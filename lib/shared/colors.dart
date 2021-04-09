@@ -26,7 +26,13 @@ const Color disabledColor = Color(0xFF04615E);
 
 const Color backgroundColor = Color(0xFFFCFCFC);
 
-const Color cardColor = Color(0xFFF7FCFB);
+const Color cardColorPrimary = Color(0xFFF7FCFB);
+
+const Color cardColorSecondary = Color(0xFFFFFAE6);
+
+const Color attendmentsChartColor = Color(0xFF42B0A6);
+
+const Color delaymentsChartColor = Color(0xFFF06C79);
 
 const MaterialColor blackShadesColor = MaterialColor(0xFF071412, <int, Color>{
   100: Color(0xFF071412),
@@ -44,7 +50,7 @@ ColorScheme colorScheme = ColorScheme(
   primaryVariant: primaryColor[80],
   secondary: secondaryColor[60],
   secondaryVariant: secondaryColor[80],
-  surface: cardColor,
+  surface: cardColorPrimary,
   background: backgroundColor,
   error: errorColor,
   onPrimary: blackShadesColor[100],

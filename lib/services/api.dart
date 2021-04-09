@@ -2,16 +2,29 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 
-class API {
-  final String _url = 'http://tizatech.herokuapp.com/api/';
+import '../locator/locator.dart';
+import '../locator/user_service.dart';
+import '../models/login_data.dart';
 
-  Future<Map<String, dynamic>> get(String endpoint) async {
-    /* Uri url = Uri.http(_url, endpoint); */
+class API {
+  final String _url = 'http://tizatechapp-demo.herokuapp.com/api/';
+
+  Map<String, String> _getHeaders() {
+    LoginData loginData = locator<UserService>().loginData;
+
+    return (loginData.token != null && loginData.token.isNotEmpty)
+        ? <String, String>{'Authorization': 'Token ${loginData.token}'}
+        : null;
+  }
+
+  Future<Map<String, dynamic>> getRequest(String endpoint) async {
+    Map<String, String> headers = _getHeaders() ?? <String, String>{};
+
     Uri url = Uri.parse(_url + endpoint);
     try {
-      http.Response response = await http.get(url);
-      Map<String, dynamic> json = jsonDecode(response.body);
-      return json;
+      http.Response response = await http.get(url, headers: headers);
+      Map<String, dynamic> map = jsonDecode(response.body);
+      return map;
     } on Exception catch (_) {
       rethrow;
     }
@@ -19,12 +32,16 @@ class API {
 
   Future<Map<String, dynamic>> post(
       String endpoint, Map<String, dynamic> body) async {
-    /* Uri url = Uri.http(_url, endpoint); */
+    Map<String, String> headers = _getHeaders() ?? <String, String>{};
     Uri url = Uri.parse(_url + endpoint);
     try {
-      http.Response response = await http.post(url, body: body);
-      Map<String, dynamic> json = jsonDecode(response.body);
-      return json;
+      http.Response response = await http.post(
+        url,
+        body: body,
+        headers: headers,
+      );
+      Map<String, dynamic> map = jsonDecode(response.body);
+      return map;
     } on Exception catch (_) {
       rethrow;
     }

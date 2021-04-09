@@ -1,28 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:tizatech/_components/menu_card.dart';
-import 'package:tizatech/services/navigation.dart';
-import 'package:tizatech/shared/colors.dart';
-import 'package:tizatech/shared/constants.dart';
+
+import '../../_components/menu_card.dart';
+import '../../locator/locator.dart';
+import '../../locator/user_service.dart';
+import '../../models/user.dart';
+import '../../services/navigation.dart';
+import '../../shared/colors.dart';
+import '../../shared/constants.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    User user = locator<UserService>().user;
     return Scaffold(
       body: CustomScrollView(
-        slivers: [
+        slivers: <Widget>[
           SliverAppBar(
             floating: true,
             forceElevated: true,
             backgroundColor: secondaryColor,
-            /*   title: Align(
-              alignment: Alignment.centerLeft,
-              child: Image.asset(
-                'assets/logo/white.png',
-                height: 30,
-              ),
-            ), */
             leading: Padding(
               padding: const EdgeInsets.only(left: 24),
               child: Image.asset(
@@ -56,9 +54,9 @@ class HomeScreen extends StatelessWidget {
                   width: MediaQuery.of(context).size.width,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
+                    children: <Widget>[
                       Text(
-                        'Rosa Linda Vasquez Hernandez',
+                        '${user.fullName}',
                         textAlign: TextAlign.left,
                         style: Theme.of(context).textTheme.headline3,
                       ),
@@ -75,28 +73,28 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
           ),
-          SliverPadding(padding: EdgeInsets.only(top: 10)),
+          SliverPadding(padding: EdgeInsets.only(top: 32)),
           SliverPadding(
             padding: EdgeInsets.symmetric(horizontal: 24),
             sliver: SliverGrid.count(
               crossAxisCount: 2,
               crossAxisSpacing: 24,
               mainAxisSpacing: 24,
-              children: [
+              children: <MenuCard>[
                 MenuCard(
                   title: 'Perfil',
                   imagePath: 'assets/images/home/profile.png',
-                  route: Routes.loader,
+                  route: Routes.profile,
                 ),
                 MenuCard(
                   title: 'Notas',
                   imagePath: 'assets/images/home/grades.png',
-                  route: Routes.profile,
+                  route: Routes.grades,
                 ),
                 MenuCard(
                   title: 'Lecturas Anuales',
                   imagePath: 'assets/images/home/books.png',
-                  route: Routes.loader,
+                  route: Routes.books,
                 ),
                 MenuCard(
                   title: 'Mensajes',
@@ -106,12 +104,12 @@ class HomeScreen extends StatelessWidget {
                 MenuCard(
                   title: 'Asistencias',
                   imagePath: 'assets/images/home/attendments.png',
-                  route: Routes.loader,
+                  route: Routes.assistance,
                 ),
                 MenuCard(
                   title: 'Atrasos',
                   imagePath: 'assets/images/home/delayments.png',
-                  route: Routes.profile,
+                  route: Routes.delayments,
                 ),
                 MenuCard(
                   title: 'Notificaciones',
@@ -120,20 +118,8 @@ class HomeScreen extends StatelessWidget {
                 ),
               ],
             ),
-          )
-          /* GridView.count(
-            crossAxisCount: 2,
-            children: [
-              MenuCard(
-                title: 'Loader',
-                route: Routes.loader,
-              ),
-              MenuCard(
-                title: 'Perfil',
-                route: Routes.profile,
-              ),
-            ],
-          ), */
+          ),
+          SliverPadding(padding: EdgeInsets.all(24)),
         ],
       ),
     );

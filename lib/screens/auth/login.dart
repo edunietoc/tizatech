@@ -21,80 +21,86 @@ class _LoginScreenState extends State<LoginScreen> {
   String password;
 
   @override
-  Widget build(BuildContext context) {
-    return ChangeNotifierProvider<AuthViewModel>(
-      create: (_) => AuthViewModel(),
-      builder: (BuildContext context, _) {
-        AuthViewModel authViewModel = Provider.of<AuthViewModel>(context);
-        return Scaffold(
-          backgroundColor: secondaryColor,
-          body: SingleChildScrollView(
-            child: Container(
-              height: MediaQuery.of(context).size.height,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Spacer(
-                      flex: 1,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 24, vertical: 48),
-                      child: Image.asset(
-                        'assets/logo/white.png',
-                        width: MediaQuery.of(context).size.width,
+  Widget build(BuildContext context) => ChangeNotifierProvider<AuthViewModel>(
+        create: (_) => AuthViewModel(),
+        builder: (BuildContext context, _) {
+          AuthViewModel authViewModel = Provider.of<AuthViewModel>(context);
+          return Scaffold(
+            backgroundColor: secondaryColor,
+            body: SingleChildScrollView(
+              child: Container(
+                height: MediaQuery.of(context).size.height,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 24),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Spacer(
+                        flex: 1,
                       ),
-                    ),
-                    Container(
-                      width: MediaQuery.of(context).size.width,
-                      child: Text(
-                        'Iniciar Sesion',
-                        textAlign: TextAlign.left,
-                        style: Theme.of(context).textTheme.headline2,
-                      ),
-                    ),
-                    TextInput(
-                      hintText: 'hintText',
-                      onChanged: (String value) => authViewModel.email = value,
-                    ),
-                    TextInput(
-                      hintText: 'hintText',
-                      labelText: 'Contraseña',
-                      onChanged: (String value) =>
-                          authViewModel.password = value,
-                    ),
-                    Align(
-                      alignment: Alignment.centerRight,
-                      child: TextButton(
-                        onPressed: () {},
-                        child: Text(
-                          'Olvide mi Contraseña',
-                          textAlign: TextAlign.end,
-                          style: Theme.of(context).textTheme.bodyText1.copyWith(
-                              decoration: TextDecoration.underline,
-                              color: informationColor),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 24, vertical: 48),
+                        child: Image.asset(
+                          'assets/logo/white.png',
+                          width: MediaQuery.of(context).size.width,
                         ),
                       ),
-                    ),
-                    Container(
-                      width: MediaQuery.of(context).size.width,
-                      padding: EdgeInsets.only(top: 40),
-                      child: ElevatedButton(
-                        onPressed: () => authViewModel.login(),
-                        child: Text('Iniciar Sesion'),
+                      Container(
+                        width: MediaQuery.of(context).size.width,
+                        child: Text(
+                          'Iniciar Sesion',
+                          textAlign: TextAlign.left,
+                          style: Theme.of(context).textTheme.headline2,
+                        ),
                       ),
-                    ),
-                    Spacer()
-                  ],
+                      TextInput(
+                        hintText: 'hintText',
+                        labelText: 'Correo',
+                        text: '24071291',
+                        onChanged: (String value) =>
+                            authViewModel.email = value,
+                      ),
+                      TextInput(
+                        hintText: '',
+                        labelText: 'Contraseña',
+                        obscureText: true,
+                        text: 'passuser',
+                        onChanged: (String value) =>
+                            authViewModel.password = value,
+                      ),
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: TextButton(
+                          onPressed: () {},
+                          child: Text(
+                            'Olvide mi Contraseña',
+                            textAlign: TextAlign.end,
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyText1
+                                .copyWith(
+                                    decoration: TextDecoration.underline,
+                                    color: informationColor),
+                          ),
+                        ),
+                      ),
+                      Container(
+                        width: MediaQuery.of(context).size.width,
+                        padding: EdgeInsets.only(top: 40),
+                        child: ElevatedButton(
+                          onPressed: () => authViewModel.login(),
+                          child: Text('Iniciar Sesion'),
+                        ),
+                      ),
+                      Spacer()
+                    ],
+                  ),
                 ),
               ),
             ),
-          ),
-        );
-      },
-    );
-  }
+          );
+        },
+      );
 }

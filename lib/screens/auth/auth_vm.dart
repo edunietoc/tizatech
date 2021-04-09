@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:tizatech/locator/locator.dart';
-import 'package:tizatech/services/navigation.dart';
 
+import '../../_components/loader.dart';
+import '../../locator/locator.dart';
 import '../../services/auth.dart';
+import '../../services/navigation.dart';
 
 class AuthViewModel extends ChangeNotifier {
   final AuthService _authService = AuthService();
@@ -20,7 +21,9 @@ class AuthViewModel extends ChangeNotifier {
   Future<void> login() async {
     BuildContext context = locator<NavigationService>().currentContext;
     try {
+      showLoader();
       await _authService.login(email, password);
+      closeLoader();
       await Navigator.pushReplacementNamed(context, Routes.home);
     } on Exception catch (e) {
       loginError = e.toString();

@@ -19,6 +19,7 @@ class TextInput extends StatelessWidget {
     this.maxLength,
     this.bottomPadding = 0,
     this.topPadding = 24,
+    this.isSearch = false,
     Key key,
   }) : super(key: key);
   final String hintText;
@@ -35,6 +36,7 @@ class TextInput extends StatelessWidget {
   final double topPadding;
   final double bottomPadding;
   final TextInputType keyboardType;
+  final bool isSearch;
 
   @override
   Widget build(BuildContext context) => Container(
@@ -49,11 +51,17 @@ class TextInput extends StatelessWidget {
         obscureText: obscureText,
         validator: validator,
         decoration: InputDecoration(
+          suffixIcon: isSearch
+              ? IconButton(
+                  icon: Icon(Icons.search),
+                  onPressed: () {},
+                )
+              : null,
           labelText: labelText,
           alignLabelWithHint: true,
           hintText: hintText,
           hintMaxLines: 2,
         ),
-        onChanged: (String value) => onChanged(value),
+        onChanged: onChanged,
       ));
 }
