@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:tizatech/screens/delayments/delayments.dart';
 
 import '_components/loader.dart';
 import 'locator/locator.dart';
+import 'screens/attendments/attendments.dart';
 import 'screens/auth/login.dart';
 import 'screens/books/books_screen.dart';
+import 'screens/delayments/delayments.dart';
 import 'screens/grades/grades.dart';
 import 'screens/home/home.dart';
 import 'screens/profile/profile.dart';
@@ -30,7 +31,7 @@ class MyApp extends StatelessWidget {
           Routes.profile: (BuildContext context) => ProfileScreen(),
           Routes.books: (BuildContext context) => BooksScreen(),
           Routes.grades: (BuildContext context) => GradesScreen(),
-          Routes.assistance: (BuildContext context) => GradesScreen(),
+          Routes.assistance: (BuildContext context) => AttendmentsScreen(),
           Routes.delayments: (BuildContext context) => DelaymentScreen(),
         },
         theme: ThemeData(

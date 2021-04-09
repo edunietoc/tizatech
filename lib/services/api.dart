@@ -17,13 +17,15 @@ class API {
         : null;
   }
 
-  Future<Map<String, dynamic>> getRequest(String endpoint) async {
+  Future<dynamic> getRequest(String endpoint) async {
     Map<String, String> headers = _getHeaders() ?? <String, String>{};
 
     Uri url = Uri.parse(_url + endpoint);
     try {
       http.Response response = await http.get(url, headers: headers);
-      Map<String, dynamic> map = jsonDecode(response.body);
+
+      dynamic map = jsonDecode(response.body);
+
       return map;
     } on Exception catch (_) {
       rethrow;
