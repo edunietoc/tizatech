@@ -5,6 +5,7 @@ class Week {
     this.dates,
     this.weekAttendments = 0,
     this.weekUnattendments = 0,
+    this.weekDelayments = 0,
   });
   List<DateTime> dates;
   int weekAttendments;
@@ -59,14 +60,16 @@ Map<String, Object> calculateMonthData(
     (Week currentWeek) => currentWeek.dates.forEach(
       (DateTime date) => attendmentList.forEach(
         (Attendment attendment) {
+          if (attendment.date == date && attendment.isDelayed) {
+            currentWeek.weekDelayments++;
+            monthData.totalDelayments++;
+          }
           if (attendment.date == date && attendment.didAttend) {
             currentWeek.weekAttendments++;
             monthData.totalAttendments++;
           } else if (attendment.date == date && !attendment.didAttend) {
             currentWeek.weekUnattendments++;
             monthData.totalUnattendments++;
-          } else if (attendment.date == date && attendment.isDelayed) {
-            monthData.totalDelayments++;
           }
         },
       ),

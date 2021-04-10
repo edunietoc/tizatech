@@ -24,7 +24,7 @@ class TizaBarChart extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Container(
         padding: EdgeInsets.symmetric(horizontal: 24),
-        margin: EdgeInsets.only(bottom: 24),
+        margin: EdgeInsets.only(bottom: 32),
         child: Column(
           children: <Widget>[
             Row(
@@ -44,7 +44,7 @@ class TizaBarChart extends StatelessWidget {
               margin: EdgeInsets.only(bottom: 16),
               child: Text(
                 yAxisLabel,
-                style: TextStyle(fontSize: 12),
+                style: TextStyle(fontSize: 12, color: blackShadesColor[70]),
               ),
             ),
             Container(
@@ -54,6 +54,13 @@ class TizaBarChart extends StatelessWidget {
                 seriesList,
                 animate: true,
                 barGroupingType: charts.BarGroupingType.stacked,
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.only(top: 16),
+              child: Text(
+                xAxisLabel,
+                style: TextStyle(fontSize: 12, color: blackShadesColor[70]),
               ),
             ),
           ],

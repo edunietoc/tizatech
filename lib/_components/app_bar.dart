@@ -33,19 +33,22 @@ class TizaAppBar extends StatelessWidget {
                   width: 60,
                 ),
               )
-            : TextButton.icon(
-                onPressed: () => Navigator.pop(context),
-                icon: Icon(
-                  Icons.arrow_back,
-                  size: 24,
-                  color: secondaryColor[80],
-                ),
-                label: Text(
-                  'Regresar',
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyText1
-                      .copyWith(color: secondaryColor[80]),
+            : Container(
+                alignment: Alignment.centerLeft,
+                child: TextButton.icon(
+                  onPressed: () => Navigator.pop(context),
+                  icon: Icon(
+                    Icons.arrow_back,
+                    size: 24,
+                    color: secondaryColor[80],
+                  ),
+                  label: Text(
+                    'Regresar',
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyText1
+                        .copyWith(color: secondaryColor[80]),
+                  ),
                 ),
               ),
         actions: <Widget>[
