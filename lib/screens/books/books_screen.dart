@@ -17,11 +17,11 @@ class BooksScreen extends StatelessWidget {
             TizaAppBar(title: 'Lecturas Anuales', subtitle: 'Alumno'),
             SliverList(
               delegate: SliverChildListDelegate(
-                [
+                <Widget>[
                   Container(
                       padding: EdgeInsets.fromLTRB(24, 32, 24, 40),
                       child: Column(
-                        children: [
+                        children: <Widget>[
                           Text(
                             'Busca por asignatura y visualiza todas las lecturas de consulta proporcionadaspor tus profesores.',
                             style: body1(context)
@@ -51,8 +51,10 @@ class BooksScreen extends StatelessWidget {
                     description: 'Antoine de Saint-Exupery',
                     author: 'author: Antoine de Saint-Exupery',
                     iconPath: 'assets/images/books/books.png',
-                    onTap: () => Navigator.push(context,
-                        MaterialPageRoute(builder: (_) => BookDetailScreen())),
+                    onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute<Widget>(
+                            builder: (_) => BookDetailScreen())),
                   ),
                   TileCard(
                     title: 'El Principito',

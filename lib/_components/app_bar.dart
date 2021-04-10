@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../shared/colors.dart';
-import '../shared/constants.dart';
 
 class TizaAppBar extends StatelessWidget {
   const TizaAppBar({
@@ -23,13 +22,15 @@ class TizaAppBar extends StatelessWidget {
   Widget build(BuildContext context) => SliverAppBar(
         floating: true,
         forceElevated: true,
+        automaticallyImplyLeading: false,
         backgroundColor: secondaryColor,
-        leading: hasLogo
+        title: hasLogo
             ? Padding(
                 padding: const EdgeInsets.only(left: 24),
                 child: Image.asset(
                   'assets/logo/white.png',
                   height: 30,
+                  width: 60,
                 ),
               )
             : TextButton.icon(
@@ -47,7 +48,6 @@ class TizaAppBar extends StatelessWidget {
                       .copyWith(color: secondaryColor[80]),
                 ),
               ),
-        leadingWidth: deviceWidth(context) / 2,
         actions: <Widget>[
           if (hasExit)
             TextButton.icon(

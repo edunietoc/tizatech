@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:tizatech/models/subject.dart';
-import 'package:tizatech/shared/colors.dart';
-import 'package:tizatech/shared/constants.dart';
+
+import '../../models/subject.dart';
+import '../../shared/colors.dart';
+import '../../shared/constants.dart';
 
 class GradesTable extends StatelessWidget {
   const GradesTable({
@@ -29,7 +30,7 @@ class GradesTable extends StatelessWidget {
             borderRadius: BorderRadius.all(Radius.circular(10))),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
+          children: <Widget>[
             Container(
               width: deviceWidth(context) * 0.35,
               decoration:

@@ -1,5 +1,4 @@
-import 'package:tizatech/models/attendments.dart';
-
+import '../models/attendments.dart';
 import 'api.dart';
 
 class StudentService {
@@ -14,29 +13,27 @@ class StudentService {
     }
   }
 
-  Future<List<Attendments>> getAttendments(int id) async {
+  Future<List<Attendment>> getAttendments(int id) async {
     String endpoint = 'asistencias/alumno/$id/';
-    print('ruuning');
+
     try {
       dynamic response = await _api.getRequest(endpoint);
 
-      List list = response;
+      List<dynamic> list = response;
 
-      List<Attendments> attendmentsList = List<Attendments>.generate(
+      List<Attendment> attendmentsList = List<Attendment>.generate(
         list.length,
-        (int index) => Attendments.fromMap(
+        (int index) => Attendment.fromMap(
           list[index],
         ),
       );
       return attendmentsList;
-
-      print(attendmentsList);
     } on Exception catch (_) {
       rethrow;
     }
   }
 
-  Future getStudentGrades(int id) async {
+  Future<void> getStudentGrades(int id) async {
     String endpoint = 'notas/alumno/$id';
     try {
       dynamic response = await _api.getRequest(endpoint);

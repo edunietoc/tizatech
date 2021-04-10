@@ -1,13 +1,15 @@
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import 'package:tizatech/shared/colors.dart';
 
 import '../../models/attendments.dart';
+import '../../models/week.dart';
 import '../../services/student.dart';
 
 class AttendementsViewModel extends ChangeNotifier {
   String _error;
+  int totalAttendments;
+  int totalUnattendments;
+
   String get error => _error;
 
   set error(String error) {
@@ -17,89 +19,55 @@ class AttendementsViewModel extends ChangeNotifier {
 
   final StudentService _studentService = StudentService();
 
-  List<charts.Series> _attendmentsMonthSeriesList;
-  List<charts.Series> get attendmentsMonthSeriesList =>
+  List<charts.Series<Week, String>> _attendmentsMonthSeriesList;
+  List<charts.Series<Week, String>> get attendmentsMonthSeriesList =>
       _attendmentsMonthSeriesList;
-  set attendmentsMonthSeriesList(List<charts.Series> series) {
+  set attendmentsMonthSeriesList(List<charts.Series<Week, String>> series) {
     _attendmentsMonthSeriesList = series;
     notifyListeners();
   }
 
-  Future<List<charts.Series>> getMonthAttendments() async {
-    print('running');
+  Future<void> getMonthAttendments() async {
     try {
-      List<Attendments> attendmentList =
+      List<Attendment> attendmentList =
           await _studentService.getAttendments(1247);
 
       attendmentList
-          .sort((Attendments a1, Attendments a2) => a1.date.compareTo(a2.date));
+          .sort((Attendment a1, Attendment a2) => a1.date.compareTo(a2.date));
       List<Week> weeks = getWeeksInAMonth(
           attendmentList[0].date.year, attendmentList[0].date.month);
 
-      weeks.forEach((currentWeek) {
-        currentWeek.dates.forEach((date) {
-          attendmentList.forEach((attendment) {
-            if (attendment.date == date && attendment.didAttend) {
-              print('COMPARING: ${attendment.date} and $date');
-              currentWeek.weekAttendments++;
-            }
-          });
-        });
-        print('Asistencias en esta semana ${currentWeek.weekAttendments}');
-      });
+      Map<String, Object> data = calculateMonthData(weeks, attendmentList);
+      weeks = data['weeks'];
+      MonthData monthData = data['monthData'];
+      totalAttendments = monthData.totalAttendments;
+      totalUnattendments = monthData.totalUnattendments;
 
       attendmentsMonthSeriesList = getAttendmentSeries(weeks);
+
       notifyListeners();
     } on Exception catch (e) {
       error = e.toString();
     }
   }
 
-  List<charts.Series> getAttendmentSeries(List<Week> list) {
-    List series = <charts.Series<Week, String>>[
-      charts.Series(
+  List<charts.Series<Week, String>> getAttendmentSeries(List<Week> list) {
+    List<charts.Series<Week, String>> series = <charts.Series<Week, String>>[
+      charts.Series<Week, String>(
+        id: 'Inasistencia',
+        data: list,
+        seriesColor: charts.Color.fromHex(code: '#F06C79'),
+        domainFn: (Week datum, int index) => 'S${index + 1}',
+        measureFn: (Week datum, _) => datum.weekUnattendments,
+      ),
+      charts.Series<Week, String>(
         id: 'Asistencia',
         data: list,
         seriesColor: charts.Color.fromHex(code: '#42B0A6'),
-        domainFn: (Week datum, index) => 'S${index + 1}',
-        measureFn: (Week datum, index) => datum.weekAttendments,
-      )
+        domainFn: (Week datum, int index) => 'S${index + 1}',
+        measureFn: (Week datum, _) => datum.weekAttendments,
+      ),
     ];
     return series;
   }
-
-  List<Week> getWeeksInAMonth(int year, int month) {
-    List<Week> weeks = <Week>[];
-
-    int _currentWeek = 0;
-    List<DateTime> acumulativeDates = [];
-    for (int i = 1; i < 35; i++) {
-      DateTime date = DateTime(year, month, i);
-
-      if (date.day != i) {
-        weeks[_currentWeek].dates = acumulativeDates;
-        break;
-      }
-      if (date.day == 1) {
-        weeks.add(Week());
-      }
-
-      acumulativeDates.add(date);
-
-      if (date.weekday == DateTime.sunday) {
-        weeks[_currentWeek].dates = acumulativeDates;
-        acumulativeDates = [];
-        _currentWeek++;
-        weeks.add(Week());
-      }
-    }
-
-    return weeks;
-  }
-}
-
-class Week {
-  Week({this.dates, this.weekAttendments = 0});
-  List<DateTime> dates;
-  int weekAttendments;
 }

@@ -6,7 +6,6 @@ import '../../locator/user_service.dart';
 import '../../models/user.dart';
 import '../../services/navigation.dart';
 import '../../shared/colors.dart';
-import '../../shared/constants.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key key}) : super(key: key);
@@ -21,14 +20,14 @@ class HomeScreen extends StatelessWidget {
             floating: true,
             forceElevated: true,
             backgroundColor: secondaryColor,
-            leading: Padding(
+            title: Padding(
               padding: const EdgeInsets.only(left: 24),
               child: Image.asset(
                 'assets/logo/white.png',
-                height: 30,
+                height: 50,
+                width: 100,
               ),
             ),
-            leadingWidth: deviceWidth(context) / 2,
             actions: <Widget>[
               TextButton.icon(
                 onPressed: () {},

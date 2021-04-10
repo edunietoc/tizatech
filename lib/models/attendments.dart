@@ -2,22 +2,24 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 
-class Attendments {
-  Attendments({
+class Attendment {
+  Attendment({
     @required this.date,
     @required this.didAttend,
+    @required this.isDelayed,
   });
 
-  factory Attendments.fromMap(Map<String, dynamic> map) => Attendments(
+  factory Attendment.fromMap(Map<String, dynamic> map) => Attendment(
         date: DateTime.parse(map['date']),
         didAttend: map['asistencia'],
+        isDelayed: map['retraso'],
       );
 
-  factory Attendments.fromJson(String source) =>
-      Attendments.fromMap(json.decode(source));
-  DateTime date;
-  bool isDelayed;
-  bool didAttend;
+  factory Attendment.fromJson(String source) =>
+      Attendment.fromMap(json.decode(source));
+  final DateTime date;
+  final bool isDelayed;
+  final bool didAttend;
 
   Map<String, dynamic> toMap() => <String, dynamic>{
         /* 'date': date.millisecondsSinceEpoch, */

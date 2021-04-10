@@ -56,10 +56,13 @@ class AvatarInfo extends StatelessWidget {
             ),
             if (description != null)
               Container(
-                padding: EdgeInsets.only(top: 16),
+                padding: EdgeInsets.only(top: 16, left: 24, right: 24),
                 child: Text(
                   description,
-                  style: body2(context).copyWith(color: blackShadesColor[70]),
+                  style: body1(context).copyWith(
+                    color: blackShadesColor[70],
+                    fontWeight: FontWeight.normal,
+                  ),
                 ),
               )
           ],

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:tizatech/locator/locator.dart';
-import 'package:tizatech/locator/user_service.dart';
-import 'package:tizatech/models/subject.dart';
-import 'package:tizatech/models/user.dart';
-import 'package:tizatech/screens/grades/grades_table.dart';
 
 import '../../_components/app_bar.dart';
 import '../../_components/avatar_info.dart';
+import '../../locator/locator.dart';
+import '../../locator/user_service.dart';
+import '../../models/subject.dart';
+import '../../models/user.dart';
 import '../../shared/colors.dart';
 import '../../shared/constants.dart';
+import 'grades_table.dart';
 
 class GradesScreen extends StatefulWidget {
   const GradesScreen({Key key}) : super(key: key);
@@ -54,7 +54,7 @@ class _GradesScreenState extends State<GradesScreen> {
                         style: h4(context).copyWith(
                           color: secondaryColor[80],
                         ),
-                        children: [
+                        children: <TextSpan>[
                           TextSpan(
                               text: '3.45',
                               style: h4(context)

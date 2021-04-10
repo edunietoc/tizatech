@@ -62,9 +62,9 @@ class TextSection extends StatelessWidget {
               child: Text(
                 value,
                 style: body2(context),
-                softWrap: false,
+                softWrap: true,
                 maxLines: 2,
-                overflow: TextOverflow.fade,
+                overflow: TextOverflow.ellipsis,
               ),
             ),
           ],

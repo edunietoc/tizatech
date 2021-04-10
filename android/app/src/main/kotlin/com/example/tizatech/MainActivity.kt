@@ -1,4 +1,4 @@
-package com.example.tizatech
+package com.tizatech.app
 
 import io.flutter.embedding.android.FlutterActivity
 

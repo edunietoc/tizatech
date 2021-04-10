@@ -89,7 +89,10 @@ class ProfileScreen extends StatelessWidget {
                         value: user.parent.mobilePhone,
                       )
                     ],
-                  )
+                  ),
+                SizedBox(
+                  height: 30,
+                ),
               ],
             ),
           ),

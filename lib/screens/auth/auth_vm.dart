@@ -18,7 +18,7 @@ class AuthViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> login() async {
+  Future<void> login(String email, String password) async {
     BuildContext context = locator<NavigationService>().currentContext;
     try {
       showLoader();
