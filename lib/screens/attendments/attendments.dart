@@ -17,7 +17,7 @@ class AttendmentsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) =>
       ChangeNotifierProvider<AttendementsViewModel>(
-        create: (_) => AttendementsViewModel()..getMonthAttendments(),
+        create: (_) => AttendementsViewModel()..getAttendments(),
         builder: (BuildContext context, _) => Consumer<AttendementsViewModel>(
           builder: (BuildContext context, AttendementsViewModel viewModel, _) =>
               Scaffold(
@@ -48,26 +48,56 @@ class AttendmentsScreen extends StatelessWidget {
                               h3(context).copyWith(color: secondaryColor[80]),
                         ),
                       ),
-                      if (viewModel.attendmentsMonthSeriesList != null)
+                      if (viewModel.monthSeriesList != null)
                         TizaBarChart(
                           title: 'Abril',
                           xAxisLabel: 'Semanas',
                           yAxisLabel: 'Dias Habiles',
-                          seriesList: viewModel.attendmentsMonthSeriesList,
+                          seriesList: viewModel.monthSeriesList,
                           dataIndicators: <DataIndicator>[
                             DataIndicator(
                               color: primaryColor,
                               dataName: 'Asistencias',
-                              dataValue: viewModel.totalAttendments.toString(),
+                              dataValue:
+                                  viewModel.totalMonthAttendments.toString(),
                             ),
                             DataIndicator(
                               color: delaymentsChartColor,
                               dataName: 'Inasistencias',
                               dataValue:
-                                  viewModel.totalUnattendments.toString(),
+                                  viewModel.totalMonthUnattendments.toString(),
                             ),
                           ],
                         ),
+                      Padding(
+                        padding: EdgeInsets.only(top: 40, left: 24, bottom: 8),
+                        child: Text(
+                          'Anuales',
+                          style:
+                              h3(context).copyWith(color: secondaryColor[80]),
+                        ),
+                      ),
+                      if (viewModel.yearSeriesList != null)
+                        TizaBarChart(
+                          seriesList: viewModel.yearSeriesList,
+                          title: DateTime.now().year.toString(),
+                          xAxisLabel: 'Meses',
+                          yAxisLabel: 'Dias Habiles',
+                          dataIndicators: <DataIndicator>[
+                            DataIndicator(
+                              color: primaryColor,
+                              dataName: 'Asistencias',
+                              dataValue:
+                                  viewModel.totalYearAttendments.toString(),
+                            ),
+                            DataIndicator(
+                              color: primaryColor,
+                              dataName: 'Inasistencias',
+                              dataValue:
+                                  viewModel.totalYearUnattendments.toString(),
+                            ),
+                          ],
+                        )
                     ],
                   ),
                 ),

@@ -27,7 +27,7 @@ class GradesTable extends StatelessWidget {
               color: blackShadesColor[70],
             ),
             shape: BoxShape.rectangle,
-            borderRadius: BorderRadius.all(Radius.circular(10))),
+            borderRadius: BorderRadius.all(Radius.circular(15))),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -41,6 +41,7 @@ class GradesTable extends StatelessWidget {
                     data: 'Asignaturas',
                     color: cardColorPrimary,
                     isMainColumn: true,
+                    isHeader: true,
                   ),
                   Column(
                     children: List<DataContainer>.generate(
@@ -69,6 +70,7 @@ class GradesTable extends StatelessWidget {
                         (int index) => DataContainer(
                           data: 'Evaluacion $index',
                           color: cardColorPrimary,
+                          isHeader: true,
                         ),
                       ),
                     ),
@@ -97,22 +99,25 @@ class DataContainer extends StatelessWidget {
     @required this.data,
     this.color,
     this.isMainColumn = false,
+    this.isHeader = false,
     Key key,
   }) : super(key: key);
 
   final String data;
   final Color color;
   final bool isMainColumn;
+  final bool isHeader;
 
   @override
   Widget build(BuildContext context) => Container(
         alignment: isMainColumn ? Alignment.centerLeft : Alignment.center,
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 15),
-        width: isMainColumn ? deviceWidth(context) * 0.35 : 120,
+        width: isMainColumn ? deviceWidth(context) * 0.35 : 130,
         color: color ?? Colors.transparent,
         child: Text(
           '$data',
-          style: body2(context),
+          style: body2(context).copyWith(
+              fontWeight: isHeader ? FontWeight.w500 : FontWeight.w400),
         ),
       );
 }

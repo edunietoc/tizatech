@@ -1,5 +1,10 @@
 import 'dart:convert';
 
+enum Gender {
+  masculino,
+  femenino,
+}
+
 class User {
   User({
     this.id,
@@ -18,6 +23,7 @@ class User {
     this.parent,
     this.birthDate,
     this.picturePath,
+    this.gender,
   });
 
   factory User.fromJson(String source) => User.fromMap(json.decode(source));
@@ -37,6 +43,8 @@ class User {
         homePhone: map['home_phone'],
         picturePath: map['picture'],
         birthDate: map['birth_date'],
+        gender:
+            map['gender'] == 'Femenino' ? Gender.femenino : Gender.masculino,
         parent: Parent.fromMap(map['parents'][0]),
       );
 
@@ -78,7 +86,7 @@ class User {
   Parent parent;
   String picturePath;
   String birthDate;
-
+  Gender gender;
   String get fullName => '$firstName $middleName $lastName $lastName2';
 }
 

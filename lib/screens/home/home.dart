@@ -82,23 +82,13 @@ class HomeScreen extends StatelessWidget {
               children: <MenuCard>[
                 MenuCard(
                   title: 'Perfil',
-                  imagePath: 'assets/images/home/profile.png',
+                  imagePath: locator<UserService>().getUserAvatar,
                   route: Routes.profile,
                 ),
                 MenuCard(
                   title: 'Notas',
                   imagePath: 'assets/images/home/grades.png',
                   route: Routes.grades,
-                ),
-                MenuCard(
-                  title: 'Lecturas Anuales',
-                  imagePath: 'assets/images/home/books.png',
-                  route: Routes.books,
-                ),
-                MenuCard(
-                  title: 'Mensajes',
-                  imagePath: 'assets/images/home/messages.png',
-                  route: Routes.profile,
                 ),
                 MenuCard(
                   title: 'Asistencias',
@@ -109,6 +99,11 @@ class HomeScreen extends StatelessWidget {
                   title: 'Atrasos',
                   imagePath: 'assets/images/home/delayments.png',
                   route: Routes.delayments,
+                ),
+                MenuCard(
+                  title: 'Lecturas Anuales',
+                  imagePath: 'assets/images/home/books.png',
+                  route: Routes.books,
                 ),
                 MenuCard(
                   title: 'Notificaciones',

@@ -49,7 +49,7 @@ class TextSection extends StatelessWidget {
   final String value;
   @override
   Widget build(BuildContext context) => Container(
-        padding: const EdgeInsets.only(left: 24),
+        padding: const EdgeInsets.only(left: 24, right: 24),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[

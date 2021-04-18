@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:tizatech/_components/avatar_info.dart';
-import 'package:tizatech/_components/bar_chart.dart';
-import 'package:tizatech/locator/locator.dart';
-import 'package:tizatech/locator/user_service.dart';
-import 'package:tizatech/models/user.dart';
-import 'package:tizatech/screens/delayments/delayments_vm.dart';
-import 'package:tizatech/shared/colors.dart';
 import 'package:provider/provider.dart';
 
 import '../../_components/app_bar.dart';
+import '../../_components/avatar_info.dart';
+import '../../_components/bar_chart.dart';
+import '../../locator/locator.dart';
+import '../../locator/user_service.dart';
+import '../../models/user.dart';
+import '../../shared/colors.dart';
 import '../../shared/constants.dart';
+import 'delayments_vm.dart';
 
 class DelaymentScreen extends StatelessWidget {
   DelaymentScreen({Key key}) : super(key: key);
@@ -17,7 +17,7 @@ class DelaymentScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) =>
       ChangeNotifierProvider<DelaymentsViewModel>(
-        create: (_) => DelaymentsViewModel()..getMonthdelayments(),
+        create: (_) => DelaymentsViewModel()..getDelayments(),
         builder: (BuildContext context, _) => Consumer<DelaymentsViewModel>(
           builder: (BuildContext context, DelaymentsViewModel viewModel, _) =>
               Scaffold(
@@ -48,18 +48,42 @@ class DelaymentScreen extends StatelessWidget {
                               h3(context).copyWith(color: secondaryColor[80]),
                         ),
                       ),
-                      if (viewModel.delaymentsMonthSeriesList != null)
+                      if (viewModel.monthSeriesList != null)
                         TizaBarChart(
                           title: 'Abril',
                           xAxisLabel: 'Semanas',
                           yAxisLabel: 'Dias Habiles',
-                          seriesList: viewModel.delaymentsMonthSeriesList,
+                          seriesList: viewModel.monthSeriesList,
                           dataIndicators: <DataIndicator>[
                             DataIndicator(
                               color: delaymentsChartColor,
                               dataName: 'Retrasos',
-                              dataValue: viewModel.totalDelayments.toString(),
+                              dataValue:
+                                  viewModel.totalMonthDelayments.toString(),
                             ),
+                          ],
+                        ),
+                      Padding(
+                        padding: EdgeInsets.only(top: 40, left: 24, bottom: 8),
+                        child: Text(
+                          'Anuales',
+                          style:
+                              h3(context).copyWith(color: secondaryColor[80]),
+                        ),
+                      ),
+                      if (viewModel.yearSeriesList != null)
+                        TizaBarChart(
+                          seriesList: viewModel.yearSeriesList,
+                          title: DateTime.now().year.toString(),
+                          xAxisLabel: 'Meses',
+                          yAxisLabel: 'Dias Habiles',
+                          dataIndicators: <DataIndicator>[
+                            DataIndicator(
+                              color: delaymentsChartColor,
+                              dataName: 'Retrasos',
+                              dataValue:
+                                  viewModel.totalYearDelayments.toString(),
+                            )
                           ],
                         ),
                     ],

@@ -68,7 +68,7 @@ class _GradesScreenState extends State<GradesScreen> {
                       10,
                       (int index) => Subject(
                         name: 'Matematica',
-                        grades: [12, 541, 84, 984, 15, 21, 18, 21],
+                        grades: <double>[12, 541, 84, 984, 15, 21, 18, 21],
                       ),
                     ),
                   ),

@@ -26,9 +26,11 @@ class ProfileScreen extends StatelessWidget {
                   middleName: user.middleName,
                   lastName2: user.lastName2,
                   lastName: user.lastName,
-                  profileImage: Image.network(
-                    user.picturePath,
-                  ),
+                  profileImage: locator<UserService>().isAvatarPictureDefault
+                      ? Image.asset(locator<UserService>().getUserAvatar)
+                      : Image.network(
+                          user.picturePath,
+                        ),
                 ),
                 MenuText(
                   title: 'General',

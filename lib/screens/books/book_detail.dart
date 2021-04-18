@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:tizatech/models/book.dart';
 
 import '../../_components/app_bar.dart';
 import '../../shared/colors.dart';
 import '../../shared/constants.dart';
 
 class BookDetailScreen extends StatelessWidget {
-  const BookDetailScreen({Key key}) : super(key: key);
-
+  const BookDetailScreen({
+    @required this.book,
+    Key key,
+  }) : super(key: key);
+  final Book book;
   @override
   Widget build(BuildContext context) => Scaffold(
         body: CustomScrollView(
@@ -20,12 +24,12 @@ class BookDetailScreen extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        Text('El Principito',
+                        Text(book.title,
                             style: h3(context).copyWith(
                               color: blackShadesColor[80],
                             )),
                         SizedBox(height: 16),
-                        Text('Autor: Antoine de Saint Expoury'),
+                        Text('Autor:'),
                         SizedBox(height: 4),
                         Text('Editorial: Planeta'),
                         SizedBox(height: 24),
@@ -37,7 +41,7 @@ class BookDetailScreen extends StatelessWidget {
                         ),
                         SizedBox(height: 4),
                         Text(
-                          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam volutpat amet sit purus. Pellentesque at orci tristique non. Id sociis tempus a id nulla. Quis senectus elementum consequat tellus massa.',
+                          book.description,
                           style: body2(context).copyWith(
                             color: blackShadesColor[70],
                             letterSpacing: 0.27,

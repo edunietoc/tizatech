@@ -1,7 +1,6 @@
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:flutter/material.dart';
 
-import '../models/week.dart';
 import '../shared/colors.dart';
 import '../shared/constants.dart';
 
@@ -12,14 +11,16 @@ class TizaBarChart extends StatelessWidget {
     @required this.xAxisLabel,
     @required this.yAxisLabel,
     @required this.dataIndicators,
+    this.isYearly = false,
     Key key,
   }) : super(key: key);
 
-  final List<charts.Series<Week, String>> seriesList;
+  final List<charts.Series<Object, String>> seriesList;
   final String title;
   final String yAxisLabel;
   final String xAxisLabel;
   final List<DataIndicator> dataIndicators;
+  final bool isYearly;
 
   @override
   Widget build(BuildContext context) => Container(

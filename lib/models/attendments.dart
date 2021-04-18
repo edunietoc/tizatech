@@ -17,15 +17,8 @@ class Attendment {
 
   factory Attendment.fromJson(String source) =>
       Attendment.fromMap(json.decode(source));
+
   final DateTime date;
   final bool isDelayed;
   final bool didAttend;
-
-  Map<String, dynamic> toMap() => <String, dynamic>{
-        /* 'date': date.millisecondsSinceEpoch, */
-
-        'didAttend': didAttend,
-      };
-
-  String toJson() => json.encode(toMap());
 }

@@ -13,17 +13,6 @@ class Week {
   int weekDelayments;
 }
 
-class MonthData {
-  MonthData({
-    this.totalAttendments = 0,
-    this.totalUnattendments = 0,
-    this.totalDelayments = 0,
-  });
-  int totalAttendments;
-  int totalUnattendments;
-  int totalDelayments;
-}
-
 List<Week> getWeeksInAMonth(int year, int month) {
   List<Week> weeks = <Week>[];
 
@@ -53,30 +42,23 @@ List<Week> getWeeksInAMonth(int year, int month) {
   return weeks;
 }
 
-Map<String, Object> calculateMonthData(
+List<Week> calculateMonthData(
     List<Week> weeks, List<Attendment> attendmentList) {
-  MonthData monthData = MonthData();
   weeks.forEach(
     (Week currentWeek) => currentWeek.dates.forEach(
       (DateTime date) => attendmentList.forEach(
         (Attendment attendment) {
           if (attendment.date == date && attendment.isDelayed) {
             currentWeek.weekDelayments++;
-            monthData.totalDelayments++;
           }
           if (attendment.date == date && attendment.didAttend) {
             currentWeek.weekAttendments++;
-            monthData.totalAttendments++;
           } else if (attendment.date == date && !attendment.didAttend) {
             currentWeek.weekUnattendments++;
-            monthData.totalUnattendments++;
           }
         },
       ),
     ),
   );
-  return <String, Object>{
-    'monthData': monthData,
-    'weeks': weeks,
-  };
+  return weeks;
 }
