@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:tizatech/models/book.dart';
 
 import '../../_components/app_bar.dart';
+import '../../models/book.dart';
 import '../../shared/colors.dart';
 import '../../shared/constants.dart';
+import 'books_vm.dart';
 
 class BookDetailScreen extends StatelessWidget {
   const BookDetailScreen({
     @required this.book,
+    @required this.viewModel,
     Key key,
   }) : super(key: key);
   final Book book;
+  final BooksViewModel viewModel;
   @override
   Widget build(BuildContext context) => Scaffold(
         body: CustomScrollView(
@@ -53,7 +56,7 @@ class BookDetailScreen extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 24),
                     child: ElevatedButton(
-                      onPressed: () => print('iplement this'),
+                      onPressed: () => viewModel.launchUrl(book.url),
                       child: Text('Ver Libro'),
                     ),
                   )

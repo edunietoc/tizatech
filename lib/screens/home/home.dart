@@ -30,7 +30,8 @@ class HomeScreen extends StatelessWidget {
             ),
             actions: <Widget>[
               TextButton.icon(
-                onPressed: () {},
+                onPressed: () =>
+                    Navigator.pushReplacementNamed(context, Routes.login),
                 icon: Image.asset(
                   'assets/icons/exit.png',
                   width: 24,
@@ -108,7 +109,7 @@ class HomeScreen extends StatelessWidget {
                 MenuCard(
                   title: 'Notificaciones',
                   imagePath: 'assets/images/home/notifications.png',
-                  route: Routes.loader,
+                  route: Routes.notifications,
                 ),
               ],
             ),

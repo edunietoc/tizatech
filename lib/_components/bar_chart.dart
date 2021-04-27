@@ -29,7 +29,7 @@ class TizaBarChart extends StatelessWidget {
         child: Column(
           children: <Widget>[
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: dataIndicators,
             ),
             Container(

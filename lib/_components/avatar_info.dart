@@ -1,26 +1,20 @@
 import 'package:flutter/material.dart';
 
+import '../models/user.dart';
 import '../shared/colors.dart';
 import '../shared/constants.dart';
 
 class AvatarInfo extends StatelessWidget {
   const AvatarInfo({
-    @required this.firstName,
-    @required this.lastName,
-    @required this.profileImage,
-    this.middleName = '',
-    this.lastName2 = '',
+    @required this.user,
     this.description,
-    this.id = '',
     this.showId = false,
+    this.profileImage,
     Key key,
   }) : super(key: key);
-  final String firstName;
-  final String middleName;
-  final String lastName;
-  final String lastName2;
+  final User user;
   final String description;
-  final String id;
+
   final bool showId;
   final Image profileImage;
   @override
@@ -46,12 +40,12 @@ class AvatarInfo extends StatelessWidget {
                   children: <Widget>[
                     Text(
                       (!showId)
-                          ? '$firstName $middleName \n$lastName $lastName2'
-                          : '$firstName $lastName ',
+                          ? '${user.firstName} ${user.middleName} \n${user.lastName} ${user.lastName2}'
+                          : '${user.firstName} ${user.lastName} ',
                       style: h4(context),
                       maxLines: 2,
                     ),
-                    if (showId && id.isNotEmpty) Text(id)
+                    if (showId && user.rut.isNotEmpty) Text(user.rut)
                   ],
                 )
               ],

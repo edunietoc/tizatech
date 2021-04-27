@@ -8,6 +8,12 @@ import '../../models/month.dart';
 import '../../models/week.dart';
 import '../../services/student.dart';
 
+enum Status {
+  loading,
+  done,
+  error,
+}
+
 class AttendementsViewModel extends ChangeNotifier {
   //---------------------DEPENDECIES--------------------------------------------
 
@@ -21,11 +27,15 @@ class AttendementsViewModel extends ChangeNotifier {
   int totalYearUnattendments;
   List<charts.Series<Week, String>> _monthSeriesList;
   List<charts.Series<Month, String>> _yearSeriesList;
+  Status _currentStatus = Status.loading;
 
   //------------------------GETTERS & SETTERS-----------------------------------
   String get error => _error;
-  set error(String error) {
-    _error = error;
+  set error(String error) => _error = error;
+
+  Status get currentStatus => _currentStatus;
+  set currentStatus(Status status) {
+    _currentStatus = status;
     notifyListeners();
   }
 
@@ -73,13 +83,15 @@ class AttendementsViewModel extends ChangeNotifier {
 
   Future<void> getAttendments() async {
     try {
+      currentStatus = Status.loading;
       int id = locator<UserService>().user.id;
       List<Month> monthList = await _studentService.getAttendments(id);
       getMonthAttendments(monthList);
       getYearAttendments(monthList);
-      notifyListeners();
+      currentStatus = Status.done;
     } on Exception catch (e) {
       error = e.toString();
+      currentStatus = Status.error;
     }
   }
 

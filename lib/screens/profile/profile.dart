@@ -22,10 +22,7 @@ class ProfileScreen extends StatelessWidget {
             delegate: SliverChildListDelegate(
               <Widget>[
                 AvatarInfo(
-                  firstName: user.firstName,
-                  middleName: user.middleName,
-                  lastName2: user.lastName2,
-                  lastName: user.lastName,
+                  user: user,
                   profileImage: locator<UserService>().isAvatarPictureDefault
                       ? Image.asset(locator<UserService>().getUserAvatar)
                       : Image.network(

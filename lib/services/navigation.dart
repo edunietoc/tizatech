@@ -19,4 +19,6 @@ class Routes {
   static const String assistance = '/assistance';
   static const String delayments = '/delayments';
   static const String books = '/books';
+  static const String notifications = '/notifications';
+  static const String login = '/login';
 }

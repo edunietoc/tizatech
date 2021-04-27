@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tizatech/screens/notifications/notifications.dart';
 
 import '_components/loader.dart';
 import 'locator/locator.dart';
@@ -33,6 +34,8 @@ class MyApp extends StatelessWidget {
           Routes.grades: (BuildContext context) => GradesScreen(),
           Routes.assistance: (BuildContext context) => AttendmentsScreen(),
           Routes.delayments: (BuildContext context) => DelaymentScreen(),
+          Routes.notifications: (BuildContext context) => NotificationsScreen(),
+          Routes.login: (BuildContext context) => LoginScreen(),
         },
         theme: ThemeData(
             brightness: Brightness.light,

@@ -1,16 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 
 import '../../models/subject.dart';
 import '../../shared/colors.dart';
 import '../../shared/constants.dart';
 
-class GradesTable extends StatelessWidget {
+class GradesTable extends StatefulWidget {
   const GradesTable({
     @required this.subjectList,
     Key key,
   }) : super(key: key);
 
   final List<Subject> subjectList;
+
+  @override
+  _GradesTableState createState() => _GradesTableState(subjectList);
+}
+
+class _GradesTableState extends State<GradesTable> {
+  _GradesTableState(this.subjectList);
+  final List<Subject> subjectList;
+  List<double> heightList;
+  @override
+  void initState() {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      heightList = List<double>.generate(subjectList.length,
+          (int index) => subjectList[index].key.currentContext.size.height);
+      setState(() {});
+    });
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) => Container(
@@ -45,12 +65,13 @@ class GradesTable extends StatelessWidget {
                   ),
                   Column(
                     children: List<DataContainer>.generate(
-                      subjectList.length,
+                      widget.subjectList.length,
                       (int index) => DataContainer(
-                        data: subjectList[index].name,
+                        data: widget.subjectList[index].name,
                         color:
                             index.isEven ? blackShadesColor[05] : Colors.white,
                         isMainColumn: true,
+                        key: widget.subjectList[index].key,
                       ),
                     ),
                   ),
@@ -66,24 +87,56 @@ class GradesTable extends StatelessWidget {
                   children: <Widget>[
                     Row(
                       children: List<DataContainer>.generate(
-                        8,
-                        (int index) => DataContainer(
-                          data: 'Evaluacion $index',
+                          widget.subjectList[0].grades.length + 1, (int index) {
+                        if (index >= widget.subjectList[0].grades.length) {
+                          return DataContainer(
+                            data: 'Promedio',
+                            color: cardColorPrimary,
+                            isHeader: true,
+                          );
+                        }
+                        return DataContainer(
+                          data: 'Evaluacion ${index + 1}',
                           color: cardColorPrimary,
                           isHeader: true,
-                        ),
-                      ),
+                        );
+                      }),
                     ),
-                    Column(
-                      children: List<DataContainerRow>.generate(
-                        subjectList.length,
-                        (int index) => DataContainerRow(
-                          gradesList: subjectList[index].grades,
-                          color: index.isEven
-                              ? blackShadesColor[05]
-                              : Colors.white,
-                        ),
-                      ),
+                    AnimatedSwitcher(
+                      duration: Duration(milliseconds: 620),
+                      switchInCurve: Curves.elasticOut,
+                      transitionBuilder:
+                          (Widget child, Animation<double> animation) {
+                        Animation<Offset> offsetAnimation = Tween<Offset>(
+                                begin: Offset(-1, 0), end: Offset(0, 0))
+                            .animate(animation);
+                        return SlideTransition(
+                          position: offsetAnimation,
+                          child: child,
+                        );
+                      },
+                      child: heightList != null
+                          ? Column(
+                              children: List<DataContainerRow>.generate(
+                                  widget.subjectList.length, (int index) {
+                                Subject currentSubject =
+                                    widget.subjectList[index];
+
+                                return DataContainerRow(
+                                  gradesList: currentSubject.grades,
+                                  average: currentSubject.average,
+                                  height: heightList != null
+                                      ? heightList[index]
+                                      : null,
+                                  color: index.isEven
+                                      ? blackShadesColor[05]
+                                      : Colors.white,
+                                );
+                              }),
+                            )
+                          : Container(
+                              color: Colors.white,
+                            ),
                     ),
                   ],
                 ),
@@ -124,22 +177,27 @@ class DataContainer extends StatelessWidget {
 
 class DataContainerRow extends StatelessWidget {
   const DataContainerRow({
-    this.gradesList,
+    @required this.gradesList,
+    @required this.average,
     this.color,
+    this.height,
     Key key,
   }) : super(key: key);
   final List<double> gradesList;
   final Color color;
+  final double height;
+  final double average;
   @override
   Widget build(BuildContext context) => Container(
         color: color ?? Colors.white,
+        height: height,
         child: Row(
           children: List<DataContainer>.generate(
             gradesList.length,
             (int index) => DataContainer(
               data: gradesList[index].toString(),
             ),
-          ),
+          )..add(DataContainer(data: average.toStringAsFixed(1))),
         ),
       );
 }
