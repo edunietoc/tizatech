@@ -7,7 +7,8 @@ class MenuCard extends StatelessWidget {
   const MenuCard({
     @required this.title,
     @required this.route,
-    @required this.imagePath,
+    this.imagePath,
+    this.image,
     this.isPrimary = true,
     Key key,
   }) : super(key: key);
@@ -16,6 +17,7 @@ class MenuCard extends StatelessWidget {
   final String title;
   final String imagePath;
   final bool isPrimary;
+  final Image image;
   @override
   Widget build(BuildContext context) => InkWell(
         onTap: () => Navigator.pushNamed(context, route),
@@ -33,11 +35,12 @@ class MenuCard extends StatelessWidget {
                 SizedBox(
                   height: 8,
                 ),
-                Image.asset(
-                  imagePath,
-                  width: 64,
-                  height: 64,
-                ),
+                image ??
+                    Image.asset(
+                      imagePath,
+                      width: 64,
+                      height: 64,
+                    ),
                 SizedBox(
                   height: 8,
                 ),

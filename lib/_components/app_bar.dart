@@ -70,7 +70,7 @@ class TizaAppBar extends StatelessWidget {
         ],
         bottom: PreferredSize(
           preferredSize:
-              Size.fromHeight(MediaQuery.of(context).size.height / 8),
+              Size.fromHeight(MediaQuery.of(context).size.height / 7),
           child: Container(
             width: MediaQuery.of(context).size.width,
             padding: const EdgeInsets.all(20),

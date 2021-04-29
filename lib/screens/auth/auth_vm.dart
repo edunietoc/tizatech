@@ -18,7 +18,7 @@ class AuthViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> login(String email, String password) async {
+  Future<void> login() async {
     BuildContext context = locator<NavigationService>().currentContext;
     try {
       showLoader();
@@ -27,6 +27,7 @@ class AuthViewModel extends ChangeNotifier {
       await Navigator.pushReplacementNamed(context, Routes.home);
     } on Exception catch (e) {
       loginError = e.toString();
+      print(loginError);
     }
   }
 }

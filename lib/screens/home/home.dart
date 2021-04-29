@@ -47,7 +47,7 @@ class HomeScreen extends StatelessWidget {
             ],
             bottom: PreferredSize(
               preferredSize:
-                  Size.fromHeight(MediaQuery.of(context).size.height / 8),
+                  Size.fromHeight(MediaQuery.of(context).size.height / 5),
               child: Padding(
                 padding: const EdgeInsets.all(020),
                 child: Container(
@@ -83,7 +83,7 @@ class HomeScreen extends StatelessWidget {
               children: <MenuCard>[
                 MenuCard(
                   title: 'Perfil',
-                  imagePath: locator<UserService>().getUserAvatar,
+                  image: locator<UserService>().getUserAvatar,
                   route: Routes.profile,
                 ),
                 MenuCard(

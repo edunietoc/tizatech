@@ -44,6 +44,11 @@ class StudentService {
     String endpoint = 'notas/$year/$id';
     try {
       dynamic response = await _api.getRequest(endpoint);
+
+      List responseList = response;
+      if (responseList.isEmpty) {
+        throw Exception('No_info');
+      }
       List<dynamic> list = response[0]['ListaAsignatura'];
 
       List<Subject> subjectList = list

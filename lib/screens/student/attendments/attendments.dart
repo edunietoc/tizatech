@@ -1,29 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tizatech/_components/app_bar.dart';
+import 'package:tizatech/_components/avatar_info.dart';
+import 'package:tizatech/_components/bar_chart.dart';
+import 'package:tizatech/_components/loader.dart';
+import 'package:tizatech/locator/locator.dart';
+import 'package:tizatech/locator/user_service.dart';
+import 'package:tizatech/models/user.dart';
+import 'package:tizatech/screens/error/error_screen.dart';
+import 'package:tizatech/shared/colors.dart';
+import 'package:tizatech/shared/constants.dart';
 
-import '../../_components/app_bar.dart';
-import '../../_components/avatar_info.dart';
-import '../../_components/bar_chart.dart';
-import '../../_components/loader.dart';
-import '../../locator/locator.dart';
-import '../../locator/user_service.dart';
-import '../../models/user.dart';
-import '../../shared/colors.dart';
-import '../../shared/constants.dart';
-import 'delayments_vm.dart';
+import 'attendments_vm.dart';
 
-class DelaymentScreen extends StatelessWidget {
-  DelaymentScreen({Key key}) : super(key: key);
+class AttendmentsScreen extends StatelessWidget {
+  AttendmentsScreen({Key key}) : super(key: key);
   final User user = locator<UserService>().user;
   @override
   Widget build(BuildContext context) =>
-      ChangeNotifierProvider<DelaymentsViewModel>(
-        create: (_) => DelaymentsViewModel()..getDelayments(),
-        builder: (BuildContext context, _) => Consumer<DelaymentsViewModel>(
-            builder: (BuildContext context, DelaymentsViewModel viewModel, _) {
+      ChangeNotifierProvider<AttendementsViewModel>(
+        create: (_) => AttendementsViewModel()..getAttendments(),
+        builder: (BuildContext context, _) => Consumer<AttendementsViewModel>(
+            builder:
+                (BuildContext context, AttendementsViewModel viewModel, _) {
           switch (viewModel.currentStatus) {
             case Status.error:
-              return Text(viewModel.error);
+              return ErrorScreen(
+                errorDescription: viewModel.errorDescription,
+                errorImage: viewModel.errorImage,
+                errorTitle: viewModel.errorTitle,
+                screenSubtitle: 'Alumno',
+                screenTitle: 'Asistencias',
+                user: user,
+              );
 
             case Status.loading:
               return Loader();
@@ -64,10 +73,16 @@ class DelaymentScreen extends StatelessWidget {
                               seriesList: viewModel.monthSeriesList,
                               dataIndicators: <DataIndicator>[
                                 DataIndicator(
+                                  color: primaryColor,
+                                  dataName: 'Asistencias',
+                                  dataValue: viewModel.totalMonthAttendments
+                                      .toString(),
+                                ),
+                                DataIndicator(
                                   color: delaymentsChartColor,
-                                  dataName: 'Retrasos',
-                                  dataValue:
-                                      viewModel.totalMonthDelayments.toString(),
+                                  dataName: 'Inasistencias',
+                                  dataValue: viewModel.totalMonthUnattendments
+                                      .toString(),
                                 ),
                               ],
                             ),
@@ -88,13 +103,19 @@ class DelaymentScreen extends StatelessWidget {
                               yAxisLabel: 'Dias Habiles',
                               dataIndicators: <DataIndicator>[
                                 DataIndicator(
-                                  color: delaymentsChartColor,
-                                  dataName: 'Retrasos',
+                                  color: primaryColor,
+                                  dataName: 'Asistencias',
                                   dataValue:
-                                      viewModel.totalYearDelayments.toString(),
-                                )
+                                      viewModel.totalYearAttendments.toString(),
+                                ),
+                                DataIndicator(
+                                  color: delaymentsChartColor,
+                                  dataName: 'Inasistencias',
+                                  dataValue: viewModel.totalYearUnattendments
+                                      .toString(),
+                                ),
                               ],
-                            ),
+                            )
                         ],
                       ),
                     ),

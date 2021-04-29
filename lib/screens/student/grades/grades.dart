@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../_components/app_bar.dart';
-import '../../_components/avatar_info.dart';
-import '../../_components/loader.dart';
-import '../../locator/locator.dart';
-import '../../locator/user_service.dart';
-import '../../models/user.dart';
-import '../../shared/colors.dart';
-import '../../shared/constants.dart';
+import '../../../_components/app_bar.dart';
+import '../../../_components/avatar_info.dart';
+import '../../../_components/loader.dart';
+import '../../../locator/locator.dart';
+import '../../../locator/user_service.dart';
+import '../../../models/user.dart';
+import '../../../shared/colors.dart';
+import '../../../shared/constants.dart';
+import '../../error/error_screen.dart';
 import 'grades_table.dart';
 import 'grades_vm.dart';
 
@@ -36,7 +37,14 @@ class _GradesScreenState extends State<GradesScreen> {
             builder: (BuildContext context, GradesViewModel viewModel, _) {
           switch (viewModel.currentStatus) {
             case Status.error:
-              return Text(viewModel.error);
+              return ErrorScreen(
+                errorDescription: viewModel.errorDescription,
+                errorImage: viewModel.errorImage,
+                errorTitle: viewModel.errorTitle,
+                screenSubtitle: 'Alumno',
+                screenTitle: 'Notas',
+                user: user,
+              );
 
             case Status.loading:
               return Loader();

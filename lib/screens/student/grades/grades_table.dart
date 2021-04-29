@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-
-import '../../models/subject.dart';
-import '../../shared/colors.dart';
-import '../../shared/constants.dart';
+import 'package:tizatech/models/subject.dart';
+import 'package:tizatech/shared/colors.dart';
+import 'package:tizatech/shared/constants.dart';
 
 class GradesTable extends StatefulWidget {
   const GradesTable({

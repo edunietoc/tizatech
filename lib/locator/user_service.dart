@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 import '../models/login_data.dart';
 import '../models/user.dart';
 
@@ -24,41 +26,41 @@ class UserService {
     }
   }
 
-  String get getUserAvatar {
+  Widget get getUserAvatar {
     switch (loginData.userType) {
       case 0:
-        return '';
+        return Container();
       case 1:
         if (user.picturePath ==
             'http://tizatechapp-demo.herokuapp.com/media/default.jpg') {
           switch (user.gender) {
             case Gender.femenino:
-              return 'assets/images/avatars/girl.png';
+              return Image.asset('assets/images/avatars/girl.png');
               break;
             case Gender.masculino:
-              return 'assets/images/avatars/boy.png';
+              return Image.asset('assets/images/avatars/boy.png');
           }
         } else {
-          return user.picturePath;
+          return Image.network(user.picturePath);
         }
 
         break;
       case 2:
         if (user.picturePath ==
-            'http://tizatechapp-demo.herokuapp.com/media/default.jpg ') {
+            'http://tizatechapp-demo.herokuapp.com/media/default.jpg') {
           switch (user.gender) {
             case Gender.femenino:
-              return 'assets/images/avatars/woman.png';
+              return Image.asset('assets/images/avatars/woman.png');
               break;
             case Gender.masculino:
-              return 'assets/images/avatars/man.png';
+              return Image.asset('assets/images/avatars/man.png');
           }
         } else {
-          return user.picturePath;
+          return Image.network(user.picturePath);
         }
         break;
       case 3:
-        return '';
+        return Container();
       default:
         return null;
     }

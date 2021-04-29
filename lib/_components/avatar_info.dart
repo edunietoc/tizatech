@@ -42,7 +42,7 @@ class AvatarInfo extends StatelessWidget {
                       (!showId)
                           ? '${user.firstName} ${user.middleName} \n${user.lastName} ${user.lastName2}'
                           : '${user.firstName} ${user.lastName} ',
-                      style: h4(context),
+                      style: body1(context),
                       maxLines: 2,
                     ),
                     if (showId && user.rut.isNotEmpty) Text(user.rut)

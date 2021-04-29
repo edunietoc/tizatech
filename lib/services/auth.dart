@@ -20,7 +20,11 @@ class AuthService {
         Map<String, dynamic> userMap = await getProfileData(
             userService.getUserType, userService.loginData.id);
 
-        userService.user = User.fromMap(userMap);
+        if (userService.getUserType == UserType.student) {
+          userService.user = Student.fromMap(userMap);
+        } else if (userService.getUserType == UserType.parent) {
+          userService.user = Parent.fromMap(userMap);
+        }
       } else {
         throw Exception(response.values.last.toString());
       }
@@ -35,6 +39,8 @@ class AuthService {
 
       if (type == UserType.student) {
         endpoint = 'alumnos/$id/';
+      } else if (type == UserType.parent) {
+        endpoint = 'apoderados/$id/';
       }
       Map<String, dynamic> response = await api.getRequest(endpoint);
       return response;

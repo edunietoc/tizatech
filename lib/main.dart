@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:tizatech/screens/notifications/notifications.dart';
 
 import '_components/loader.dart';
 import 'locator/locator.dart';
-import 'screens/attendments/attendments.dart';
 import 'screens/auth/login.dart';
 import 'screens/books/books_screen.dart';
-import 'screens/delayments/delayments.dart';
-import 'screens/grades/grades.dart';
 import 'screens/home/home.dart';
+import 'screens/notifications/notifications.dart';
 import 'screens/profile/profile.dart';
+import 'screens/student/attendments/attendments.dart';
+import 'screens/student/delayments/delayments.dart';
+import 'screens/student/grades/grades.dart';
 import 'services/navigation.dart';
 import 'shared/colors.dart';
 
@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) => MaterialApp(
-        title: 'Flutter Demo',
+        title: 'Tizatech',
         navigatorKey: locator<NavigationService>().navigatorKey,
         routes: <String, WidgetFun>{
           Routes.loader: (BuildContext context) => Loader(),

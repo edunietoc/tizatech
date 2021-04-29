@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tizatech/shared/constants.dart';
 
 import '../../_components/app_bar.dart';
 import '../../_components/avatar_info.dart';
@@ -13,7 +14,7 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     User user = locator<UserService>().user;
-
+    print('student List ${user.studentList}');
     return Scaffold(
       body: CustomScrollView(
         slivers: <Widget>[
@@ -23,11 +24,7 @@ class ProfileScreen extends StatelessWidget {
               <Widget>[
                 AvatarInfo(
                   user: user,
-                  profileImage: locator<UserService>().isAvatarPictureDefault
-                      ? Image.asset(locator<UserService>().getUserAvatar)
-                      : Image.network(
-                          user.picturePath,
-                        ),
+                  profileImage: locator<UserService>().getUserAvatar,
                 ),
                 MenuText(
                   title: 'General',
@@ -71,23 +68,18 @@ class ProfileScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                if (locator<UserService>().getUserType == UserType.student)
-                  MenuText(
-                    title: 'Apoderado',
-                    list: <TextSection>[
-                      TextSection(
-                        title: 'Nombre',
-                        value: user.parent.fullName,
+                if (locator<UserService>().getUserType == UserType.parent)
+                  Column(
+                    children: List<Widget>.generate(
+                      user.studentList.length,
+                      (int index) => Container(
+                        padding: EdgeInsets.only(bottom: 8),
+                        child: Text(
+                          user.studentList[index].fullName,
+                          style: body2(context),
+                        ),
                       ),
-                      TextSection(
-                        title: 'Telefono (Casa)',
-                        value: user.parent.homePhone,
-                      ),
-                      TextSection(
-                        title: 'Telefono (movil)',
-                        value: user.parent.mobilePhone,
-                      )
-                    ],
+                    ),
                   ),
                 SizedBox(
                   height: 30,

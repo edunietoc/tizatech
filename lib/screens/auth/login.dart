@@ -16,9 +16,9 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   AuthService authService = AuthService();
 
-  String email = '24071291';
+  /* String email = '24071291';
 
-  String password = 'passuser';
+  String password = 'passuser'; */
 
   @override
   Widget build(BuildContext context) => ChangeNotifierProvider<AuthViewModel>(
@@ -56,7 +56,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
                       TextInput(
-                        hintText: 'hintText',
+                        hintText: 'Correo',
                         labelText: 'Correo',
                         onChanged: (String value) =>
                             authViewModel.email = value,
@@ -88,7 +88,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         width: MediaQuery.of(context).size.width,
                         padding: EdgeInsets.only(top: 40),
                         child: ElevatedButton(
-                          onPressed: () => authViewModel.login(email, password),
+                          onPressed: () => authViewModel.login(),
                           child: Text('Iniciar Sesion'),
                         ),
                       ),

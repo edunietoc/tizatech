@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 
 import '../../locator/locator.dart';
@@ -15,12 +17,15 @@ enum Status {
 class BooksViewModel extends ChangeNotifier {
   final StudentService _studentService = StudentService();
 
-  String _error;
-
-  String get error => _error;
-  set error(String error) => _error = error;
-
+  String _errorTitle;
+  String _errorDescription;
+  String _errorImage;
   Status _currentStatus;
+  List<Book> bookList;
+
+  String get errorTitle => _errorTitle;
+  String get errorDescription => _errorDescription;
+  String get errorImage => _errorImage;
 
   Status get currentStatus => _currentStatus;
 
@@ -29,8 +34,6 @@ class BooksViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  List<Book> bookList;
-
   Future<void> init() async {
     try {
       currentStatus = Status.loading;
@@ -38,17 +41,35 @@ class BooksViewModel extends ChangeNotifier {
       bookList = await _studentService.getBooks(id);
       currentStatus = Status.done;
     } on Exception catch (e) {
-      error = e.toString();
-      currentStatus = Status.error;
+      handleError(e);
     }
+  }
+
+  void handleError(Exception e) {
+    if (e.toString().contains('No_info')) {
+      _errorTitle = 'No hay Resultados';
+      _errorImage = 'assets/images/grades/no_grades.png';
+      _errorDescription =
+          'Tus asistencias no han sido cargadas, por favor intenta consultarlas más tarde.';
+    } else if (e is SocketException) {
+      _errorTitle = 'Error en la Conexion';
+      _errorImage = 'assets/images/error/connection_error.png';
+      _errorDescription =
+          'Por favor verifique que su conexión de intenet es estable o vuelva a intentarlo más tarde.';
+    } else {
+      _errorTitle = 'Error al mostrar';
+      _errorImage = 'assets/images/error/unknown_error.png';
+      _errorDescription =
+          'Ocurrio un error al mostrar este Contenido, por favor intentalo más tarde o contacta a tu Institución.';
+    }
+    currentStatus = Status.error;
   }
 
   Future<void> launchUrl(String url) async {
     try {
       await launchURL(url);
     } on Exception catch (e) {
-      error = e.toString();
-      currentStatus = Status.error;
+      handleError(e);
     }
   }
 }

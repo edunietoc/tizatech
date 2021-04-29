@@ -1,12 +1,13 @@
+import 'dart:io';
+
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:flutter/material.dart';
-
-import '../../locator/locator.dart';
-import '../../locator/user_service.dart';
-import '../../models/attendments.dart';
-import '../../models/month.dart';
-import '../../models/week.dart';
-import '../../services/student.dart';
+import 'package:tizatech/locator/locator.dart';
+import 'package:tizatech/locator/user_service.dart';
+import 'package:tizatech/models/attendments.dart';
+import 'package:tizatech/models/month.dart';
+import 'package:tizatech/models/week.dart';
+import 'package:tizatech/services/student.dart';
 
 enum Status {
   loading,
@@ -20,7 +21,9 @@ class AttendementsViewModel extends ChangeNotifier {
   final StudentService _studentService = StudentService();
 
   //-----------------------VARIABLES--------------------------------------------
-  String _error;
+  String _errorTitle;
+  String _errorDescription;
+  String _errorImage;
   int totalMonthAttendments;
   int totalYearAttendments;
   int totalMonthUnattendments;
@@ -30,8 +33,9 @@ class AttendementsViewModel extends ChangeNotifier {
   Status _currentStatus = Status.loading;
 
   //------------------------GETTERS & SETTERS-----------------------------------
-  String get error => _error;
-  set error(String error) => _error = error;
+  String get errorTitle => _errorTitle;
+  String get errorDescription => _errorDescription;
+  String get errorImage => _errorImage;
 
   Status get currentStatus => _currentStatus;
   set currentStatus(Status status) {
@@ -90,7 +94,22 @@ class AttendementsViewModel extends ChangeNotifier {
       getYearAttendments(monthList);
       currentStatus = Status.done;
     } on Exception catch (e) {
-      error = e.toString();
+      if (e.toString().contains('No_info')) {
+        _errorTitle = 'No hay Resultados';
+        _errorImage = 'assets/images/grades/no_grades.png';
+        _errorDescription =
+            'Tus asistencias no han sido cargadas, por favor intenta consultarlas más tarde.';
+      } else if (e is SocketException) {
+        _errorTitle = 'Error en la Conexion';
+        _errorImage = 'assets/images/error/connection_error.png';
+        _errorDescription =
+            'Por favor verifique que su conexión de intenet es estable o vuelva a intentarlo más tarde.';
+      } else {
+        _errorTitle = 'Error al mostrar';
+        _errorImage = 'assets/images/error/unknown_error.png';
+        _errorDescription =
+            'Ocurrio un error al mostrar este Contenido, por favor intentalo más tarde o contacta a tu Institución.';
+      }
       currentStatus = Status.error;
     }
   }

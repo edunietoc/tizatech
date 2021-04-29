@@ -24,6 +24,7 @@ class User {
     this.birthDate,
     this.picturePath,
     this.gender,
+    this.studentList,
   });
 
   factory User.fromJson(String source) => User.fromMap(json.decode(source));
@@ -45,7 +46,6 @@ class User {
         birthDate: map['birth_date'],
         gender:
             map['gender'] == 'Femenino' ? Gender.femenino : Gender.masculino,
-        parent: Parent.fromMap(map['parents'][0]),
       );
 
   Map<String, dynamic> toMap() => <String, dynamic>{
@@ -87,6 +87,7 @@ class User {
   String picturePath;
   String birthDate;
   Gender gender;
+  List<Student> studentList;
   String get fullName => '$firstName $middleName $lastName $lastName2';
 }
 
@@ -105,6 +106,9 @@ class Parent extends User {
     String mobilePhone,
     String homePhone,
     String picturePath,
+    String birthDate,
+    Gender gender,
+    List<Student> studentList,
   }) : super(
             id: id,
             email: email,
@@ -118,9 +122,72 @@ class Parent extends User {
             location: location,
             mobilePhone: mobilePhone,
             homePhone: homePhone,
-            picturePath: picturePath);
+            picturePath: picturePath,
+            gender: gender,
+            studentList: studentList,
+            birthDate: birthDate);
 
-  factory Parent.fromMap(Map<String, dynamic> map) => Parent(
+  factory Parent.fromMap(Map<String, dynamic> map) {
+    List<dynamic> responseStudentList = map['alumno_set'];
+
+    List studentList = responseStudentList
+        .map((dynamic student) => Student.fromMap(student))
+        .toList();
+
+    print(studentList);
+    return Parent(
+      firstName: map['first_name'],
+      middleName: map['middle_name'],
+      lastName: map['last_name'],
+      lastName2: map['second_last_name'],
+      rut: map['rut'],
+      nationality: map['nationality'],
+      street: map['calle'],
+      location: map['comuna'],
+      email: map['email'],
+      mobilePhone: map['mobile_phone'],
+      homePhone: map['home_phone'],
+      birthDate: map['birth_date'],
+      picturePath: map['picture'],
+      studentList: studentList,
+      gender: map['gender'] == 'Femenino' ? Gender.femenino : Gender.masculino,
+    );
+  }
+}
+
+class Student extends User {
+  Student({
+    int id,
+    String firstName,
+    String middleName,
+    String lastName,
+    String lastName2,
+    String rut,
+    String nationality,
+    String street,
+    String location,
+    String email,
+    String mobilePhone,
+    String homePhone,
+    String picturePath,
+    Gender gender,
+  }) : super(
+            id: id,
+            email: email,
+            middleName: middleName,
+            firstName: firstName,
+            lastName2: lastName2,
+            lastName: lastName,
+            rut: rut,
+            nationality: nationality,
+            street: street,
+            location: location,
+            mobilePhone: mobilePhone,
+            homePhone: homePhone,
+            picturePath: picturePath,
+            gender: gender);
+
+  factory Student.fromMap(Map<String, dynamic> map) => Student(
         firstName: map['first_name'],
         middleName: map['middle_name'],
         lastName: map['last_name'],
@@ -133,5 +200,7 @@ class Parent extends User {
         mobilePhone: map['mobile_phone'],
         homePhone: map['home_phone'],
         picturePath: map['picture'],
+        gender:
+            map['gender'] == 'Femenino' ? Gender.femenino : Gender.masculino,
       );
 }
