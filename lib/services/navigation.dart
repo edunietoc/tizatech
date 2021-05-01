@@ -21,4 +21,5 @@ class Routes {
   static const String books = '/books';
   static const String notifications = '/notifications';
   static const String login = '/login';
+  static const String studentList = '/student_list';
 }

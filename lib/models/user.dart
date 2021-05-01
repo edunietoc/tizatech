@@ -89,6 +89,7 @@ class User {
   Gender gender;
   List<Student> studentList;
   String get fullName => '$firstName $middleName $lastName $lastName2';
+  String get halfName => '$firstName $lastName';
 }
 
 class Parent extends User {
@@ -171,23 +172,27 @@ class Student extends User {
     String homePhone,
     String picturePath,
     Gender gender,
+    String birthDate,
   }) : super(
-            id: id,
-            email: email,
-            middleName: middleName,
-            firstName: firstName,
-            lastName2: lastName2,
-            lastName: lastName,
-            rut: rut,
-            nationality: nationality,
-            street: street,
-            location: location,
-            mobilePhone: mobilePhone,
-            homePhone: homePhone,
-            picturePath: picturePath,
-            gender: gender);
+          id: id,
+          email: email,
+          middleName: middleName,
+          firstName: firstName,
+          lastName2: lastName2,
+          lastName: lastName,
+          rut: rut,
+          nationality: nationality,
+          street: street,
+          location: location,
+          mobilePhone: mobilePhone,
+          homePhone: homePhone,
+          picturePath: picturePath,
+          gender: gender,
+          birthDate: birthDate,
+        );
 
   factory Student.fromMap(Map<String, dynamic> map) => Student(
+        id: map['id'],
         firstName: map['first_name'],
         middleName: map['middle_name'],
         lastName: map['last_name'],
@@ -200,6 +205,7 @@ class Student extends User {
         mobilePhone: map['mobile_phone'],
         homePhone: map['home_phone'],
         picturePath: map['picture'],
+        birthDate: map['birth_date'],
         gender:
             map['gender'] == 'Femenino' ? Gender.femenino : Gender.masculino,
       );

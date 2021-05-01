@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:tizatech/shared/constants.dart';
 
 import '../../_components/app_bar.dart';
 import '../../_components/avatar_info.dart';
@@ -7,14 +6,19 @@ import '../../_components/text_section.dart';
 import '../../locator/locator.dart';
 import '../../locator/user_service.dart';
 import '../../models/user.dart';
+import '../../shared/constants.dart';
+import '../home/home.dart';
 
 class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({Key key}) : super(key: key);
-
+  const ProfileScreen({
+    this.userParam,
+    Key key,
+  }) : super(key: key);
+  final User userParam;
   @override
   Widget build(BuildContext context) {
-    User user = locator<UserService>().user;
-    print('student List ${user.studentList}');
+    User user = userParam ?? locator<UserService>().user;
+
     return Scaffold(
       body: CustomScrollView(
         slivers: <Widget>[
@@ -68,7 +72,8 @@ class ProfileScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                if (locator<UserService>().getUserType == UserType.parent)
+                if (locator<UserService>().getUserType == UserType.parent &&
+                    userParam == null)
                   Column(
                     children: List<Widget>.generate(
                       user.studentList.length,
@@ -80,6 +85,20 @@ class ProfileScreen extends StatelessWidget {
                         ),
                       ),
                     ),
+                  ),
+                if (userParam != null)
+                  Container(
+                    padding: EdgeInsets.all(24),
+                    child: ElevatedButton(
+                        onPressed: () => Navigator.push(
+                              context,
+                              MaterialPageRoute<Widget>(
+                                builder: (_) => HomeScreen(
+                                  userParam: user,
+                                ),
+                              ),
+                            ),
+                        child: Text('Informacion Academica')),
                   ),
                 SizedBox(
                   height: 30,

@@ -15,7 +15,11 @@ enum Status {
 }
 
 class GradesViewModel extends ChangeNotifier {
-  User user = locator<UserService>().user;
+  GradesViewModel({User userParam}) {
+    user = userParam ?? locator<UserService>().user;
+  }
+  User user;
+
   final StudentService _studentService = StudentService();
 
   String _errorTitle;

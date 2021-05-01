@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../../_components/app_bar.dart';
-import '../../models/book.dart';
-import '../../shared/colors.dart';
-import '../../shared/constants.dart';
+import '../../../_components/app_bar.dart';
+import '../../../models/book.dart';
+import '../../../shared/colors.dart';
+import '../../../shared/constants.dart';
+
 import 'books_vm.dart';
 
 class BookDetailScreen extends StatelessWidget {

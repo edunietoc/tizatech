@@ -54,6 +54,7 @@ flutter:
     - assets/images/avatars/
     - assets/images/grades/
     - assets/images/error/
+    - assets/images/dialogs/
     - assets/logo/
     - assets/icons/
   #   - images/a_dot_ham.jpeg

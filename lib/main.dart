@@ -3,13 +3,14 @@ import 'package:flutter/material.dart';
 import '_components/loader.dart';
 import 'locator/locator.dart';
 import 'screens/auth/login.dart';
-import 'screens/books/books_screen.dart';
 import 'screens/home/home.dart';
 import 'screens/notifications/notifications.dart';
 import 'screens/profile/profile.dart';
-import 'screens/student/attendments/attendments.dart';
-import 'screens/student/delayments/delayments.dart';
-import 'screens/student/grades/grades.dart';
+import 'screens/student_list/student_list.dart';
+import 'screens/student_screen/attendments/attendments.dart';
+import 'screens/student_screen/books/books_screen.dart';
+import 'screens/student_screen/delayments/delayments.dart';
+import 'screens/student_screen/grades/grades.dart';
 import 'services/navigation.dart';
 import 'shared/colors.dart';
 
@@ -36,6 +37,7 @@ class MyApp extends StatelessWidget {
           Routes.delayments: (BuildContext context) => DelaymentScreen(),
           Routes.notifications: (BuildContext context) => NotificationsScreen(),
           Routes.login: (BuildContext context) => LoginScreen(),
+          Routes.studentList: (BuildContext context) => StudentListScreen(),
         },
         theme: ThemeData(
             brightness: Brightness.light,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tizatech/_components/dialog.dart';
 
 import '../../_components/text_input.dart';
 import '../../services/auth.dart';

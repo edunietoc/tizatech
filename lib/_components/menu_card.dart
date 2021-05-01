@@ -6,10 +6,11 @@ import '../shared/constants.dart';
 class MenuCard extends StatelessWidget {
   const MenuCard({
     @required this.title,
-    @required this.route,
+    this.route,
     this.imagePath,
     this.image,
     this.isPrimary = true,
+    this.widgetRoute,
     Key key,
   }) : super(key: key);
 
@@ -18,9 +19,17 @@ class MenuCard extends StatelessWidget {
   final String imagePath;
   final bool isPrimary;
   final Image image;
+  final Widget widgetRoute;
+
   @override
   Widget build(BuildContext context) => InkWell(
-        onTap: () => Navigator.pushNamed(context, route),
+        onTap: () => route != null
+            ? Navigator.pushNamed(
+                context,
+                route,
+              )
+            : Navigator.push(context,
+                MaterialPageRoute<Widget>(builder: (_) => widgetRoute)),
         child: Container(
           decoration: BoxDecoration(
               border: Border.all(color: primaryColor[40], width: 2.5),

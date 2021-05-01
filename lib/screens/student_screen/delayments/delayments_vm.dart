@@ -7,6 +7,7 @@ import '../../../locator/locator.dart';
 import '../../../locator/user_service.dart';
 import '../../../models/attendments.dart';
 import '../../../models/month.dart';
+import '../../../models/user.dart';
 import '../../../models/week.dart';
 import '../../../services/student.dart';
 
@@ -17,9 +18,14 @@ enum Status {
 }
 
 class DelaymentsViewModel extends ChangeNotifier {
+  DelaymentsViewModel({User userParam}) {
+    user = userParam ?? locator<UserService>().user;
+  }
+
   //---------------------DEPENDECIES--------------------------------------------
 
   final StudentService _studentService = StudentService();
+  User user;
 
   //-----------------------VARIABLES--------------------------------------------
   String _errorTitle;
@@ -85,7 +91,7 @@ class DelaymentsViewModel extends ChangeNotifier {
   Future<void> getDelayments() async {
     try {
       currentStatus = Status.loading;
-      int id = locator<UserService>().user.id;
+      int id = user.id;
       List<Month> monthList = await _studentService.getAttendments(id);
       getMonthDelayments(monthList);
       getYearDelayments(monthList);

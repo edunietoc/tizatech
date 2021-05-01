@@ -2,12 +2,14 @@ import 'dart:io';
 
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:flutter/material.dart';
-import 'package:tizatech/locator/locator.dart';
-import 'package:tizatech/locator/user_service.dart';
-import 'package:tizatech/models/attendments.dart';
-import 'package:tizatech/models/month.dart';
-import 'package:tizatech/models/week.dart';
-import 'package:tizatech/services/student.dart';
+
+import '../../../locator/locator.dart';
+import '../../../locator/user_service.dart';
+import '../../../models/attendments.dart';
+import '../../../models/month.dart';
+import '../../../models/user.dart';
+import '../../../models/week.dart';
+import '../../../services/student.dart';
 
 enum Status {
   loading,
@@ -16,9 +18,14 @@ enum Status {
 }
 
 class AttendementsViewModel extends ChangeNotifier {
+  AttendementsViewModel({User userParam}) {
+    user = userParam ?? locator<UserService>().user;
+  }
+
   //---------------------DEPENDECIES--------------------------------------------
 
   final StudentService _studentService = StudentService();
+  User user;
 
   //-----------------------VARIABLES--------------------------------------------
   String _errorTitle;
@@ -88,7 +95,7 @@ class AttendementsViewModel extends ChangeNotifier {
   Future<void> getAttendments() async {
     try {
       currentStatus = Status.loading;
-      int id = locator<UserService>().user.id;
+      int id = user.id;
       List<Month> monthList = await _studentService.getAttendments(id);
       getMonthAttendments(monthList);
       getYearAttendments(monthList);

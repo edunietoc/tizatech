@@ -1,25 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tizatech/_components/app_bar.dart';
-import 'package:tizatech/_components/avatar_info.dart';
-import 'package:tizatech/_components/bar_chart.dart';
-import 'package:tizatech/_components/loader.dart';
-import 'package:tizatech/locator/locator.dart';
-import 'package:tizatech/locator/user_service.dart';
-import 'package:tizatech/models/user.dart';
-import 'package:tizatech/screens/error/error_screen.dart';
-import 'package:tizatech/shared/colors.dart';
-import 'package:tizatech/shared/constants.dart';
 
+import '../../../_components/app_bar.dart';
+import '../../../_components/avatar_info.dart';
+import '../../../_components/bar_chart.dart';
+import '../../../_components/loader.dart';
+import '../../../models/user.dart';
+import '../../../shared/colors.dart';
+import '../../../shared/constants.dart';
+import '../../error/error_screen.dart';
 import 'attendments_vm.dart';
 
 class AttendmentsScreen extends StatelessWidget {
-  AttendmentsScreen({Key key}) : super(key: key);
-  final User user = locator<UserService>().user;
+  const AttendmentsScreen({this.userParam, Key key}) : super(key: key);
+  final User userParam;
   @override
   Widget build(BuildContext context) =>
       ChangeNotifierProvider<AttendementsViewModel>(
-        create: (_) => AttendementsViewModel()..getAttendments(),
+        create: (_) =>
+            AttendementsViewModel(userParam: userParam)..getAttendments(),
         builder: (BuildContext context, _) => Consumer<AttendementsViewModel>(
             builder:
                 (BuildContext context, AttendementsViewModel viewModel, _) {
@@ -31,7 +30,7 @@ class AttendmentsScreen extends StatelessWidget {
                 errorTitle: viewModel.errorTitle,
                 screenSubtitle: 'Alumno',
                 screenTitle: 'Asistencias',
-                user: user,
+                user: viewModel.user,
               );
 
             case Status.loading:
@@ -48,8 +47,9 @@ class AttendmentsScreen extends StatelessWidget {
                           Column(
                             children: <Widget>[
                               AvatarInfo(
-                                user: user,
-                                profileImage: Image.network(user.picturePath),
+                                user: viewModel.user,
+                                profileImage:
+                                    Image.network(viewModel.user.picturePath),
                                 showId: true,
                                 description:
                                     'Visualiza de forma mesual y anual todas las asistencias e inasistencias.',

@@ -1,78 +1,30 @@
 import 'package:flutter/material.dart';
 
-import '../../_components/menu_card.dart';
-import '../../locator/locator.dart';
-import '../../locator/user_service.dart';
+import '../../_components/app_bar.dart';
 import '../../models/user.dart';
 import '../../services/navigation.dart';
 import '../../shared/colors.dart';
+import 'home_viewmodel.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key key}) : super(key: key);
+  const HomeScreen({
+    this.userParam,
+    Key key,
+  }) : super(key: key);
+
+  final User userParam;
 
   @override
   Widget build(BuildContext context) {
-    User user = locator<UserService>().user;
+    HomeViewModel viewModel = HomeViewModel(userParam: userParam);
+
     return Scaffold(
       body: CustomScrollView(
         slivers: <Widget>[
-          SliverAppBar(
-            floating: true,
-            forceElevated: true,
-            backgroundColor: secondaryColor,
-            title: Padding(
-              padding: const EdgeInsets.only(left: 24),
-              child: Image.asset(
-                'assets/logo/white.png',
-                height: 50,
-                width: 100,
-              ),
-            ),
-            actions: <Widget>[
-              TextButton.icon(
-                onPressed: () =>
-                    Navigator.pushReplacementNamed(context, Routes.login),
-                icon: Image.asset(
-                  'assets/icons/exit.png',
-                  width: 24,
-                  height: 24,
-                ),
-                label: Text(
-                  'Salir',
-                  style: Theme.of(context).textTheme.bodyText1.copyWith(
-                        color: secondaryColor[80],
-                      ),
-                ),
-              )
-            ],
-            bottom: PreferredSize(
-              preferredSize:
-                  Size.fromHeight(MediaQuery.of(context).size.height / 5),
-              child: Padding(
-                padding: const EdgeInsets.all(020),
-                child: Container(
-                  width: MediaQuery.of(context).size.width,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text(
-                        '${user.fullName}',
-                        textAlign: TextAlign.left,
-                        style: Theme.of(context).textTheme.headline3,
-                      ),
-                      Text(
-                        'Alumno',
-                        textAlign: TextAlign.left,
-                        style: Theme.of(context).textTheme.bodyText1.copyWith(
-                              color: primaryColor[80],
-                            ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ),
+          if (userParam != null)
+            TizaAppBar(title: userParam.halfName, subtitle: 'Alumno')
+          else
+            HomeAppBar(user: viewModel.user),
           SliverPadding(padding: EdgeInsets.only(top: 32)),
           SliverPadding(
             padding: EdgeInsets.symmetric(horizontal: 24),
@@ -80,38 +32,7 @@ class HomeScreen extends StatelessWidget {
               crossAxisCount: 2,
               crossAxisSpacing: 24,
               mainAxisSpacing: 24,
-              children: <MenuCard>[
-                MenuCard(
-                  title: 'Perfil',
-                  image: locator<UserService>().getUserAvatar,
-                  route: Routes.profile,
-                ),
-                MenuCard(
-                  title: 'Notas',
-                  imagePath: 'assets/images/home/grades.png',
-                  route: Routes.grades,
-                ),
-                MenuCard(
-                  title: 'Asistencias',
-                  imagePath: 'assets/images/home/attendments.png',
-                  route: Routes.assistance,
-                ),
-                MenuCard(
-                  title: 'Atrasos',
-                  imagePath: 'assets/images/home/delayments.png',
-                  route: Routes.delayments,
-                ),
-                MenuCard(
-                  title: 'Lecturas Anuales',
-                  imagePath: 'assets/images/home/books.png',
-                  route: Routes.books,
-                ),
-                MenuCard(
-                  title: 'Notificaciones',
-                  imagePath: 'assets/images/home/notifications.png',
-                  route: Routes.notifications,
-                ),
-              ],
+              children: viewModel.currentList,
             ),
           ),
           SliverPadding(padding: EdgeInsets.all(24)),
@@ -119,4 +40,72 @@ class HomeScreen extends StatelessWidget {
       ),
     );
   }
+}
+
+class HomeAppBar extends StatelessWidget {
+  const HomeAppBar({
+    @required this.user,
+    Key key,
+  }) : super(key: key);
+
+  final User user;
+
+  @override
+  Widget build(BuildContext context) => SliverAppBar(
+        floating: true,
+        forceElevated: true,
+        backgroundColor: secondaryColor,
+        title: Padding(
+          padding: const EdgeInsets.only(left: 24),
+          child: Image.asset(
+            'assets/logo/white.png',
+            height: 50,
+            width: 100,
+          ),
+        ),
+        actions: <Widget>[
+          TextButton.icon(
+            onPressed: () =>
+                Navigator.pushReplacementNamed(context, Routes.login),
+            icon: Image.asset(
+              'assets/icons/exit.png',
+              width: 24,
+              height: 24,
+            ),
+            label: Text(
+              'Salir',
+              style: Theme.of(context).textTheme.bodyText1.copyWith(
+                    color: secondaryColor[80],
+                  ),
+            ),
+          )
+        ],
+        bottom: PreferredSize(
+          preferredSize:
+              Size.fromHeight(MediaQuery.of(context).size.height / 5),
+          child: Padding(
+            padding: const EdgeInsets.all(020),
+            child: Container(
+              width: MediaQuery.of(context).size.width,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    '${user.fullName}',
+                    textAlign: TextAlign.left,
+                    style: Theme.of(context).textTheme.headline3,
+                  ),
+                  Text(
+                    'Alumno',
+                    textAlign: TextAlign.left,
+                    style: Theme.of(context).textTheme.bodyText1.copyWith(
+                          color: primaryColor[80],
+                        ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      );
 }

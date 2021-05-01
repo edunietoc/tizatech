@@ -5,8 +5,6 @@ import '../../../_components/app_bar.dart';
 import '../../../_components/avatar_info.dart';
 import '../../../_components/bar_chart.dart';
 import '../../../_components/loader.dart';
-import '../../../locator/locator.dart';
-import '../../../locator/user_service.dart';
 import '../../../models/user.dart';
 import '../../../shared/colors.dart';
 import '../../../shared/constants.dart';
@@ -14,12 +12,13 @@ import '../../error/error_screen.dart';
 import 'delayments_vm.dart';
 
 class DelaymentScreen extends StatelessWidget {
-  DelaymentScreen({Key key}) : super(key: key);
-  final User user = locator<UserService>().user;
+  const DelaymentScreen({this.userParam, Key key}) : super(key: key);
+  final User userParam;
   @override
   Widget build(BuildContext context) =>
       ChangeNotifierProvider<DelaymentsViewModel>(
-        create: (_) => DelaymentsViewModel()..getDelayments(),
+        create: (_) =>
+            DelaymentsViewModel(userParam: userParam)..getDelayments(),
         builder: (BuildContext context, _) => Consumer<DelaymentsViewModel>(
             builder: (BuildContext context, DelaymentsViewModel viewModel, _) {
           switch (viewModel.currentStatus) {
@@ -30,7 +29,7 @@ class DelaymentScreen extends StatelessWidget {
                 errorTitle: viewModel.errorTitle,
                 screenSubtitle: 'Alumno',
                 screenTitle: 'Atrasos',
-                user: user,
+                user: viewModel.user,
               );
 
             case Status.loading:
@@ -47,8 +46,9 @@ class DelaymentScreen extends StatelessWidget {
                           Column(
                             children: <Widget>[
                               AvatarInfo(
-                                user: user,
-                                profileImage: Image.network(user.picturePath),
+                                user: viewModel.user,
+                                profileImage:
+                                    Image.network(viewModel.user.picturePath),
                                 showId: true,
                                 description:
                                     'Visualiza de forma mesual y anual todas las asistencias e inasistencias.',

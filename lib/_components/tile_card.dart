@@ -9,6 +9,7 @@ class TileCard extends StatelessWidget {
     @required this.description,
     @required this.iconPath,
     @required this.onTap,
+    this.isBlue = false,
     this.author,
     Key key,
   }) : super(key: key);
@@ -17,17 +18,18 @@ class TileCard extends StatelessWidget {
   final String author;
   final String iconPath;
   final Function onTap;
+  final bool isBlue;
 
   @override
   Widget build(BuildContext context) => Card(
         margin: EdgeInsets.only(left: 24, right: 24, bottom: 24),
         elevation: cardElevation,
-        color: cardColorSecondary,
+        color: isBlue ? cardColorPrimary : cardColorSecondary,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(6)),
           side: BorderSide(
             width: 1.5,
-            color: secondaryColor[80],
+            color: isBlue ? primaryColor[80] : secondaryColor[80],
           ),
         ),
         child: ListTile(
@@ -36,7 +38,8 @@ class TileCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Text>[
               Text(description,
-                  style: body2(context).copyWith(color: secondaryColor[80])),
+                  style: body2(context).copyWith(
+                      color: isBlue ? primaryColor[80] : secondaryColor[80])),
               if (author != null)
                 Text(author,
                     style:

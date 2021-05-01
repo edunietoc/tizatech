@@ -2,11 +2,12 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 
-import '../../locator/locator.dart';
-import '../../locator/user_service.dart';
-import '../../models/book.dart';
-import '../../services/student.dart';
-import '../../services/url_service.dart';
+import '../../../locator/locator.dart';
+import '../../../locator/user_service.dart';
+import '../../../models/book.dart';
+import '../../../models/user.dart';
+import '../../../services/student.dart';
+import '../../../services/url_service.dart';
 
 enum Status {
   loading,
@@ -15,7 +16,12 @@ enum Status {
 }
 
 class BooksViewModel extends ChangeNotifier {
+  BooksViewModel({User userParam}) {
+    user = userParam ?? locator<UserService>().user;
+  }
+
   final StudentService _studentService = StudentService();
+  User user;
 
   String _errorTitle;
   String _errorDescription;
@@ -37,7 +43,7 @@ class BooksViewModel extends ChangeNotifier {
   Future<void> init() async {
     try {
       currentStatus = Status.loading;
-      int id = locator<UserService>().user.id;
+      int id = user.id;
       bookList = await _studentService.getBooks(id);
       currentStatus = Status.done;
     } on Exception catch (e) {

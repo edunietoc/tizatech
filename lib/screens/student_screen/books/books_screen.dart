@@ -1,24 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tizatech/screens/error/error_screen.dart';
 
-import '../../_components/app_bar.dart';
-import '../../_components/loader.dart';
-import '../../_components/text_input.dart';
-import '../../_components/tile_card.dart';
-import '../../locator/locator.dart';
-import '../../locator/user_service.dart';
-import '../../shared/colors.dart';
-import '../../shared/constants.dart';
+import '../../../_components/app_bar.dart';
+import '../../../_components/loader.dart';
+import '../../../_components/text_input.dart';
+import '../../../_components/tile_card.dart';
+import '../../../models/user.dart';
+import '../../../shared/colors.dart';
+import '../../../shared/constants.dart';
+import '../../error/error_screen.dart';
 import 'book_detail.dart';
 import 'books_vm.dart';
 
 class BooksScreen extends StatelessWidget {
-  const BooksScreen({Key key}) : super(key: key);
-
+  const BooksScreen({this.userParam, Key key}) : super(key: key);
+  final User userParam;
   @override
   Widget build(BuildContext context) => ChangeNotifierProvider<BooksViewModel>(
-        create: (_) => BooksViewModel()..init(),
+        create: (_) => BooksViewModel(userParam: userParam)..init(),
         child: Consumer<BooksViewModel>(
             builder: (BuildContext context, BooksViewModel viewModel, _) {
           switch (viewModel.currentStatus) {
@@ -29,7 +28,7 @@ class BooksScreen extends StatelessWidget {
                 errorTitle: viewModel.errorTitle,
                 screenSubtitle: 'Alumno',
                 screenTitle: 'Lecturas Anuales',
-                user: locator<UserService>().user,
+                user: viewModel.user,
               );
 
             case Status.loading:
