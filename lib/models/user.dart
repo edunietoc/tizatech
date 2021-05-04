@@ -25,6 +25,8 @@ class User {
     this.picturePath,
     this.gender,
     this.studentList,
+    this.grade,
+    this.gradeLetter,
   });
 
   factory User.fromJson(String source) => User.fromMap(json.decode(source));
@@ -46,6 +48,8 @@ class User {
         birthDate: map['birth_date'],
         gender:
             map['gender'] == 'Femenino' ? Gender.femenino : Gender.masculino,
+        grade: map['grade'],
+        gradeLetter: map['letra_curso'],
       );
 
   Map<String, dynamic> toMap() => <String, dynamic>{
@@ -87,6 +91,8 @@ class User {
   String picturePath;
   String birthDate;
   Gender gender;
+  String grade;
+  String gradeLetter;
   List<Student> studentList;
   String get fullName => '$firstName $middleName $lastName $lastName2';
   String get halfName => '$firstName $lastName';
@@ -173,6 +179,9 @@ class Student extends User {
     String picturePath,
     Gender gender,
     String birthDate,
+    String grade,
+    String gradeLetter,
+    int userType,
   }) : super(
           id: id,
           email: email,
@@ -189,6 +198,9 @@ class Student extends User {
           picturePath: picturePath,
           gender: gender,
           birthDate: birthDate,
+          grade: grade,
+          gradeLetter: gradeLetter,
+          userType: userType,
         );
 
   factory Student.fromMap(Map<String, dynamic> map) => Student(
@@ -208,5 +220,8 @@ class Student extends User {
         birthDate: map['birth_date'],
         gender:
             map['gender'] == 'Femenino' ? Gender.femenino : Gender.masculino,
+        grade: map['grade'],
+        gradeLetter: map['letra_curso'],
+        userType: 1,
       );
 }

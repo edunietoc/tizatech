@@ -24,7 +24,7 @@ class StudentListScreen extends StatelessWidget {
                 <Widget>[
                   AvatarInfo(
                     user: user,
-                    profileImage: locator<UserService>().getUserAvatar,
+                    profileImage: locator<UserService>().getUserAvatar(),
                     description:
                         'Visualiza todos los estudiantes registrados a tu nombre.',
                   ),
@@ -46,7 +46,8 @@ class StudentListScreen extends StatelessWidget {
                       user.studentList.length,
                       (int index) => TileCard(
                         title: user.studentList[index].halfName,
-                        description: 'algo aca',
+                        description:
+                            '${user.studentList[index].grade} - ${user.studentList[index].gradeLetter}',
                         isBlue: true,
                         iconPath: 'assets/images/avatars/boy.png',
                         onTap: () => Navigator.push(

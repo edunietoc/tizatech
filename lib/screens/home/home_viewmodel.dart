@@ -15,7 +15,7 @@ class HomeViewModel {
     studentMenu = <MenuCard>[
       MenuCard(
         title: 'Perfil',
-        image: locator<UserService>().getUserAvatar,
+        image: locator<UserService>().getUserAvatar(),
         route: Routes.profile,
       ),
       MenuCard(
@@ -71,7 +71,7 @@ class HomeViewModel {
     parentMenu = <MenuCard>[
       MenuCard(
         title: 'Perfil',
-        image: locator<UserService>().getUserAvatar,
+        image: locator<UserService>().getUserAvatar(),
         route: Routes.profile,
       ),
       MenuCard(

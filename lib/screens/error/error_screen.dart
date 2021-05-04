@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../../_components/app_bar.dart';
 import '../../_components/avatar_info.dart';
+import '../../locator/locator.dart';
+import '../../locator/user_service.dart';
 import '../../models/user.dart';
 import '../../shared/colors.dart';
 import '../../shared/constants.dart';
@@ -32,13 +34,11 @@ class ErrorScreen extends StatelessWidget {
         SliverList(
             delegate: SliverChildListDelegate([
           Column(
-            children: [
+            children: <Widget>[
               AvatarInfo(
                 user: user,
                 showId: true,
-                profileImage: Image.network(
-                  user.picturePath,
-                ),
+                profileImage: locator<UserService>().getUserAvatar(),
               ),
               SizedBox(height: 55),
               Image.asset(errorImage),

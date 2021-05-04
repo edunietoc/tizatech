@@ -64,22 +64,27 @@ class AttendementsViewModel extends ChangeNotifier {
 
   //-------------------------METHODS--------------------------------------------
 
-  void getMonthAttendments(List<Month> monthList) {
-    Month currentMonth = monthList.singleWhere(
-        (Month element) => element.monthNumber == DateTime.now().month);
+  Future<void> getMonthAttendments(List<Month> monthList) async {
+    try {
+      Month currentMonth = monthList.singleWhere(
+          (Month element) => element.monthNumber == DateTime.now().month,
+          orElse: () => throw Exception('No_info'));
 
-    totalMonthAttendments = currentMonth.attendements;
-    totalMonthUnattendments = currentMonth.unnatendments;
+      totalMonthAttendments = currentMonth.attendements;
+      totalMonthUnattendments = currentMonth.unnatendments;
 
-    currentMonth.attendmentList
-        .sort((Attendment a1, Attendment a2) => a1.date.compareTo(a2.date));
+      currentMonth.attendmentList
+          .sort((Attendment a1, Attendment a2) => a1.date.compareTo(a2.date));
 
-    List<Week> weeks = getWeeksInAMonth(
-        currentMonth.attendmentList[0].date.year, currentMonth.monthNumber);
+      List<Week> weeks = getWeeksInAMonth(
+          currentMonth.attendmentList[0].date.year, currentMonth.monthNumber);
 
-    weeks = calculateMonthData(weeks, currentMonth.attendmentList);
+      weeks = calculateMonthData(weeks, currentMonth.attendmentList);
 
-    monthSeriesList = getMonthSeries(weeks);
+      monthSeriesList = getMonthSeries(weeks);
+    } on Exception catch (_) {
+      rethrow;
+    }
   }
 
   void getYearAttendments(List<Month> monthList) {
@@ -97,7 +102,8 @@ class AttendementsViewModel extends ChangeNotifier {
       currentStatus = Status.loading;
       int id = user.id;
       List<Month> monthList = await _studentService.getAttendments(id);
-      getMonthAttendments(monthList);
+      print('meses: ${monthList.length}');
+      await getMonthAttendments(monthList);
       getYearAttendments(monthList);
       currentStatus = Status.done;
     } on Exception catch (e) {

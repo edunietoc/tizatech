@@ -26,12 +26,18 @@ class UserService {
     }
   }
 
-  Widget get getUserAvatar {
-    switch (loginData.userType) {
-      case 0:
+  Widget getUserAvatar({User userParam}) {
+    UserType _userType = userParam != null
+        ? UserType.values[userParam.userType]
+        : UserType.values[loginData.userType];
+    String _picturePath =
+        userParam != null ? userParam.picturePath : user.picturePath;
+
+    switch (_userType) {
+      case UserType.admin:
         return Container();
-      case 1:
-        if (user.picturePath ==
+      case UserType.student:
+        if (_picturePath ==
             'http://tizatechapp-demo.herokuapp.com/media/default.jpg') {
           switch (user.gender) {
             case Gender.femenino:
@@ -45,8 +51,8 @@ class UserService {
         }
 
         break;
-      case 2:
-        if (user.picturePath ==
+      case UserType.parent:
+        if (_picturePath ==
             'http://tizatechapp-demo.herokuapp.com/media/default.jpg') {
           switch (user.gender) {
             case Gender.femenino:
@@ -59,10 +65,29 @@ class UserService {
           return Image.network(user.picturePath);
         }
         break;
-      case 3:
+      case UserType.teacher:
         return Container();
       default:
         return null;
+    }
+  }
+
+  String userTypeString({User userParam}) {
+    UserType _userType = userParam != null
+        ? UserType.values[userParam.userType]
+        : UserType.values[loginData.userType];
+
+    switch (_userType) {
+      case UserType.admin:
+        return 'Admin';
+      case UserType.student:
+        return 'Alumno';
+      case UserType.parent:
+        return 'Apoderado';
+      case UserType.teacher:
+        return 'Profesor';
+      default:
+        return '';
     }
   }
 

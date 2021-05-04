@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tizatech/locator/locator.dart';
+import 'package:tizatech/locator/user_service.dart';
 
 import '../../../_components/app_bar.dart';
 import '../../../_components/avatar_info.dart';
@@ -46,9 +48,8 @@ class GradesScreen extends StatelessWidget {
                         <Widget>[
                           AvatarInfo(
                             user: viewModel.user,
-                            profileImage: Image.network(
-                              viewModel.user.picturePath,
-                            ),
+                            profileImage: locator<UserService>()
+                                .getUserAvatar(userParam: userParam),
                             description:
                                 'Desliza a la izquierda para visualizar\nlas notas de cada asignatura.',
                           ),

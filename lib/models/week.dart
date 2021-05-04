@@ -18,7 +18,7 @@ List<Week> getWeeksInAMonth(int year, int month) {
 
   int _currentWeek = 0;
   List<DateTime> acumulativeDates = <DateTime>[];
-  for (int i = 1; i < 32; i++) {
+  for (int i = 1; i <= 32; i++) {
     DateTime date = DateTime(year, month, i);
 
     if (date.day != i) {

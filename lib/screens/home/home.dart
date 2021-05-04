@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:tizatech/locator/locator.dart';
+import 'package:tizatech/locator/user_service.dart';
 
 import '../../_components/app_bar.dart';
 import '../../models/user.dart';
@@ -22,7 +24,10 @@ class HomeScreen extends StatelessWidget {
       body: CustomScrollView(
         slivers: <Widget>[
           if (userParam != null)
-            TizaAppBar(title: userParam.halfName, subtitle: 'Alumno')
+            TizaAppBar(
+                title: userParam.halfName,
+                subtitle:
+                    locator<UserService>().userTypeString(userParam: userParam))
           else
             HomeAppBar(user: viewModel.user),
           SliverPadding(padding: EdgeInsets.only(top: 32)),
@@ -96,7 +101,7 @@ class HomeAppBar extends StatelessWidget {
                     style: Theme.of(context).textTheme.headline3,
                   ),
                   Text(
-                    'Alumno',
+                    locator<UserService>().userTypeString(),
                     textAlign: TextAlign.left,
                     style: Theme.of(context).textTheme.bodyText1.copyWith(
                           color: primaryColor[80],
