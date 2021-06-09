@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "292999620995",
+    "project_id": "tizatech",
+    "storage_bucket": "tizatech.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:292999620995:android:9e6d84be48d67e7147eeb6",
+        "android_client_info": {
+          "package_name": "com.tiza.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "292999620995-ucps6q3cn206sl3vh2c90qa87jss2pqt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyADM_38dWZinUiVUosgjJgdJiRbLXbe_sw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "292999620995-ucps6q3cn206sl3vh2c90qa87jss2pqt.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "292999620995-pfmoem9jribckmcudpcdcno59o76c26t.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.tiza.app"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

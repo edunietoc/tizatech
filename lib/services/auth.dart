@@ -21,9 +21,11 @@ class AuthService {
             userService.getUserType, userService.loginData.id);
 
         if (userService.getUserType == UserType.student) {
-          userService.user = Student.fromMap(userMap);
+          locator<UserService>().user = Student.fromMap(userMap);
         } else if (userService.getUserType == UserType.parent) {
-          userService.user = Parent.fromMap(userMap);
+          locator<UserService>().user = Parent.fromMap(userMap);
+        } else if (userService.getUserType == UserType.teacher) {
+          locator<UserService>().user = Teacher.fromMap(userMap);
         }
       } else {
         throw Exception(response.values.last.toString());
@@ -41,6 +43,8 @@ class AuthService {
         endpoint = 'alumnos/$id/';
       } else if (type == UserType.parent) {
         endpoint = 'apoderados/$id/';
+      } else if (type == UserType.teacher) {
+        endpoint = 'profesores/$id/';
       }
       Map<String, dynamic> response = await api.getRequest(endpoint);
       return response;

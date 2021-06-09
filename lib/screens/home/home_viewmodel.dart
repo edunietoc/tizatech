@@ -90,14 +90,36 @@ class HomeViewModel {
         route: Routes.notifications,
       ),
     ];
+
+    teacherMenu = <MenuCard>[
+      MenuCard(
+        title: 'Perfil',
+        image: locator<UserService>().getUserAvatar(),
+        route: Routes.profile,
+      ),
+      MenuCard(
+        title: 'Mensajes',
+        imagePath: 'assets/images/home/message_dot.png',
+        route: Routes.messages,
+      ),
+      MenuCard(
+        title: 'Lecturas Anuales',
+        imagePath: 'assets/images/home/books.png',
+        route: Routes.books,
+      ),
+      MenuCard(
+        title: 'Cursos',
+        imagePath: 'assets/images/home/courses.png',
+        route: Routes.courses,
+      )
+    ];
   }
 
   User user;
 
   List<MenuCard> get currentList {
     UserType userType = locator<UserService>().getUserType;
-    print(userType.index);
-    print(user.userType);
+
     if (userType == UserType.student) {
       return studentMenu;
     } else if (userType == UserType.parent) {
@@ -106,6 +128,8 @@ class HomeViewModel {
       } else {
         return reducedStudentMenu;
       }
+    } else if (userType == UserType.teacher) {
+      return teacherMenu;
     }
   }
 
@@ -114,4 +138,6 @@ class HomeViewModel {
   List<MenuCard> reducedStudentMenu;
 
   List<MenuCard> parentMenu;
+
+  List<MenuCard> teacherMenu;
 }

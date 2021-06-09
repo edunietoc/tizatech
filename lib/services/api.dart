@@ -13,18 +13,25 @@ class API {
     LoginData loginData = locator<UserService>().loginData;
 
     return (loginData.token != null && loginData.token.isNotEmpty)
-        ? <String, String>{'Authorization': 'Token ${loginData.token}'}
+        ? <String, String>{
+            'Authorization': 'Token ${loginData.token}',
+          }
         : null;
   }
 
   Future<dynamic> getRequest(String endpoint) async {
     Map<String, String> headers = _getHeaders() ?? <String, String>{};
 
+    headers.addAll({
+      'Content-type': 'application/json',
+      'Accept': 'application/json',
+    });
+
     Uri url = Uri.parse(_url + endpoint);
     try {
       http.Response response = await http.get(url, headers: headers);
 
-      dynamic map = jsonDecode(response.body);
+      dynamic map = json.decode(utf8.decode(response.bodyBytes));
 
       return map;
     } on Exception catch (_) {

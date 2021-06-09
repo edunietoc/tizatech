@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tizatech/services/message.dart';
 
 import '../../_components/dialog.dart';
 import '../../_components/loader.dart';
@@ -36,7 +37,6 @@ class AuthViewModel extends ChangeNotifier {
               'Verifica que tus claves sean correctas o contacta a la Institución.',
           title: 'Usuario No Registrado',
           onPressed: () => Navigator.pop(context));
-      print(loginError);
     }
   }
 }

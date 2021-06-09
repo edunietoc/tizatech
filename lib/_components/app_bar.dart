@@ -82,7 +82,7 @@ class TizaAppBar extends StatelessWidget {
                   textAlign: TextAlign.left,
                   style: isHome
                       ? Theme.of(context).textTheme.headline3
-                      : Theme.of(context).textTheme.headline1,
+                      : Theme.of(context).textTheme.headline2,
                 ),
                 Text(
                   subtitle,

@@ -66,7 +66,19 @@ class UserService {
         }
         break;
       case UserType.teacher:
-        return Container();
+        if (_picturePath ==
+            'http://tizatechapp-demo.herokuapp.com/media/default.jpg') {
+          switch (user.gender) {
+            case Gender.femenino:
+              return Image.asset('assets/images/avatars/woman.png');
+              break;
+            case Gender.masculino:
+              return Image.asset('assets/images/avatars/man.png');
+          }
+        } else {
+          return Image.network(user.picturePath);
+        }
+        break;
       default:
         return null;
     }

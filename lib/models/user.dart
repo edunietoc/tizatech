@@ -32,7 +32,7 @@ class User {
   factory User.fromJson(String source) => User.fromMap(json.decode(source));
 
   factory User.fromMap(Map<String, dynamic> map) => User(
-        id: map['id'],
+        id: int.tryParse(map['id'].toString()),
         firstName: map['first_name'],
         middleName: map['middle_name'],
         lastName: map['last_name'],
@@ -141,8 +141,8 @@ class Parent extends User {
         .map((dynamic student) => Student.fromMap(student))
         .toList();
 
-    print(studentList);
     return Parent(
+      id: int.tryParse(map['id'].toString()),
       firstName: map['first_name'],
       middleName: map['middle_name'],
       lastName: map['last_name'],
@@ -224,4 +224,62 @@ class Student extends User {
         gradeLetter: map['letra_curso'],
         userType: 1,
       );
+}
+
+class Teacher extends User {
+  Teacher({
+    int id,
+    String firstName,
+    String middleName,
+    String lastName,
+    String lastName2,
+    String rut,
+    String nationality,
+    String street,
+    String location,
+    String email,
+    String mobilePhone,
+    String homePhone,
+    String picturePath,
+    String birthDate,
+    Gender gender,
+    List<Student> studentList,
+  }) : super(
+          id: id,
+          email: email,
+          middleName: middleName,
+          firstName: firstName,
+          lastName2: lastName2,
+          lastName: lastName,
+          rut: rut,
+          nationality: nationality,
+          street: street,
+          location: location,
+          mobilePhone: mobilePhone,
+          homePhone: homePhone,
+          picturePath: picturePath,
+          gender: gender,
+          studentList: studentList,
+          birthDate: birthDate,
+        );
+
+  factory Teacher.fromMap(Map<String, dynamic> map) {
+    return Teacher(
+      id: map['id'],
+      firstName: map['first_name'],
+      middleName: map['middle_name'],
+      lastName: map['last_name'],
+      lastName2: map['second_last_name'],
+      rut: map['rut'],
+      nationality: map['nationality'],
+      street: map['calle'],
+      location: map['comuna'],
+      email: map['email'],
+      mobilePhone: map['mobile_phone'],
+      homePhone: map['home_phone'],
+      birthDate: map['birth_date'],
+      picturePath: map['picture'],
+      gender: map['gender'] == 'Femenino' ? Gender.femenino : Gender.masculino,
+    );
+  }
 }
