@@ -136,26 +136,26 @@ class _SendedMessage extends StatelessWidget {
   final Message message;
   final bool userSentThis;
   @override
-  Widget build(BuildContext context) => Row(
-        mainAxisAlignment: MainAxisAlignment.end,
+  Widget build(BuildContext context) => Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
         children: <Widget>[
-          Expanded(
-            child: Container(
-              margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
-              padding: const EdgeInsets.symmetric(
-                vertical: 8,
-                horizontal: 16,
-              ),
-              decoration: BoxDecoration(
-                  color: primaryColor[80],
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(16),
-                    topRight: Radius.circular(16),
-                    bottomLeft: Radius.circular(16),
-                  )),
-              child: Text(
-                userSentThis ? message.message : message.answer,
-                style: body1(context).copyWith(color: blackShadesColor[05]),
+          Container(
+            margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+            padding: const EdgeInsets.symmetric(
+              vertical: 8,
+              horizontal: 16,
+            ),
+            decoration: BoxDecoration(
+                color: primaryColor[80],
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(16),
+                  topRight: Radius.circular(16),
+                  bottomLeft: Radius.circular(16),
+                )),
+            child: Text(
+              userSentThis ? message.message : message.answer,
+              style: body1(context).copyWith(
+                color: blackShadesColor[05],
               ),
             ),
           ),
