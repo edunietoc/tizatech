@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tizatech/_components/filter_item.dart';
 import 'package:tizatech/_components/loader.dart';
 import 'package:tizatech/models/messages.dart';
 
@@ -38,12 +39,19 @@ class MessagesDetailScreen extends StatelessWidget {
                           SizedBox(
                             height: 32,
                           ),
-                          _ReceivedMessage(
-                            message: viewModel.currentMessage,
-                          ),
+                          if (viewModel.userSentThis)
+                            _SendedMessage(
+                              message: viewModel.currentMessage,
+                              userSentThis: viewModel.userSentThis,
+                            )
+                          else
+                            _ReceivedMessage(
+                              message: viewModel.currentMessage,
+                            ),
                           if (viewModel.currentMessage.hasBeenAnswered)
                             _SendedMessage(message: viewModel.currentMessage),
-                          if (!viewModel.currentMessage.hasBeenAnswered)
+                          if (!viewModel.currentMessage.hasBeenAnswered &&
+                              !viewModel.userSentThis)
                             Container(
                                 margin: EdgeInsets.only(top: 32, bottom: 16),
                                 padding: EdgeInsets.symmetric(horizontal: 16),
@@ -51,13 +59,14 @@ class MessagesDetailScreen extends StatelessWidget {
                                   'Seleccione una Respuesta:',
                                   style: body2(context),
                                 )),
-                          if (!viewModel.currentMessage.hasBeenAnswered)
+                          if (!viewModel.currentMessage.hasBeenAnswered &&
+                              !viewModel.userSentThis)
                             Wrap(
                               alignment: WrapAlignment.center,
                               spacing: 16,
                               runSpacing: 8,
                               children: viewModel.currentMessage.responseOptions
-                                  .map((String option) => _AnswerOption(
+                                  .map((String option) => FilterItem(
                                       text: option,
                                       isSelected:
                                           viewModel.answer.contains(option),
@@ -70,7 +79,8 @@ class MessagesDetailScreen extends StatelessWidget {
                     )
                   ],
                 ),
-                if (!viewModel.currentMessage.hasBeenAnswered)
+                if (!viewModel.currentMessage.hasBeenAnswered &&
+                    !viewModel.userSentThis)
                   Positioned(
                     bottom: 40,
                     right: 24,
@@ -120,69 +130,36 @@ class _ReceivedMessage extends StatelessWidget {
 class _SendedMessage extends StatelessWidget {
   const _SendedMessage({
     @required this.message,
+    this.userSentThis = false,
     Key key,
   }) : super(key: key);
   final Message message;
+  final bool userSentThis;
   @override
   Widget build(BuildContext context) => Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: <Widget>[
-          Container(
-            margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
-            padding: const EdgeInsets.symmetric(
-              vertical: 8,
-              horizontal: 16,
-            ),
-            decoration: BoxDecoration(
-                color: primaryColor[80],
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(16),
-                  topRight: Radius.circular(16),
-                  bottomLeft: Radius.circular(16),
-                )),
-            child: Text(
-              message.answer,
-              style: body1(context).copyWith(color: blackShadesColor[05]),
+          Expanded(
+            child: Container(
+              margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+              padding: const EdgeInsets.symmetric(
+                vertical: 8,
+                horizontal: 16,
+              ),
+              decoration: BoxDecoration(
+                  color: primaryColor[80],
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(16),
+                    topRight: Radius.circular(16),
+                    bottomLeft: Radius.circular(16),
+                  )),
+              child: Text(
+                userSentThis ? message.message : message.answer,
+                style: body1(context).copyWith(color: blackShadesColor[05]),
+              ),
             ),
           ),
         ],
-      );
-}
-
-class _AnswerOption extends StatefulWidget {
-  const _AnswerOption({
-    @required this.text,
-    @required this.isSelected,
-    @required this.onSelected,
-    this.showCheckMark = false,
-    Key key,
-  }) : super(key: key);
-  final String text;
-  final bool isSelected;
-  final Function onSelected;
-  final bool showCheckMark;
-  @override
-  __AnswerOptionState createState() => __AnswerOptionState();
-}
-
-class __AnswerOptionState extends State<_AnswerOption> {
-  @override
-  Widget build(BuildContext context) => FilterChip(
-        backgroundColor: cardColorPrimary,
-        disabledColor: cardColorPrimary,
-        selected: widget.isSelected ?? false,
-        selectedColor: primaryColor[80],
-        showCheckmark: widget.showCheckMark,
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-        onSelected: (bool isSelected) => widget.onSelected(isSelected),
-        side: BorderSide(color: primaryColor[80]),
-        label: Text(
-          widget.text,
-          style: body2(context).copyWith(
-            color: widget.isSelected ? blackShadesColor[05] : primaryColor[80],
-          ),
-          textAlign: TextAlign.center,
-        ),
       );
 }
 

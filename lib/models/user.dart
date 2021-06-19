@@ -27,6 +27,7 @@ class User {
     this.studentList,
     this.grade,
     this.gradeLetter,
+    this.schoolId,
   });
 
   factory User.fromJson(String source) => User.fromMap(json.decode(source));
@@ -94,6 +95,7 @@ class User {
   String grade;
   String gradeLetter;
   List<Student> studentList;
+  int schoolId;
   String get fullName => '$firstName $middleName $lastName $lastName2';
   String get halfName => '$firstName $lastName';
 }
@@ -116,6 +118,7 @@ class Parent extends User {
     String birthDate,
     Gender gender,
     List<Student> studentList,
+    int schoolId,
   }) : super(
             id: id,
             email: email,
@@ -132,7 +135,8 @@ class Parent extends User {
             picturePath: picturePath,
             gender: gender,
             studentList: studentList,
-            birthDate: birthDate);
+            birthDate: birthDate,
+            schoolId: schoolId);
 
   factory Parent.fromMap(Map<String, dynamic> map) {
     List<dynamic> responseStudentList = map['alumno_set'];
@@ -158,6 +162,7 @@ class Parent extends User {
       picturePath: map['picture'],
       studentList: studentList,
       gender: map['gender'] == 'Femenino' ? Gender.femenino : Gender.masculino,
+      schoolId: map['establecimiento']['id'],
     );
   }
 }
@@ -182,6 +187,7 @@ class Student extends User {
     String grade,
     String gradeLetter,
     int userType,
+    int schoolId,
   }) : super(
           id: id,
           email: email,
@@ -201,6 +207,7 @@ class Student extends User {
           grade: grade,
           gradeLetter: gradeLetter,
           userType: userType,
+          schoolId: schoolId,
         );
 
   factory Student.fromMap(Map<String, dynamic> map) => Student(
@@ -223,6 +230,7 @@ class Student extends User {
         grade: map['grade'],
         gradeLetter: map['letra_curso'],
         userType: 1,
+        schoolId: map['establecimiento']['id'],
       );
 }
 
@@ -244,6 +252,7 @@ class Teacher extends User {
     String birthDate,
     Gender gender,
     List<Student> studentList,
+    int schoolId,
   }) : super(
           id: id,
           email: email,
@@ -261,6 +270,7 @@ class Teacher extends User {
           gender: gender,
           studentList: studentList,
           birthDate: birthDate,
+          schoolId: schoolId,
         );
 
   factory Teacher.fromMap(Map<String, dynamic> map) {
@@ -280,6 +290,7 @@ class Teacher extends User {
       birthDate: map['birth_date'],
       picturePath: map['picture'],
       gender: map['gender'] == 'Femenino' ? Gender.femenino : Gender.masculino,
+      schoolId: map['establecimiento']['id'],
     );
   }
 }

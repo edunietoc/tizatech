@@ -1,4 +1,4 @@
-package com.tizatech.app
+package com.tiza.app
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tizatech/_components/filter_item.dart';
 import 'package:tizatech/_components/loader.dart';
 import 'package:tizatech/_components/tile_card.dart';
 import 'package:tizatech/screens/teacher_screens/subject_list/subject_list.dart';
@@ -38,21 +39,14 @@ class CoursesScreen extends StatelessWidget {
                         AvatarInfo(user: viewModel.teacher),
                         Column(
                           children: List<Widget>.generate(
-                              viewModel.courseList.length,
-                              (int index) => TileCard(
-                                    title: viewModel.courseList[index].name,
-                                    description: '',
-                                    iconPath: 'assets/images/books/books.png',
-                                    onTap: () => Navigator.push(
-                                      context,
-                                      MaterialPageRoute<Widget>(
-                                        builder: (_) => SubjectListScreen(
-                                          currentCourse:
-                                              viewModel.courseList[index],
-                                        ),
-                                      ),
-                                    ),
-                                  )),
+                            viewModel.courseList.length,
+                            (int index) => FilterItem(
+                              text:
+                                  '${viewModel.courseList[index].name} ${viewModel.courseList[index].letter}',
+                              isSelected: false,
+                              onSelected: (value) => print,
+                            ),
+                          ),
                         )
                       ],
                     ),

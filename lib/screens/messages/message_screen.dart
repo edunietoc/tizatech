@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tizatech/_components/loader.dart';
-import 'package:tizatech/screens/messages/message_detail.dart';
-import 'package:tizatech/screens/messages/messages_vm.dart';
+import 'package:tizatech/_components/search_input.dart';
 
 import '../../_components/app_bar.dart';
+import '../../_components/loader.dart';
 import '../../_components/message.dart';
 import '../../locator/locator.dart';
 import '../../locator/user_service.dart';
 import '../../models/messages.dart';
+import 'messages_vm.dart';
 
 class MessagesScreen extends StatelessWidget {
   const MessagesScreen({
@@ -22,7 +22,7 @@ class MessagesScreen extends StatelessWidget {
     return ChangeNotifierProvider<MessagesViewModel>(
       create: (_) => MessagesViewModel(),
       child: Consumer<MessagesViewModel>(
-          builder: (BuildContext context, MessagesViewModel viewModel, _) {
+          builder: (_, MessagesViewModel viewModel, __) {
         switch (viewModel.currentStatus) {
           case Status.loading:
             return Loader();
@@ -33,12 +33,20 @@ class MessagesScreen extends StatelessWidget {
           case Status.done:
             return Scaffold(
               body: CustomScrollView(
-                slivers: [
+                slivers: <Widget>[
                   TizaAppBar(title: 'Mensajes', subtitle: ''),
-                  SliverPadding(padding: EdgeInsets.only(top: 32)),
+                  SliverToBoxAdapter(
+                    child: SearchBar(
+                      hintText: 'Buscar',
+                      onChanged: (String text) =>
+                          viewModel.filterMessages(text),
+                    ),
+                  ),
                   SliverList(
                     delegate: SliverChildListDelegate(
-                      viewModel.messageList
+                      (viewModel.isMessageFiltered
+                              ? viewModel.filteredMessage
+                              : viewModel.messageList)
                           .map(
                             (Message message) => MessageTile(
                               hasBeenRead: message.hasBeenRead,
@@ -54,6 +62,7 @@ class MessagesScreen extends StatelessWidget {
             );
 
           default:
+            return Container();
         }
       }),
     );

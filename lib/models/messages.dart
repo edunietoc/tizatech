@@ -10,6 +10,7 @@ class Message {
     this.userSender,
     this.date,
     this.responseOptions,
+    this.dateTime,
   });
   factory Message.fromMap(Map<String, dynamic> map) {
     return Message(
@@ -21,6 +22,7 @@ class Message {
       responseOptions: (map['respuestas_array'] as List<dynamic>)
           .map((dynamic e) => e.toString())
           .toList(),
+      dateTime: DateTime.parse(map['date']),
     );
   }
 
@@ -37,6 +39,7 @@ class Message {
   bool hasBeenAnswered = false;
   String path;
   String answer;
+  DateTime dateTime;
 
   Map<String, dynamic> toMap() {
     return {

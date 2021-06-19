@@ -1,20 +1,39 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../models/messages.dart';
+import '../models/user.dart';
+import 'api.dart';
 
 class MessageService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final API _api = API();
 
-  Future<List<Message>> getMessageList(int id) async {
+  Future<List<Message>> getMessageList(int id, int schooldId) async {
     try {
       QuerySnapshot<Map<String, dynamic>> snapshot = await _firestore
           .collection('chats')
           .where('apod_array', arrayContains: id)
+          .where('establecimiento_id', isEqualTo: schooldId)
           .get();
 
-      return snapshot.docs
-          .map((QueryDocumentSnapshot<Map<String, dynamic>> doc) {
+      QuerySnapshot<Map<String, dynamic>> sendedSnapshot = await _firestore
+          .collection('chats')
+          .where('created_by_dict.id', isEqualTo: '$id')
+          .get();
+
+      print(snapshot.docs.length);
+      print(sendedSnapshot.docs.length);
+
+      List<QueryDocumentSnapshot<Map<String, dynamic>>> list = snapshot.docs
+        ..addAll(sendedSnapshot.docs);
+
+      return list.map((QueryDocumentSnapshot<Map<String, dynamic>> doc) {
         Message message = Message.fromMap(doc.data());
+
+        if (message.userSender.id == id) {
+          message.hasBeenRead = true;
+          return message;
+        }
 
         List<dynamic> listMap =
             doc.data()['has_been_answered_by'] as List<dynamic>;
@@ -50,17 +69,25 @@ class MessageService {
     }
   }
 
-  Future<void> answerMessage(Message message, int id, String answer) async {
+  Future<void> answerMessage(Message message, User user, String answer) async {
+    const String endpoint = 'respuestasmensaje/';
     try {
       await _firestore.doc(message.path).update(<String, dynamic>{
         'has_been_answered_by': FieldValue.arrayUnion(<Map<String, dynamic>>[
           <String, dynamic>{
-            'id': id,
+            'id': user.id,
             'respuesta': answer,
           },
         ])
       });
-    } on Exception catch (_) {
+      await _api.post(endpoint, <String, dynamic>{
+        'apoderado': user.id.toString(),
+        'respuesta': answer,
+        'mensaje': message.path.substring(6),
+        'establecimiento': user.schoolId.toString()
+      });
+    } on Exception catch (e) {
+      print(e.toString());
       rethrow;
     }
   }

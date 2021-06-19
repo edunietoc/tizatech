@@ -1,14 +1,13 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:tizatech/shared/api.dart';
 
 import '../locator/locator.dart';
 import '../locator/user_service.dart';
 import '../models/login_data.dart';
 
 class API {
-  final String _url = 'http://tizatechapp-demo.herokuapp.com/api/';
-
   Map<String, String> _getHeaders() {
     LoginData loginData = locator<UserService>().loginData;
 
@@ -27,7 +26,7 @@ class API {
       'Accept': 'application/json',
     });
 
-    Uri url = Uri.parse(_url + endpoint);
+    Uri url = Uri.parse(baseUrl + endpoint);
     try {
       http.Response response = await http.get(url, headers: headers);
 
@@ -42,7 +41,7 @@ class API {
   Future<Map<String, dynamic>> post(
       String endpoint, Map<String, dynamic> body) async {
     Map<String, String> headers = _getHeaders() ?? <String, String>{};
-    Uri url = Uri.parse(_url + endpoint);
+    Uri url = Uri.parse(baseUrl + endpoint);
     try {
       http.Response response = await http.post(
         url,

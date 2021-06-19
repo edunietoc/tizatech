@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:tizatech/shared/constants.dart';
 
 import '../models/messages.dart';
+import '../shared/constants.dart';
+import '../shared/utils.dart';
 
 class MessageTile extends StatelessWidget {
   const MessageTile({
@@ -15,13 +16,15 @@ class MessageTile extends StatelessWidget {
   final Message message;
   final Function onTap;
 
-  static const String _unreadPath = 'assets/images/messages/unread.png';
-  static const String _readPath = 'assets/images/messages/read.png';
+  final String _unreadPath = 'assets/images/messages/unread.png';
+  final String _readPath = 'assets/images/messages/read.png';
 
   @override
   Widget build(BuildContext context) => InkWell(
+        onTap: onTap,
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 16),
+          margin: EdgeInsets.only(bottom: 24),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
@@ -30,6 +33,11 @@ class MessageTile extends StatelessWidget {
                 width: 40,
                 height: 40,
               ),
+              /* Image.network(
+                '$imageBaseUrl${message.userSender.picturePath}',
+                width: 40,
+                height: 40,
+              ), */
               SizedBox(
                 width: 16,
               ),
@@ -39,11 +47,15 @@ class MessageTile extends StatelessWidget {
                   children: <Widget>[
                     Text(
                       message.userSender.halfName,
-                      style: body2(context),
+                      style: body2(context).copyWith(
+                          fontWeight:
+                              hasBeenRead ? FontWeight.w400 : FontWeight.w500),
                     ),
                     Text(
                       message.title,
-                      style: body2(context),
+                      style: body2(context).copyWith(
+                          fontWeight:
+                              hasBeenRead ? FontWeight.w400 : FontWeight.w500),
                     ),
                     Text(
                       message.message,
@@ -54,22 +66,13 @@ class MessageTile extends StatelessWidget {
                 ),
               ),
               Text(
-                message.date,
-                style: caption(context),
+                parseDate(message.date, message.time),
+                style: caption(context).copyWith(
+                    fontWeight:
+                        hasBeenRead ? FontWeight.w400 : FontWeight.w500),
               ),
             ],
           ),
-
-          /* isThreeLine: true,
-          leading: Image.asset(hasBeenRead ? _readPath : _unreadPath),
-          title: Text(message.title),
-          subtitle: Text(message.message),
-
-          trailing: Text(
-            message.time,
-          ),
-          onTap: onTap, */
         ),
-        onTap: onTap,
       );
 }
