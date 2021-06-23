@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:tizatech/screens/messages/message_screen.dart';
+import 'package:tizatech/screens/teacher_screens/charts/menu.dart';
 import 'package:tizatech/screens/teacher_screens/courses/courses.dart';
 
 import '_components/loader.dart';
@@ -84,7 +85,8 @@ class _MyAppState extends State<MyApp> {
         Routes.login: (BuildContext context) => LoginScreen(),
         Routes.studentList: (BuildContext context) => StudentListScreen(),
         Routes.courses: (BuildContext context) => CoursesScreen(),
-        Routes.messages: (BuildContext context) => MessagesScreen()
+        Routes.messages: (BuildContext context) => MessagesScreen(),
+        Routes.charts: (_) => ChartListScreen(),
       },
       theme: ThemeData(
           brightness: Brightness.light,

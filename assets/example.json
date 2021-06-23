@@ -1,0 +1,15 @@
+{
+
+    "lista_mensual": [
+        {
+            "mes": "Junio",
+            "curso":{
+               "nombre": "4 medio - A",
+               "valor": "95"    
+            }
+            
+        }
+    ]
+
+
+}

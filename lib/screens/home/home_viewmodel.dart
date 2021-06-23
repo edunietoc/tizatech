@@ -111,6 +111,11 @@ class HomeViewModel {
         title: 'Cursos',
         imagePath: 'assets/images/home/courses.png',
         route: Routes.courses,
+      ),
+      MenuCard(
+        title: 'Informe de Gestion',
+        imagePath: 'assets/images/home/courses.png',
+        route: Routes.charts,
       )
     ];
   }
