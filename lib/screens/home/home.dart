@@ -18,7 +18,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    HomeViewModel viewModel = HomeViewModel(userParam: userParam);
+    HomeViewModel viewModel = HomeViewModel(userParameter: userParam);
 
     return Scaffold(
       body: CustomScrollView(

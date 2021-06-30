@@ -230,7 +230,6 @@ class Student extends User {
         grade: map['grade'],
         gradeLetter: map['letra_curso'],
         userType: 1,
-        schoolId: map['establecimiento']['id'],
       );
 }
 

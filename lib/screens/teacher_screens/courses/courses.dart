@@ -27,6 +27,13 @@ class CoursesScreen extends StatelessWidget {
 
           case Status.done:
             return Scaffold(
+              bottomNavigationBar: Padding(
+                padding: EdgeInsets.symmetric(vertical: 28, horizontal: 24),
+                child: ElevatedButton(
+                  onPressed: () => viewModel.selectCourse(),
+                  child: Text('Aplicar'),
+                ),
+              ),
               body: CustomScrollView(
                 slivers: <Widget>[
                   TizaAppBar(
@@ -43,8 +50,10 @@ class CoursesScreen extends StatelessWidget {
                             (int index) => FilterItem(
                               text:
                                   '${viewModel.courseList[index].name} ${viewModel.courseList[index].letter}',
-                              isSelected: false,
-                              onSelected: (value) => print,
+                              isSelected:
+                                  index == viewModel?.currentIndexCourse,
+                              onSelected: (bool value) =>
+                                  viewModel.currentIndexCourse = index,
                             ),
                           ),
                         )

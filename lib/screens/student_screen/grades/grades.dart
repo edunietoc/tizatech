@@ -10,7 +10,7 @@ import '../../../models/user.dart';
 import '../../../shared/colors.dart';
 import '../../../shared/constants.dart';
 import '../../error/error_screen.dart';
-import 'grades_table.dart';
+import '../../../_components/grades_table.dart';
 import 'grades_vm.dart';
 
 class GradesScreen extends StatelessWidget {

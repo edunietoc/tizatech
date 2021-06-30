@@ -23,12 +23,7 @@ class SubjectListScreen extends StatelessWidget {
                 Column(
                   children: List<Widget>.generate(
                     currentCourse.subjectList.length,
-                    (int index) => ListTile(
-                      title: Text(currentCourse.subjectList[index].name),
-                      trailing: Icon(Icons.arrow_forward_ios),
-                      //TODO: move to grade screen
-                      onTap: () => print('object'),
-                    ),
+                    (int index) => Text(currentCourse.subjectList[index].name),
                   ),
                 )
               ],

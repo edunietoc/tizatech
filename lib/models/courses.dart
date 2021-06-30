@@ -39,11 +39,14 @@ class TeacherSubject {
     this.name,
     this.code,
   });
-  factory TeacherSubject.fromMap(Map<String, dynamic> map) => TeacherSubject(
-        id: map['id'],
-        name: map['name'],
-        code: map['codigo'],
-      );
+  factory TeacherSubject.fromMap(Map<String, dynamic> map) {
+    print(map);
+    return TeacherSubject(
+      id: map['id'],
+      name: map['name'],
+      code: map['codigo'],
+    );
+  }
 
   factory TeacherSubject.fromJson(String source) =>
       TeacherSubject.fromMap(json.decode(source));

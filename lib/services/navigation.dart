@@ -24,4 +24,7 @@ class Routes {
   static const String studentList = '/student_list';
   static const String courses = '/courses';
   static const String charts = '/charts';
+  static const String teacherStudentList = '/teacher_student_list';
+  static const String teacherGradesList = '/teacher_grades_list';
+  static const String teacherSubjectList = '/teacher_subject_list';
 }

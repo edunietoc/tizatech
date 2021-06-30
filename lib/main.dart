@@ -3,6 +3,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:tizatech/screens/messages/message_screen.dart';
 import 'package:tizatech/screens/teacher_screens/charts/menu.dart';
 import 'package:tizatech/screens/teacher_screens/courses/courses.dart';
+import 'package:tizatech/screens/teacher_screens/student_list/student_list.dart';
+import 'package:tizatech/screens/teacher_screens/subject_list/subject_list.dart';
 
 import '_components/loader.dart';
 import 'locator/locator.dart';
@@ -87,6 +89,10 @@ class _MyAppState extends State<MyApp> {
         Routes.courses: (BuildContext context) => CoursesScreen(),
         Routes.messages: (BuildContext context) => MessagesScreen(),
         Routes.charts: (_) => ChartListScreen(),
+        Routes.teacherSubjectList: (BuildContext context) =>
+            SubjectListScreen(),
+        Routes.teacherStudentList: (BuildContext context) =>
+            TeacherStudentListScreen(),
       },
       theme: ThemeData(
           brightness: Brightness.light,

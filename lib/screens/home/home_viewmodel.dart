@@ -9,9 +9,9 @@ import '../student_screen/delayments/delayments.dart';
 import '../student_screen/grades/grades.dart';
 
 class HomeViewModel {
-  HomeViewModel({User userParam}) {
-    user = userParam ?? locator<UserService>().user;
-
+  HomeViewModel({User userParameter}) {
+    user = userParameter ?? locator<UserService>().user;
+    userParam = userParameter;
     studentMenu = <MenuCard>[
       MenuCard(
         title: 'Perfil',
@@ -118,9 +118,33 @@ class HomeViewModel {
         route: Routes.charts,
       )
     ];
+
+    coursesTeacherMenu = <MenuCard>[
+      MenuCard(
+        title: 'Perfil',
+        image: locator<UserService>().getUserAvatar(),
+        route: Routes.profile,
+      ),
+      MenuCard(
+        title: 'Mensajes',
+        imagePath: 'assets/images/home/message_dot.png',
+        route: Routes.messages,
+      ),
+      MenuCard(
+        title: 'Lecturas Anuales',
+        imagePath: 'assets/images/home/books.png',
+        route: Routes.books,
+      ),
+      MenuCard(
+        title: 'Cursos',
+        imagePath: 'assets/images/home/courses.png',
+        route: Routes.courses,
+      ),
+    ];
   }
 
   User user;
+  User userParam;
 
   List<MenuCard> get currentList {
     UserType userType = locator<UserService>().getUserType;
@@ -134,7 +158,11 @@ class HomeViewModel {
         return reducedStudentMenu;
       }
     } else if (userType == UserType.teacher) {
-      return teacherMenu;
+      if (userParam != null && userParam is Student) {
+        return reducedStudentMenu;
+      } else {
+        return teacherMenu;
+      }
     }
   }
 
@@ -145,4 +173,6 @@ class HomeViewModel {
   List<MenuCard> parentMenu;
 
   List<MenuCard> teacherMenu;
+
+  List<MenuCard> coursesTeacherMenu;
 }
