@@ -28,30 +28,30 @@ class User {
     this.grade,
     this.gradeLetter,
     this.schoolId,
+    this.verifierDigit,
   });
 
   factory User.fromJson(String source) => User.fromMap(json.decode(source));
 
   factory User.fromMap(Map<String, dynamic> map) => User(
-        id: int.tryParse(map['id'].toString()),
-        firstName: map['first_name'],
-        middleName: map['middle_name'],
-        lastName: map['last_name'],
-        lastName2: map['second_last_name'],
-        rut: map['rut'],
-        nationality: map['nationality'],
-        street: map['calle'],
-        location: map['comuna'],
-        email: map['email'],
-        mobilePhone: map['mobile_phone'],
-        homePhone: map['home_phone'],
-        picturePath: map['picture'],
-        birthDate: map['birth_date'],
-        gender:
-            map['gender'] == 'Femenino' ? Gender.femenino : Gender.masculino,
-        grade: map['grade'],
-        gradeLetter: map['letra_curso'],
-      );
+      id: int.tryParse(map['id'].toString()),
+      firstName: map['first_name'],
+      middleName: map['middle_name'],
+      lastName: map['last_name'],
+      lastName2: map['second_last_name'],
+      rut: map['rut'],
+      nationality: map['nationality'],
+      street: map['calle'],
+      location: map['comuna'],
+      email: map['email'],
+      mobilePhone: map['mobile_phone'],
+      homePhone: map['home_phone'],
+      picturePath: map['picture'],
+      birthDate: map['birth_date'],
+      gender: map['gender'] == 'Femenino' ? Gender.femenino : Gender.masculino,
+      grade: map['grade'],
+      gradeLetter: map['letra_curso'],
+      verifierDigit: map['verifier_digit']);
 
   Map<String, dynamic> toMap() => <String, dynamic>{
         'token': token,
@@ -96,6 +96,7 @@ class User {
   String gradeLetter;
   List<Student> studentList;
   int schoolId;
+  String verifierDigit;
   String get fullName => '$firstName $middleName $lastName $lastName2';
   String get halfName => '$firstName $lastName';
 }
@@ -119,29 +120,32 @@ class Parent extends User {
     Gender gender,
     List<Student> studentList,
     int schoolId,
+    int userType,
   }) : super(
-            id: id,
-            email: email,
-            middleName: middleName,
-            firstName: firstName,
-            lastName2: lastName2,
-            lastName: lastName,
-            rut: rut,
-            nationality: nationality,
-            street: street,
-            location: location,
-            mobilePhone: mobilePhone,
-            homePhone: homePhone,
-            picturePath: picturePath,
-            gender: gender,
-            studentList: studentList,
-            birthDate: birthDate,
-            schoolId: schoolId);
+          id: id,
+          email: email,
+          middleName: middleName,
+          firstName: firstName,
+          lastName2: lastName2,
+          lastName: lastName,
+          rut: rut,
+          nationality: nationality,
+          street: street,
+          location: location,
+          mobilePhone: mobilePhone,
+          homePhone: homePhone,
+          picturePath: picturePath,
+          gender: gender,
+          studentList: studentList,
+          birthDate: birthDate,
+          schoolId: schoolId,
+          userType: userType,
+        );
 
   factory Parent.fromMap(Map<String, dynamic> map) {
     List<dynamic> responseStudentList = map['alumno_set'];
 
-    List studentList = responseStudentList
+    List<Student> studentList = responseStudentList
         .map((dynamic student) => Student.fromMap(student))
         .toList();
 
@@ -163,6 +167,7 @@ class Parent extends User {
       studentList: studentList,
       gender: map['gender'] == 'Femenino' ? Gender.femenino : Gender.masculino,
       schoolId: map['establecimiento']['id'],
+      userType: 2,
     );
   }
 }
@@ -252,6 +257,9 @@ class Teacher extends User {
     Gender gender,
     List<Student> studentList,
     int schoolId,
+    String verifierDigit,
+    this.roomHours,
+    this.schoolHours,
   }) : super(
           id: id,
           email: email,
@@ -270,10 +278,11 @@ class Teacher extends User {
           studentList: studentList,
           birthDate: birthDate,
           schoolId: schoolId,
+          verifierDigit: verifierDigit,
+          userType: 3,
         );
 
-  factory Teacher.fromMap(Map<String, dynamic> map) {
-    return Teacher(
+  factory Teacher.fromMap(Map<String, dynamic> map) => Teacher(
       id: map['id'],
       firstName: map['first_name'],
       middleName: map['middle_name'],
@@ -290,6 +299,10 @@ class Teacher extends User {
       picturePath: map['picture'],
       gender: map['gender'] == 'Femenino' ? Gender.femenino : Gender.masculino,
       schoolId: map['establecimiento']['id'],
-    );
-  }
+      verifierDigit: map['verifier_digit'],
+      roomHours: map['horas_aula'],
+      schoolHours: map['horas_colegio']);
+
+  int schoolHours;
+  int roomHours;
 }

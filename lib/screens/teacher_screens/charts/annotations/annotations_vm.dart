@@ -1,8 +1,7 @@
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:flutter/material.dart';
-import 'package:tizatech/models/chart_models/annotations.dart';
 
-import '../../../../models/chart_models/attendace.dart';
+import '../../../../models/chart_models/annotations.dart';
 import '../../../../services/charts/charts.dart';
 
 enum Status {

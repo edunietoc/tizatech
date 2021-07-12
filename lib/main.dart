@@ -1,15 +1,12 @@
-import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:tizatech/screens/messages/message_screen.dart';
-import 'package:tizatech/screens/teacher_screens/charts/menu.dart';
-import 'package:tizatech/screens/teacher_screens/courses/courses.dart';
-import 'package:tizatech/screens/teacher_screens/student_list/student_list.dart';
-import 'package:tizatech/screens/teacher_screens/subject_list/subject_list.dart';
+import 'package:flutter/material.dart';
+import 'package:tizatech/screens/teacher_screens/search_teacher/search_teacher.dart';
 
 import '_components/loader.dart';
 import 'locator/locator.dart';
 import 'screens/auth/login.dart';
 import 'screens/home/home.dart';
+import 'screens/messages/message_screen.dart';
 import 'screens/notifications/notifications.dart';
 import 'screens/profile/profile.dart';
 import 'screens/student_list/student_list.dart';
@@ -17,6 +14,8 @@ import 'screens/student_screen/attendments/attendments.dart';
 import 'screens/student_screen/books/books_screen.dart';
 import 'screens/student_screen/delayments/delayments.dart';
 import 'screens/student_screen/grades/grades.dart';
+import 'screens/teacher_screens/charts/menu.dart';
+import 'screens/teacher_screens/courses/courses.dart';
 import 'services/navigation.dart';
 import 'shared/colors.dart';
 
@@ -89,10 +88,7 @@ class _MyAppState extends State<MyApp> {
         Routes.courses: (BuildContext context) => CoursesScreen(),
         Routes.messages: (BuildContext context) => MessagesScreen(),
         Routes.charts: (_) => ChartListScreen(),
-        Routes.teacherSubjectList: (BuildContext context) =>
-            SubjectListScreen(),
-        Routes.teacherStudentList: (BuildContext context) =>
-            TeacherStudentListScreen(),
+        Routes.searchTeacher: (_) => SearchTeacherScreen(),
       },
       theme: ThemeData(
           brightness: Brightness.light,
@@ -123,8 +119,15 @@ class _MyAppState extends State<MyApp> {
           inputDecorationTheme: InputDecorationTheme(
             filled: true,
             fillColor: blackShadesColor[05],
+            labelStyle: TextStyle(color: primaryColor),
+            focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(width: 2, color: primaryColor),
+              borderRadius: const BorderRadius.all(
+                Radius.circular(6),
+              ),
+            ),
             border: OutlineInputBorder(
-              borderSide: BorderSide(width: 20, color: secondaryColor),
+              borderSide: BorderSide(width: 2, color: secondaryColor),
               borderRadius: const BorderRadius.all(
                 Radius.circular(6),
               ),

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:tizatech/_components/app_bar.dart';
-import 'package:tizatech/models/courses.dart';
-import 'package:tizatech/screens/teacher_screens/grades/grades.dart';
-import 'package:tizatech/shared/colors.dart';
+
+import '../../../_components/app_bar.dart';
+import '../../../_components/option_tile.dart';
+import '../../../models/courses.dart';
+import 'grades.dart';
 
 class SubjectSelectionScreen extends StatelessWidget {
   const SubjectSelectionScreen({
@@ -13,30 +14,25 @@ class SubjectSelectionScreen extends StatelessWidget {
   final Courses course;
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        body: CustomScrollView(
-      slivers: [
-        TizaAppBar(title: 'Notas', subtitle: course.name),
-        SliverList(
-          delegate: SliverChildListDelegate(course.subjectList
-              .map((TeacherSubject subject) => ListTile(
-                    title: Text(
-                      subject.name,
-                    ),
-                    tileColor: blackShadesColor[05],
-                    trailing: Icon(Icons.arrow_forward_ios),
-                    onTap: () => Navigator.push(
-                        context,
-                        MaterialPageRoute<Widget>(
-                          builder: (_) => TeacherGradesScreen(
-                            subject: subject,
-                          ),
-                        )),
-                  ))
-              .toList()),
-        )
-      ],
-    ));
-  }
+  Widget build(BuildContext context) => Scaffold(
+          body: CustomScrollView(
+        slivers: <Widget>[
+          TizaAppBar(title: 'Notas', subtitle: course.name),
+          SliverPadding(padding: const EdgeInsets.only(top: 32)),
+          SliverList(
+            delegate: SliverChildListDelegate(course.subjectList
+                .map((TeacherSubject subject) => OptionTile(
+                      text: subject.name,
+                      onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute<Widget>(
+                            builder: (_) => TeacherGradesScreen(
+                                subject: subject,
+                                courseName: course.courseName),
+                          )),
+                    ))
+                .toList()),
+          )
+        ],
+      ));
 }

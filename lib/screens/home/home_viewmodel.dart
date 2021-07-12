@@ -99,24 +99,29 @@ class HomeViewModel {
       ),
       MenuCard(
         title: 'Mensajes',
-        imagePath: 'assets/images/home/message_dot.png',
+        imagePath: 'assets/images/home/messages.png',
         route: Routes.messages,
       ),
-      MenuCard(
+      /* MenuCard(
         title: 'Lecturas Anuales',
         imagePath: 'assets/images/home/books.png',
         route: Routes.books,
-      ),
+      ), */
       MenuCard(
-        title: 'Cursos',
+        title: 'Libro Digital',
         imagePath: 'assets/images/home/courses.png',
         route: Routes.courses,
       ),
       MenuCard(
         title: 'Informe de Gestion',
-        imagePath: 'assets/images/home/courses.png',
+        imagePath: 'assets/images/home/charts.png',
         route: Routes.charts,
-      )
+      ),
+      MenuCard(
+        title: 'Profesores',
+        imagePath: 'assets/images/home/teachers.png',
+        route: Routes.searchTeacher,
+      ),
     ];
 
     coursesTeacherMenu = <MenuCard>[

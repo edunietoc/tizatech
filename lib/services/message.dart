@@ -21,9 +21,6 @@ class MessageService {
           .where('created_by_dict.id', isEqualTo: '$id')
           .get();
 
-      print(snapshot.docs.length);
-      print(sendedSnapshot.docs.length);
-
       List<QueryDocumentSnapshot<Map<String, dynamic>>> list = snapshot.docs
         ..addAll(sendedSnapshot.docs);
 
@@ -51,7 +48,7 @@ class MessageService {
               (doc.data()['has_been_read_by'] as List<dynamic>)?.contains(id) ??
                   false
           ..path = doc.reference.path;
-        print('has been answered ${message.hasBeenAnswered}');
+
         return message;
       }).toList();
     } on Exception catch (_) {
@@ -86,8 +83,7 @@ class MessageService {
         'mensaje': message.path.substring(6),
         'establecimiento': user.schoolId.toString()
       });
-    } on Exception catch (e) {
-      print(e.toString());
+    } on Exception catch (_) {
       rethrow;
     }
   }

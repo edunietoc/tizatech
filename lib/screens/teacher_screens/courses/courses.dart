@@ -1,72 +1,75 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tizatech/_components/filter_item.dart';
-import 'package:tizatech/_components/loader.dart';
-import 'package:tizatech/_components/tile_card.dart';
-import 'package:tizatech/screens/teacher_screens/subject_list/subject_list.dart';
+import 'package:tizatech/locator/locator.dart';
+import 'package:tizatech/locator/user_service.dart';
 
 import '../../../_components/app_bar.dart';
 import '../../../_components/avatar_info.dart';
+import '../../../_components/filter_item.dart';
+import '../../../_components/loader.dart';
 import 'courses_vm.dart';
 
 class CoursesScreen extends StatelessWidget {
   const CoursesScreen({Key key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return ChangeNotifierProvider<CoursesViewModel>(
-      create: (_) => CoursesViewModel(),
-      child: Consumer<CoursesViewModel>(
-          builder: (BuildContext context, CoursesViewModel viewModel, _) {
-        switch (viewModel.currentStatus) {
-          case Status.loading:
-            return Loader();
+  Widget build(BuildContext context) =>
+      ChangeNotifierProvider<CoursesViewModel>(
+        create: (_) => CoursesViewModel(),
+        child: Consumer<CoursesViewModel>(
+            builder: (BuildContext context, CoursesViewModel viewModel, _) {
+          switch (viewModel.currentStatus) {
+            case Status.loading:
+              return Loader();
 
-          case Status.error:
-            return Text('Error');
+            case Status.error:
+              return Text('Error');
 
-          case Status.done:
-            return Scaffold(
-              bottomNavigationBar: Padding(
-                padding: EdgeInsets.symmetric(vertical: 28, horizontal: 24),
-                child: ElevatedButton(
-                  onPressed: () => viewModel.selectCourse(),
-                  child: Text('Aplicar'),
-                ),
-              ),
-              body: CustomScrollView(
-                slivers: <Widget>[
-                  TizaAppBar(
-                    title: 'Cursos',
-                    subtitle: 'profesor',
+            case Status.done:
+              return Scaffold(
+                bottomNavigationBar: Padding(
+                  padding: EdgeInsets.symmetric(vertical: 28, horizontal: 24),
+                  child: ElevatedButton(
+                    onPressed: () => viewModel.selectCourse(),
+                    child: Text('Aplicar'),
                   ),
-                  SliverList(
-                    delegate: SliverChildListDelegate(
-                      <Widget>[
-                        AvatarInfo(user: viewModel.teacher),
-                        Column(
-                          children: List<Widget>.generate(
-                            viewModel.courseList.length,
-                            (int index) => FilterItem(
-                              text:
-                                  '${viewModel.courseList[index].name} ${viewModel.courseList[index].letter}',
-                              isSelected:
-                                  index == viewModel?.currentIndexCourse,
-                              onSelected: (bool value) =>
-                                  viewModel.currentIndexCourse = index,
-                            ),
-                          ),
-                        )
-                      ],
+                ),
+                body: CustomScrollView(
+                  slivers: <Widget>[
+                    TizaAppBar(
+                      title: 'Cursos',
+                      subtitle: 'profesor',
                     ),
-                  )
-                ],
-              ),
-            );
-          default:
-            return Container();
-        }
-      }),
-    );
-  }
+                    SliverList(
+                      delegate: SliverChildListDelegate(
+                        <Widget>[
+                          AvatarInfo(
+                            user: viewModel.teacher,
+                            profileImage: locator<UserService>()
+                                .getUserAvatar(userParam: viewModel.teacher),
+                          ),
+                          Column(
+                            children: List<Widget>.generate(
+                              viewModel.courseList.length,
+                              (int index) => FilterItem(
+                                text:
+                                    '${viewModel.courseList[index].name} ${viewModel.courseList[index].letter}',
+                                isSelected:
+                                    index == viewModel?.currentIndexCourse,
+                                onSelected: (bool value) =>
+                                    viewModel.currentIndexCourse = index,
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              );
+            default:
+              return Container();
+          }
+        }),
+      );
 }

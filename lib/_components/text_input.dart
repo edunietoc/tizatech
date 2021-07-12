@@ -20,6 +20,7 @@ class TextInput extends StatelessWidget {
     this.bottomPadding = 0,
     this.topPadding = 24,
     this.isSearch = false,
+    this.padding,
     Key key,
   }) : super(key: key);
   final String hintText;
@@ -37,10 +38,12 @@ class TextInput extends StatelessWidget {
   final double bottomPadding;
   final TextInputType keyboardType;
   final bool isSearch;
+  final EdgeInsets padding;
 
   @override
   Widget build(BuildContext context) => Container(
-      padding: EdgeInsets.only(top: topPadding, bottom: bottomPadding),
+      padding:
+          padding ?? EdgeInsets.only(top: topPadding, bottom: bottomPadding),
       child: TextFormField(
         /* style: TextStyle(color: Colors.blue), */
         maxLength: maxLength,

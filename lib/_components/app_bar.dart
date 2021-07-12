@@ -5,7 +5,7 @@ import '../shared/colors.dart';
 class TizaAppBar extends StatelessWidget {
   const TizaAppBar({
     @required this.title,
-    @required this.subtitle,
+    this.subtitle = '',
     this.hasExit = false,
     this.hasLogo = false,
     this.isHome = false,

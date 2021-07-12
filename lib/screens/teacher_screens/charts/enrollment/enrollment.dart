@@ -1,9 +1,10 @@
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tizatech/_components/app_bar.dart';
-import 'package:tizatech/_components/loader.dart';
-import 'package:tizatech/screens/teacher_screens/charts/enrollment/enrollment_vm.dart';
+
+import '../../../../_components/app_bar.dart';
+import '../../../../_components/loader.dart';
+import 'enrollment_vm.dart';
 
 class EnrollmentChartScreen extends StatelessWidget {
   const EnrollmentChartScreen({Key key}) : super(key: key);
@@ -59,6 +60,7 @@ class EnrollmentChartScreen extends StatelessWidget {
                 );
                 break;
               default:
+                return Container();
             }
           }),
         ),

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:tizatech/_components/app_bar.dart';
-import 'package:tizatech/models/courses.dart';
-import 'package:tizatech/screens/teacher_screens/course_menu/course_menu_vm.dart';
+
+import '../../../_components/app_bar.dart';
+import '../../../models/courses.dart';
+import 'course_menu_vm.dart';
 
 class TeacherCourseMenuScreen extends StatelessWidget {
   const TeacherCourseMenuScreen({
@@ -16,9 +17,12 @@ class TeacherCourseMenuScreen extends StatelessWidget {
     return Scaffold(
       body: CustomScrollView(
         slivers: [
-          TizaAppBar(title: '${course.name} ${course.letter}', subtitle: ''),
+          TizaAppBar(
+            title: '${course.name} ${course.letter}',
+            subtitle: course.schedule,
+          ),
           SliverPadding(
-            padding: EdgeInsets.symmetric(horizontal: 24),
+            padding: EdgeInsets.symmetric(horizontal: 24, vertical: 32),
             sliver: SliverGrid.count(
               crossAxisCount: 2,
               crossAxisSpacing: 24,

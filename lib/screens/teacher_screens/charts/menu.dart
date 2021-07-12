@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:tizatech/screens/teacher_screens/charts/annotations/annotations.dart';
-import 'package:tizatech/screens/teacher_screens/charts/enrollment/enrollment.dart';
-import 'package:tizatech/screens/teacher_screens/charts/simce_essay/simce_essay.dart';
 
 import '../../../_components/app_bar.dart';
+import '../../../_components/option_tile.dart';
+import 'annotations/annotations.dart';
 import 'attendance/attendance.dart';
+import 'enrollment/enrollment.dart';
+import 'simce_essay/simce_essay.dart';
 
 class ChartListScreen extends StatelessWidget {
   const ChartListScreen({Key key}) : super(key: key);
@@ -12,53 +13,52 @@ class ChartListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Scaffold(
         body: CustomScrollView(
-          slivers: [
-            TizaAppBar(title: 'Graficas', subtitle: ''),
+          slivers: <Widget>[
+            TizaAppBar(
+              title: 'Informe de Gestión',
+            ),
             SliverList(
-                delegate: SliverChildListDelegate([
-              ListTile(
-                title: Text('Asistencias'),
-                onTap: () => Navigator.push(
-                  context,
-                  MaterialPageRoute<Widget>(
-                    builder: (_) => AttendanceChartScreen(),
+                delegate: SliverChildListDelegate(
+              <Widget>[
+                SizedBox(height: 32),
+                OptionTile(
+                  text: 'Asistencias',
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute<Widget>(
+                      builder: (_) => AttendanceChartScreen(),
+                    ),
                   ),
                 ),
-              ),
-              ListTile(
-                title: Text('Ensayo Simce'),
-                onTap: () => Navigator.push(
-                  context,
-                  MaterialPageRoute<Widget>(
-                    builder: (_) => SimceScoreChartScreen(),
+                OptionTile(
+                  text: 'Ensayo Simce',
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute<Widget>(
+                      builder: (_) => SimceScoreChartScreen(),
+                    ),
                   ),
                 ),
-              ),
-              ListTile(
-                title: Text('Matricula'),
-                onTap: () => Navigator.push(
-                  context,
-                  MaterialPageRoute<Widget>(
-                    builder: (_) => EnrollmentChartScreen(),
+                OptionTile(
+                  text: 'Matricula',
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute<Widget>(
+                      builder: (_) => EnrollmentChartScreen(),
+                    ),
                   ),
                 ),
-              ),
-              ListTile(
-                title: Text('Cumplimiento'),
-                onTap: () => Navigator.push(
-                  context,
-                  MaterialPageRoute<Widget>(
-                    builder: (_) => AnnotationsChartScreen(),
+                OptionTile(
+                  text: 'Cumplimiento',
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute<Widget>(
+                      builder: (_) => AnnotationsChartScreen(),
+                    ),
                   ),
                 ),
-              ),
-            ]))
-
-            /* ListView(
-              children: [
-              
               ],
-            ) */
+            ))
           ],
         ),
       );

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tizatech/_components/filter_item.dart';
-import 'package:tizatech/_components/loader.dart';
-import 'package:tizatech/models/messages.dart';
 
 import '../../_components/app_bar.dart';
+import '../../_components/filter_item.dart';
+import '../../_components/loader.dart';
+import '../../models/messages.dart';
 import '../../shared/colors.dart';
 import '../../shared/constants.dart';
 import 'messages_vm.dart';
@@ -13,91 +13,92 @@ class MessagesDetailScreen extends StatelessWidget {
   const MessagesDetailScreen({Key key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return Consumer<MessagesViewModel>(
-        builder: (BuildContext context, MessagesViewModel viewModel, _) {
-      switch (viewModel.currentStatus) {
-        case Status.loading:
-          return Loader();
+  Widget build(BuildContext context) => Consumer<MessagesViewModel>(
+          builder: (BuildContext context, MessagesViewModel viewModel, _) {
+        switch (viewModel.currentStatus) {
+          case Status.loading:
+            return Loader();
 
-        case Status.error:
-          return Text('error');
+          case Status.error:
+            return Text('error');
 
-        case Status.done:
-          return Scaffold(
-            body: Stack(
-              children: <Widget>[
-                CustomScrollView(
-                  slivers: <Widget>[
-                    TizaAppBar(
-                      title: viewModel.currentMessage.userSender.halfName,
-                      subtitle: viewModel.currentMessage.title,
-                    ),
-                    SliverList(
-                      delegate: SliverChildListDelegate(
-                        <Widget>[
-                          SizedBox(
-                            height: 32,
-                          ),
-                          if (viewModel.userSentThis)
-                            _SendedMessage(
-                              message: viewModel.currentMessage,
-                              userSentThis: viewModel.userSentThis,
-                            )
-                          else
-                            _ReceivedMessage(
-                              message: viewModel.currentMessage,
+          case Status.done:
+            return Scaffold(
+              body: Stack(
+                children: <Widget>[
+                  CustomScrollView(
+                    slivers: <Widget>[
+                      TizaAppBar(
+                        title: viewModel.currentMessage.userSender.halfName,
+                        subtitle: viewModel.currentMessage.title,
+                      ),
+                      SliverList(
+                        delegate: SliverChildListDelegate(
+                          <Widget>[
+                            SizedBox(
+                              height: 32,
                             ),
-                          if (viewModel.currentMessage.hasBeenAnswered)
-                            _SendedMessage(message: viewModel.currentMessage),
-                          if (!viewModel.currentMessage.hasBeenAnswered &&
-                              !viewModel.userSentThis)
-                            Container(
-                                margin: EdgeInsets.only(top: 32, bottom: 16),
-                                padding: EdgeInsets.symmetric(horizontal: 16),
-                                child: Text(
-                                  'Seleccione una Respuesta:',
-                                  style: body2(context),
-                                )),
-                          if (!viewModel.currentMessage.hasBeenAnswered &&
-                              !viewModel.userSentThis)
-                            Wrap(
-                              alignment: WrapAlignment.center,
-                              spacing: 16,
-                              runSpacing: 8,
-                              children: viewModel.currentMessage.responseOptions
-                                  .map((String option) => FilterItem(
-                                      text: option,
-                                      isSelected:
-                                          viewModel.answer.contains(option),
-                                      onSelected: (bool selection) => viewModel
-                                          .selectAnswer(option, selection)))
-                                  .toList(),
-                            ),
-                        ],
+                            if (viewModel.userSentThis)
+                              _SendedMessage(
+                                message: viewModel.currentMessage,
+                                userSentThis: viewModel.userSentThis,
+                              )
+                            else
+                              _ReceivedMessage(
+                                message: viewModel.currentMessage,
+                              ),
+                            if (viewModel.currentMessage.hasBeenAnswered)
+                              _SendedMessage(message: viewModel.currentMessage),
+                            if (!viewModel.currentMessage.hasBeenAnswered &&
+                                !viewModel.userSentThis)
+                              Container(
+                                  margin: EdgeInsets.only(top: 32, bottom: 16),
+                                  padding: EdgeInsets.symmetric(horizontal: 16),
+                                  child: Text(
+                                    'Seleccione una Respuesta:',
+                                    style: body2(context),
+                                  )),
+                            if (!viewModel.currentMessage.hasBeenAnswered &&
+                                !viewModel.userSentThis)
+                              Wrap(
+                                alignment: WrapAlignment.center,
+                                spacing: 16,
+                                runSpacing: 8,
+                                children: viewModel
+                                    .currentMessage.responseOptions
+                                    .map((String option) => FilterItem(
+                                        text: option,
+                                        isSelected:
+                                            viewModel.answer.contains(option),
+                                        onSelected: (bool selection) =>
+                                            viewModel.selectAnswer(
+                                                option, selection)))
+                                    .toList(),
+                              ),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                  if (!viewModel.currentMessage.hasBeenAnswered &&
+                      !viewModel.userSentThis)
+                    Positioned(
+                      bottom: 40,
+                      right: 24,
+                      left: 24,
+                      child: ElevatedButton(
+                        onPressed: () => viewModel.submitAnswer(),
+                        child: Text('Enviar'),
                       ),
                     )
-                  ],
-                ),
-                if (!viewModel.currentMessage.hasBeenAnswered &&
-                    !viewModel.userSentThis)
-                  Positioned(
-                    bottom: 40,
-                    right: 24,
-                    left: 24,
-                    child: ElevatedButton(
-                      onPressed: () => viewModel.submitAnswer(),
-                      child: Text('Enviar'),
-                    ),
-                  )
-              ],
-            ),
-          );
+                ],
+              ),
+            );
 
-        default:
-      }
-    });
-  }
+          default:
+            return Container();
+        }
+      });
 }
 
 class _ReceivedMessage extends StatelessWidget {

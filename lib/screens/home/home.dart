@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:tizatech/locator/locator.dart';
-import 'package:tizatech/locator/user_service.dart';
 
 import '../../_components/app_bar.dart';
+import '../../locator/locator.dart';
+import '../../locator/user_service.dart';
 import '../../models/user.dart';
 import '../../services/navigation.dart';
 import '../../shared/colors.dart';

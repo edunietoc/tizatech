@@ -1,20 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tizatech/_components/app_bar.dart';
-import 'package:tizatech/_components/grades_table.dart';
-import 'package:tizatech/_components/loader.dart';
-import 'package:tizatech/models/courses.dart';
-import 'package:tizatech/models/grades_subject.dart';
-import 'package:tizatech/screens/teacher_screens/grades/grades_vm.dart';
-import 'package:tizatech/shared/colors.dart';
-import 'package:tizatech/shared/constants.dart';
+
+import '../../../_components/app_bar.dart';
+import '../../../_components/loader.dart';
+import '../../../_components/table.dart';
+import '../../../models/courses.dart';
+import '../../../models/grades_subject.dart';
+import '../../../shared/colors.dart';
+import '../../../shared/constants.dart';
+import 'grades_vm.dart';
 
 class TeacherGradesScreen extends StatelessWidget {
   const TeacherGradesScreen({
     @required this.subject,
+    this.courseName,
     Key key,
   }) : super(key: key);
   final TeacherSubject subject;
+  final String courseName;
 
   @override
   Widget build(BuildContext context) =>
@@ -34,68 +37,31 @@ class TeacherGradesScreen extends StatelessWidget {
                 return CustomScrollView(
                   slivers: <Widget>[
                     TizaAppBar(
-                      title: 'Notas',
-                      subtitle: subject.name.toLowerCase(),
+                      title: courseName,
+                      subtitle: subject.name.toLowerCase().trimLeft(),
                     ),
                     SliverList(
                         delegate: SliverChildListDelegate(
-                      [
-                        Container(
-                          margin: const EdgeInsets.symmetric(
-                            horizontal: 24,
-                            vertical: 24,
-                          ),
-                          clipBehavior: Clip.antiAlias,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(6)),
-                            border: Border.all(
-                              color: blackShadesColor[30],
-                              width: 1,
+                      <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.only(top: 32, left: 24),
+                          child: Text(
+                            'Notas',
+                            style: h3(context).copyWith(
+                              color: secondaryColor[80],
                             ),
                           ),
-                          child: Column(
-                            children: <Widget>[
-                              Row(
-                                children: <_DataContainer>[
-                                  _DataContainer(
-                                    data: 'Alumnos',
-                                    flex: 3,
-                                  ),
-                                  _DataContainer(
-                                    data: 'Evaluacion',
-                                    flex: 2,
-                                  )
-                                ],
-                              ),
-                              Container(
-                                height: deviceHeight(context) * 0.6,
-                                width: deviceWidth(context),
-                                child: ListView.builder(
-                                  shrinkWrap: true,
-                                  padding: EdgeInsets.zero,
-                                  itemCount: viewModel.grades.length,
-                                  itemBuilder: (_, int index) => Row(
-                                    children: <Widget>[
-                                      _DataContainer(
-                                        data: viewModel
-                                            .grades[index].student.halfName,
-                                        isColoured: index.isEven,
-                                        isAlignedLeft: true,
-                                        flex: 3,
-                                      ),
-                                      _DataContainer(
-                                        data: viewModel.grades[index].grade
-                                            .toStringAsFixed(1),
-                                        isColoured: index.isEven,
-                                        flex: 2,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        )
+                        ),
+                        TizaTable(
+                          firstColumnLabel: 'Alumnos',
+                          secondCoulmnLabel: 'Nota',
+                          dataRows: viewModel.grades
+                              .map((GradesByStudent grades) => TizaDataRow(
+                                    label: grades.student.halfName,
+                                    value: grades.grade.toStringAsFixed(1),
+                                  ))
+                              .toList(),
+                        ),
                       ],
                     ))
                   ],
@@ -104,35 +70,6 @@ class TeacherGradesScreen extends StatelessWidget {
                 return Container();
             }
           }),
-        ),
-      );
-}
-
-class _DataContainer extends StatelessWidget {
-  const _DataContainer({
-    @required this.data,
-    this.isColoured = false,
-    this.isAlignedLeft = false,
-    this.flex = 1,
-    Key key,
-  }) : super(key: key);
-
-  final String data;
-  final bool isColoured;
-  final bool isAlignedLeft;
-  final int flex;
-
-  @override
-  Widget build(BuildContext context) => Expanded(
-        flex: flex,
-        child: Container(
-          height: 40,
-          color: isColoured ? blackShadesColor[05] : Colors.white,
-          alignment: isAlignedLeft ? Alignment.centerLeft : Alignment.center,
-          padding: EdgeInsets.symmetric(
-            horizontal: 16,
-          ),
-          child: Text(data),
         ),
       );
 }

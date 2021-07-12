@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:tizatech/models/courses.dart';
-import 'package:tizatech/models/grades_subject.dart';
-import 'package:tizatech/services/teacher.dart';
+
+import '../../../models/courses.dart';
+import '../../../models/grades_subject.dart';
+import '../../../services/teacher.dart';
 
 enum Status {
   loading,
@@ -36,7 +37,6 @@ class TeacherGradesViewModel extends ChangeNotifier {
 
   Future<void> _getGrades() async {
     try {
-      print(_currentSubject.id);
       _grades = await _teacherServices.getGrades(_currentSubject.id);
 
       currentStatus = Status.done;

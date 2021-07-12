@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:tizatech/_components/app_bar.dart';
-import 'package:tizatech/models/courses.dart';
-import 'package:tizatech/models/user.dart';
-import 'package:tizatech/screens/home/home.dart';
-import 'package:tizatech/shared/colors.dart';
+
+import '../../../_components/app_bar.dart';
+import '../../../_components/option_tile.dart';
+import '../../../models/courses.dart';
+import '../../../models/user.dart';
+import '../../home/home.dart';
 
 class TeacherStudentListScreen extends StatelessWidget {
   const TeacherStudentListScreen({
@@ -14,37 +15,30 @@ class TeacherStudentListScreen extends StatelessWidget {
   final Courses course;
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: CustomScrollView(
-        slivers: [
-          TizaAppBar(title: '${course.name} ${course.letter}', subtitle: ''),
-          SliverList(
-              delegate: SliverChildListDelegate(course.studentList
-                  .map((Student student) => Padding(
-                        padding: const EdgeInsets.only(
-                          left: 16,
-                          right: 16,
-                          bottom: 16,
-                        ),
-                        child: ListTile(
-                          title: Text(student.fullName),
-                          tileColor: blackShadesColor[05],
-                          trailing: Icon(
-                            Icons.arrow_forward_ios,
-                          ),
-                          onTap: () => Navigator.push(
-                              context,
-                              MaterialPageRoute<Widget>(
-                                builder: (_) => HomeScreen(
-                                  userParam: student,
-                                ),
-                              )),
-                        ),
-                      ))
-                  .toList()))
-        ],
-      ),
-    );
-  }
+  Widget build(BuildContext context) => Scaffold(
+        body: CustomScrollView(
+          slivers: <Widget>[
+            TizaAppBar(
+              title: '${course.name} ${course.letter}',
+              subtitle: course.schedule,
+            ),
+            SliverPadding(padding: const EdgeInsets.only(top: 32)),
+            SliverList(
+                delegate: SliverChildListDelegate(course.studentList
+                    .map(
+                      (Student student) => OptionTile(
+                        text: student.fullName,
+                        onTap: () => Navigator.push(
+                            context,
+                            MaterialPageRoute<Widget>(
+                              builder: (_) => HomeScreen(
+                                userParam: student,
+                              ),
+                            )),
+                      ),
+                    )
+                    .toList()))
+          ],
+        ),
+      );
 }

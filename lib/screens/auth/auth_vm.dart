@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:tizatech/services/message.dart';
 
 import '../../_components/dialog.dart';
 import '../../_components/loader.dart';

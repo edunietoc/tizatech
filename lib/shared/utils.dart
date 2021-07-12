@@ -14,3 +14,25 @@ String parseDate(String date, String time) {
     return DateFormat.MMMd().format(_date);
   }
 }
+
+String dateTimeWithTimeZone() {
+  DateTime date = DateTime.now();
+
+  String timeZone = date.timeZoneOffset.toString().split('.')[0];
+  String _date = date.toIso8601String().split('.')[0];
+  String hh = timeZone.split(':')[0];
+
+  if (int.parse(hh).abs() < 10) {
+    List<String> charList = timeZone.split('')..insert(1, '0');
+    charList = charList.sublist(0, charList.lastIndexOf(':'));
+
+    timeZone = charList.join();
+  }
+
+  return _date + timeZone;
+}
+
+String dateOnly(DateTime date) {
+  String stringDate = date.toIso8601String();
+  return stringDate.split('T')[0];
+}

@@ -33,13 +33,15 @@ class UserService {
     String _picturePath =
         userParam != null ? userParam.picturePath : user.picturePath;
 
+    User _user = userParam ?? user;
+
     switch (_userType) {
       case UserType.admin:
         return Container();
       case UserType.student:
         if (_picturePath ==
             'http://tizatechapp-demo.herokuapp.com/media/default.jpg') {
-          switch (user.gender) {
+          switch (_user.gender) {
             case Gender.femenino:
               return Image.asset('assets/images/avatars/girl.png');
               break;
@@ -54,7 +56,7 @@ class UserService {
       case UserType.parent:
         if (_picturePath ==
             'http://tizatechapp-demo.herokuapp.com/media/default.jpg') {
-          switch (user.gender) {
+          switch (_user.gender) {
             case Gender.femenino:
               return Image.asset('assets/images/avatars/woman.png');
               break;
@@ -68,7 +70,7 @@ class UserService {
       case UserType.teacher:
         if (_picturePath ==
             'http://tizatechapp-demo.herokuapp.com/media/default.jpg') {
-          switch (user.gender) {
+          switch (_user.gender) {
             case Gender.femenino:
               return Image.asset('assets/images/avatars/woman.png');
               break;

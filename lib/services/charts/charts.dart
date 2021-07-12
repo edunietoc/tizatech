@@ -1,5 +1,4 @@
-import 'package:tizatech/models/chart_models/annotations.dart';
-
+import '../../models/chart_models/annotations.dart';
 import '../../models/chart_models/attendace.dart';
 import '../../models/chart_models/enrollment.dart';
 import '../../models/chart_models/simce.dart';

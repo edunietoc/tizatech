@@ -27,7 +27,7 @@ class AnnotationsChartScreen extends StatelessWidget {
                 return CustomScrollView(slivers: <Widget>[
                   TizaAppBar(title: 'Cumplimiento', subtitle: ''),
                   SliverList(
-                    delegate: SliverChildListDelegate([
+                    delegate: SliverChildListDelegate(<Widget>[
                       Container(
                         width: 300,
                         height: 300,

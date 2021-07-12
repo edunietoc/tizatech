@@ -12,19 +12,17 @@ class Message {
     this.responseOptions,
     this.dateTime,
   });
-  factory Message.fromMap(Map<String, dynamic> map) {
-    return Message(
-      title: map['titulo'],
-      message: map['mensaje'],
-      time: map['time'],
-      date: map['date'],
-      userSender: User.fromMap(map['created_by_dict']),
-      responseOptions: (map['respuestas_array'] as List<dynamic>)
-          .map((dynamic e) => e.toString())
-          .toList(),
-      dateTime: DateTime.parse(map['date']),
-    );
-  }
+  factory Message.fromMap(Map<String, dynamic> map) => Message(
+        title: map['titulo'],
+        message: map['mensaje'],
+        time: map['time'],
+        date: map['date'],
+        userSender: User.fromMap(map['created_by_dict']),
+        responseOptions: (map['respuestas_array'] as List<dynamic>)
+            .map((dynamic e) => e.toString())
+            .toList(),
+        dateTime: DateTime.parse(map['date']),
+      );
 
   factory Message.fromJson(String source) =>
       Message.fromMap(json.decode(source));
@@ -41,15 +39,13 @@ class Message {
   String answer;
   DateTime dateTime;
 
-  Map<String, dynamic> toMap() {
-    return {
-      'title': title,
-      'message': message,
-      'time': time,
-      'date': date,
-      'userSender': userSender.toMap(),
-    };
-  }
+  Map<String, dynamic> toMap() => <String, dynamic>{
+        'title': title,
+        'message': message,
+        'time': time,
+        'date': date,
+        'userSender': userSender.toMap(),
+      };
 
   String toJson() => json.encode(toMap());
 }

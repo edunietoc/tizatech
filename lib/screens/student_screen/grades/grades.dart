@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tizatech/locator/locator.dart';
-import 'package:tizatech/locator/user_service.dart';
 
 import '../../../_components/app_bar.dart';
 import '../../../_components/avatar_info.dart';
+import '../../../_components/grades_table.dart';
 import '../../../_components/loader.dart';
+import '../../../locator/locator.dart';
+import '../../../locator/user_service.dart';
 import '../../../models/user.dart';
 import '../../../shared/colors.dart';
 import '../../../shared/constants.dart';
 import '../../error/error_screen.dart';
-import '../../../_components/grades_table.dart';
 import 'grades_vm.dart';
 
 class GradesScreen extends StatelessWidget {

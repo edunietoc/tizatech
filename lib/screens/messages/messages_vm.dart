@@ -54,7 +54,7 @@ class MessagesViewModel extends ChangeNotifier {
 
   Status get currentStatus => _currentStatus;
 
-  List<dynamic> answer = [];
+  List<dynamic> answer = <dynamic>[];
 
   set currentStatus(Status status) {
     _currentStatus = status;

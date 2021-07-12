@@ -27,43 +27,41 @@ class ErrorScreen extends StatelessWidget {
   final User user;
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: CustomScrollView(slivers: <Widget>[
-        TizaAppBar(title: screenTitle, subtitle: screenSubtitle),
-        SliverList(
-            delegate: SliverChildListDelegate([
-          Column(
-            children: <Widget>[
-              AvatarInfo(
-                user: user,
-                showId: true,
-                profileImage: locator<UserService>().getUserAvatar(),
-              ),
-              SizedBox(height: 55),
-              Image.asset(errorImage),
-              SizedBox(height: 24),
-              Text(
-                errorTitle,
-                style: h3(context).copyWith(color: blackShadesColor[80]),
-                textAlign: TextAlign.center,
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
-                child: Text(
-                  errorDescription,
-                  style: body1(context).copyWith(
-                    color: blackShadesColor[70],
-                    letterSpacing: 0.7,
-                  ),
+  Widget build(BuildContext context) => Scaffold(
+        body: CustomScrollView(slivers: <Widget>[
+          TizaAppBar(title: screenTitle, subtitle: screenSubtitle),
+          SliverList(
+              delegate: SliverChildListDelegate(<Widget>[
+            Column(
+              children: <Widget>[
+                AvatarInfo(
+                  user: user,
+                  showId: true,
+                  profileImage: locator<UserService>().getUserAvatar(),
+                ),
+                SizedBox(height: 55),
+                Image.asset(errorImage),
+                SizedBox(height: 24),
+                Text(
+                  errorTitle,
+                  style: h3(context).copyWith(color: blackShadesColor[80]),
                   textAlign: TextAlign.center,
                 ),
-              )
-            ],
-          ),
-        ]))
-      ]),
-    );
-  }
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
+                  child: Text(
+                    errorDescription,
+                    style: body1(context).copyWith(
+                      color: blackShadesColor[70],
+                      letterSpacing: 0.7,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                )
+              ],
+            ),
+          ]))
+        ]),
+      );
 }
