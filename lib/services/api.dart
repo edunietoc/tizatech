@@ -113,7 +113,7 @@ class API {
 
       http.StreamedResponse response = await request.send();
       String data = utf8.decode(await response.stream.single);
-      //TODO: return value
+      return json.decode(data);
     } on Exception catch (_) {
       rethrow;
     }

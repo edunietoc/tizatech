@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tizatech/_components/loader.dart';
 import 'package:tizatech/shared/constants.dart';
 
 import '../../../_components/app_bar.dart';
@@ -27,68 +28,90 @@ class TeacherTakeAttendmentScreen extends StatelessWidget {
                   course: course,
                 ),
             child: Consumer<TakeAttendmentViewModel>(
-              builder: (_, TakeAttendmentViewModel viewModel, __) =>
-                  CustomScrollView(
-                slivers: <Widget>[
-                  TizaAppBar(
-                    title: 'Asistencias',
-                    subtitle: course.courseName,
-                  ),
-                  SliverList(
-                    delegate: SliverChildListDelegate(
-                      <Widget>[
-                        Padding(
-                          padding: const EdgeInsets.only(
-                            top: 32,
-                            left: 24,
-                            right: 24,
-                          ),
-                          child: RichText(
-                              text: TextSpan(
-                            children: <TextSpan>[
-                              TextSpan(
-                                text: 'Turno: ',
-                                style: body1(context).copyWith(
-                                  color: blackShadesColor[70],
-                                ),
+                builder: (_, TakeAttendmentViewModel viewModel, __) {
+              switch (viewModel.currentStatus) {
+                case Status.error:
+                  return Text('Errror');
+
+                case Status.loading:
+                  return Loader();
+
+                case Status.done:
+                  return CustomScrollView(
+                    slivers: <Widget>[
+                      TizaAppBar(
+                        title: 'Asistencias',
+                        subtitle: course.courseName,
+                      ),
+                      SliverList(
+                        delegate: SliverChildListDelegate(
+                          <Widget>[
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                top: 32,
+                                left: 24,
+                                right: 24,
                               ),
-                              TextSpan(
-                                text: course.schedule,
-                                style: body1(context),
-                              )
-                            ],
-                          )),
-                        ),
-                        TizaTable(
-                          dataRows: course.studentList
-                              .map(
-                                (Student student) => TizaDataRow(
-                                  label: student.halfName,
-                                  value: Checkbox(
-                                    activeColor: primaryColor[80],
-                                    value: !viewModel.studentExist(student),
-                                    onChanged: (_) =>
-                                        viewModel.addItem(student),
+                              child: RichText(
+                                  text: TextSpan(
+                                children: <TextSpan>[
+                                  TextSpan(
+                                    text: 'Turno: ',
+                                    style: body1(context).copyWith(
+                                      color: blackShadesColor[70],
+                                    ),
                                   ),
-                                ),
-                              )
-                              .toList(),
-                          firstColumnLabel: 'Alumnos',
-                          secondCoulmnLabel: 'Asistencia',
+                                  TextSpan(
+                                    text: course.schedule,
+                                    style: body1(context),
+                                  )
+                                ],
+                              )),
+                            ),
+                            TizaTable(
+                              dataRows: course.studentList
+                                  .map(
+                                    (Student student) => TizaDataRow(
+                                      label: student.halfName,
+                                      value: Checkbox(
+                                        activeColor: primaryColor[80],
+                                        value: !viewModel
+                                            .isMarkedAsUnnatendance(student),
+                                        onChanged: (_) =>
+                                            viewModel.addItem(student),
+                                      ),
+                                      thirdValue: Checkbox(
+                                        activeColor: primaryColor[80],
+                                        value:
+                                            !viewModel.isMarkedAsLate(student),
+                                        onChanged: (_) => viewModel.addItem(
+                                            student,
+                                            modifyLateStudents: true),
+                                      ),
+                                    ),
+                                  )
+                                  .toList(),
+                              firstColumnLabel: 'Alumnos',
+                              secondCoulmnLabel: 'Asistencia',
+                              thirdColumnLabel: 'Retraso',
+                            ),
+                            Container(
+                              margin: EdgeInsets.only(bottom: 24),
+                              padding: EdgeInsets.symmetric(horizontal: 24),
+                              child: ElevatedButton(
+                                onPressed: () => viewModel.uploadAttendments(),
+                                child: Text('Guardar'),
+                              ),
+                            )
+                          ],
                         ),
-                        Container(
-                          margin: EdgeInsets.only(bottom: 24),
-                          padding: EdgeInsets.symmetric(horizontal: 24),
-                          child: ElevatedButton(
-                            onPressed: () => viewModel.uploadAttendments(),
-                            child: Text('Guardar'),
-                          ),
-                        )
-                      ],
-                    ),
-                  )
-                ],
-              ),
-            )),
+                      )
+                    ],
+                  );
+
+                default:
+                  return Container();
+              }
+            })),
       );
 }

@@ -7,11 +7,13 @@ class TizaTable extends StatelessWidget {
     @required this.dataRows,
     @required this.firstColumnLabel,
     @required this.secondCoulmnLabel,
+    this.thirdColumnLabel,
     Key key,
   }) : super(key: key);
 
   final String firstColumnLabel;
   final String secondCoulmnLabel;
+  final String thirdColumnLabel;
   final List<TizaDataRow> dataRows;
 
   @override
@@ -35,14 +37,20 @@ class TizaTable extends StatelessWidget {
               children: <_DataContainer>[
                 _DataContainer(
                   data: firstColumnLabel,
-                  flex: 3,
+                  flex: 4,
                   color: cardColorPrimary,
                 ),
                 _DataContainer(
                   data: secondCoulmnLabel,
-                  flex: 2,
+                  flex: 3,
                   color: cardColorPrimary,
-                )
+                ),
+                if (thirdColumnLabel != null)
+                  _DataContainer(
+                    data: thirdColumnLabel,
+                    flex: 3,
+                    color: cardColorPrimary,
+                  )
               ],
             ),
             Container(
@@ -58,13 +66,19 @@ class TizaTable extends StatelessWidget {
                       data: dataRows[index].label,
                       isColoured: index.isEven,
                       isAlignedLeft: true,
-                      flex: 3,
+                      flex: 4,
                     ),
                     _DataContainer(
                       data: dataRows[index].value,
                       isColoured: index.isEven,
-                      flex: 2,
+                      flex: 3,
                     ),
+                    if (thirdColumnLabel != null)
+                      _DataContainer(
+                        data: dataRows[index].thirdValue,
+                        isColoured: index.isEven,
+                        flex: 3,
+                      ),
                   ],
                 ),
               ),
@@ -78,9 +92,11 @@ class TizaDataRow {
   TizaDataRow({
     @required this.label,
     @required this.value,
+    this.thirdValue,
   });
   String label;
   dynamic value;
+  dynamic thirdValue;
 }
 
 class _DataContainer extends StatelessWidget {

@@ -1,3 +1,9 @@
+import 'package:flutter/cupertino.dart';
+import 'package:tizatech/models/chart_models/internships.dart';
+import 'package:tizatech/models/chart_models/personal_improvement.dart';
+import 'package:tizatech/models/chart_models/ptu.dart';
+import 'package:tizatech/models/chart_models/repeating.dart';
+
 import '../../models/chart_models/annotations.dart';
 import '../../models/chart_models/attendace.dart';
 import '../../models/chart_models/enrollment.dart';
@@ -70,6 +76,45 @@ class ChartsService {
       dynamic response =
           await _api.getRequest('graficas/alumnos-no-convivencia/$year');
       return Annotations.fromMap(response);
+    } on Exception catch (_) {
+      rethrow;
+    }
+  }
+
+  Future<PTU> getPTU() async {
+    try {
+      dynamic response = await _api.getRequest('graficas/ptu/');
+      return PTU.fromMap(response);
+    } on Exception catch (_) {
+      rethrow;
+    }
+  }
+
+  Future<RepeatingStudents> getRepeatingStudents() async {
+    try {
+      dynamic response =
+          await _api.getRequest('graficas/repitencia-ultimo/$year/');
+      return RepeatingStudents.fromMap(response);
+    } on Exception catch (_) {
+      rethrow;
+    }
+  }
+
+  Future<PersonalImprovement> getPersonalImprovement() async {
+    try {
+      dynamic response = await _api
+          .getRequest('graficas/indicadores-desarrollo-personal/$year/');
+      return PersonalImprovement.fromMap(response);
+    } on Exception catch (_) {
+      rethrow;
+    }
+  }
+
+  Future<Internship> getInternships() async {
+    try {
+      dynamic response =
+          await _api.getRequest('graficas/alumnos-practicas/$year/');
+      return Internship.fromMap(response);
     } on Exception catch (_) {
       rethrow;
     }

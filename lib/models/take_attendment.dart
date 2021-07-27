@@ -9,12 +9,14 @@ class TakeAttendment {
     @required this.studentId,
     @required this.schedule,
     @required this.signature,
+    this.isLate,
   });
   DateTime date;
   bool didAttend;
   String studentId;
   String schedule;
   int signature;
+  bool isLate;
 
   Map<String, dynamic> toMap() => <String, dynamic>{
         'date': dateOnly(date),
@@ -22,7 +24,7 @@ class TakeAttendment {
         'alumno': studentId,
         'horario': schedule,
         'firma': signature.toString(),
-        'retraso': 'false',
+        'retraso': isLate ?? false,
       };
 }
 

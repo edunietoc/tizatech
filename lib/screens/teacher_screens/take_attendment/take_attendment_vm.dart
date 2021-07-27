@@ -24,37 +24,62 @@ class TakeAttendmentViewModel extends ChangeNotifier {
 
   final TeacherServices _teacherServices = TeacherServices();
   final Teacher _user = locator<UserService>().user;
-  List<Student> _unMarkedStudents = <Student>[];
+  List<Student> _offStudents = <Student>[];
+  List<Student> _lateStudents = <Student>[];
 
-  List<Student> get unMarkedStudents => _unMarkedStudents;
+  List<Student> get offStudents => _offStudents;
+  List<Student> get lateStudents => _lateStudents;
 
   String _error;
 
   String get error => _error;
 
   Status _currentStatus = Status.done;
-
-  void addItem(Student stud) {
-    if (studentExist(stud)) {
-      _unMarkedStudents.remove(stud);
-    } else {
-      _unMarkedStudents.add(stud);
-    }
-
-    print(_unMarkedStudents);
+  Status get currentStatus => _currentStatus;
+  set currentStatus(Status status) {
+    _currentStatus = status;
     notifyListeners();
   }
 
-  bool studentExist(Student stud) =>
-      _unMarkedStudents.firstWhere((Student student) => student.id == stud.id,
+  void addItem(Student stud, {bool modifyLateStudents = false}) {
+    if (!modifyLateStudents) {
+      if (isMarkedAsUnnatendance(stud)) {
+        _offStudents.remove(stud);
+      } else {
+        _offStudents.add(stud);
+        if (_lateStudents.contains(stud)) {
+          _lateStudents.remove(stud);
+        }
+      }
+    } else {
+      if (isMarkedAsLate(stud)) {
+        _lateStudents.remove(stud);
+      } else {
+        _lateStudents.add(stud);
+        if (_offStudents.contains(stud)) {
+          _offStudents.remove(stud);
+        }
+      }
+    }
+
+    notifyListeners();
+  }
+
+  bool isMarkedAsUnnatendance(Student stud) =>
+      _offStudents.firstWhere((Student student) => student.id == stud.id,
+          orElse: () => null) !=
+      null;
+
+  bool isMarkedAsLate(Student stud) =>
+      _lateStudents.firstWhere((Student student) => student.id == stud.id,
           orElse: () => null) !=
       null;
 
   Future<void> uploadAttendments() async {
     try {
+      currentStatus = Status.loading;
       int contentType = await _teacherServices.getContentType();
 
-      print('content type: $contentType');
       Signature sign = Signature(
         contentType: contentType,
         signedBy: _user.id,
@@ -63,21 +88,30 @@ class TakeAttendmentViewModel extends ChangeNotifier {
       );
 
       int signatureID = await _teacherServices.signAttendment(sign);
-      print('SIGNED');
 
       List<TakeAttendment> attendmentList = List<TakeAttendment>.generate(
-        _unMarkedStudents.length,
+        _offStudents.length,
         (int index) => TakeAttendment(
           date: DateTime.now(),
           didAttend: false,
           schedule: course.schedule,
-          studentId: _unMarkedStudents[index].id.toString(),
+          studentId: _offStudents[index].id.toString(),
           signature: signatureID,
         ),
-      );
+      )..addAll(_lateStudents.map((Student student) => TakeAttendment(
+            date: DateTime.now(),
+            didAttend: true,
+            schedule: course.schedule,
+            studentId: student.id.toString(),
+            signature: signatureID,
+            isLate: true,
+          )));
 
       await _teacherServices.uploadAttendments(attendmentList);
-      print('DONE');
-    } on Exception catch (e) {}
+      currentStatus = Status.done;
+    } on Exception catch (e) {
+      _error = e.toString();
+      currentStatus = Status.error;
+    }
   }
 }
