@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:tizatech/screens/teacher_screens/charts/attendance/attendance_vm.dart';
+import 'package:tizatech/screens/teacher_screens/charts/simce_essay/simce_essay_vm.dart';
 
 import '../../../_components/app_bar.dart';
 import '../../../_components/option_tile.dart';
@@ -26,7 +28,28 @@ class ChartListScreen extends StatelessWidget {
                   onTap: () => Navigator.push(
                     context,
                     MaterialPageRoute<Widget>(
-                      builder: (_) => AttendanceChartScreen(),
+                      builder: (_) =>
+                          AttendanceChartScreen(AttendanceType.attendance),
+                    ),
+                  ),
+                ),
+                OptionTile(
+                  text: 'Inasistencias',
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute<Widget>(
+                      builder: (_) =>
+                          AttendanceChartScreen(AttendanceType.unattendance),
+                    ),
+                  ),
+                ),
+                OptionTile(
+                  text: 'Retrasos',
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute<Widget>(
+                      builder: (_) =>
+                          AttendanceChartScreen(AttendanceType.delayment),
                     ),
                   ),
                 ),
@@ -35,7 +58,16 @@ class ChartListScreen extends StatelessWidget {
                   onTap: () => Navigator.push(
                     context,
                     MaterialPageRoute<Widget>(
-                      builder: (_) => SimceScoreChartScreen(),
+                      builder: (_) => SimceScoreChartScreen(SimceType.essay),
+                    ),
+                  ),
+                ),
+                OptionTile(
+                  text: 'Puntaje Simce',
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute<Widget>(
+                      builder: (_) => SimceScoreChartScreen(SimceType.score),
                     ),
                   ),
                 ),

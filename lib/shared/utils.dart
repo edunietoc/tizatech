@@ -1,4 +1,5 @@
 import 'package:intl/intl.dart';
+import 'package:tizatech/shared/constants.dart';
 
 String parseDate(String date, String time) {
   DateTime _date = DateTime.parse(date);
@@ -35,4 +36,13 @@ String dateTimeWithTimeZone() {
 String dateOnly(DateTime date) {
   String stringDate = date.toIso8601String();
   return stringDate.split('T')[0];
+}
+
+String currentYear() => DateTime.now().year.toString();
+
+String currentMonth() {
+  int month = DateTime.now().month;
+  print(month);
+  print(monthConstants[month]);
+  return monthConstants[month];
 }

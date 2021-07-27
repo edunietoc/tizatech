@@ -1,6 +1,8 @@
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tizatech/_components/report_bar_chart.dart';
+import 'package:tizatech/shared/utils.dart';
 
 import '../../../../_components/app_bar.dart';
 import '../../../../_components/loader.dart';
@@ -29,31 +31,34 @@ class EnrollmentChartScreen extends StatelessWidget {
                     TizaAppBar(title: 'Matricula', subtitle: ''),
                     SliverList(
                         delegate: SliverChildListDelegate(<Widget>[
-                      Container(
-                          width: 300,
-                          height: 300,
-                          child: charts.BarChart(
-                            viewModel.getAnualSeries(),
-                          )),
-                      Container(
-                          width: 300,
-                          height: 300,
-                          child: charts.BarChart(
-                            viewModel.getCoursesSeries(),
-                            vertical: false,
-                          )),
-                      Container(
-                          width: 300,
-                          height: 300,
-                          child: charts.BarChart(
-                            viewModel.getLevelSeries(),
-                            vertical: false,
-                          )),
+                      ReportBarChart(
+                        series: viewModel.getAnualSeries(),
+                        title: 'Anual',
+                        subtitle: currentYear(),
+                        xLabel: 'Años',
+                        yLabel: 'Alumnos',
+                      ),
+                      ReportBarChart(
+                        series: viewModel.getCoursesSeries(),
+                        title: 'Por Curso',
+                        xLabel: 'Curso',
+                        yLabel: 'Numero de Alumnos',
+                        isVertical: false,
+                        height: 500,
+                      ),
+                      ReportBarChart(
+                        series: viewModel.getLevelSeries(),
+                        title: 'Por Nivel',
+                        xLabel: 'Nivel',
+                        yLabel: 'Numero de Alumnos',
+                        isVertical: false,
+                      ),
                       Container(
                           width: 300,
                           height: 300,
                           child: charts.PieChart(
                             viewModel.getGenderSeries(),
+                            animate: true,
                           )),
                     ]))
                   ],

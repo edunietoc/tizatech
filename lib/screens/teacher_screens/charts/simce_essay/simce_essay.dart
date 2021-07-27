@@ -1,17 +1,18 @@
-import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../_components/app_bar.dart';
 import '../../../../_components/loader.dart';
+import '../../../../_components/report_bar_chart.dart';
 import 'simce_essay_vm.dart';
 
 class SimceScoreChartScreen extends StatelessWidget {
-  const SimceScoreChartScreen({Key key}) : super(key: key);
+  const SimceScoreChartScreen(this.simceType, {Key key}) : super(key: key);
 
+  final SimceType simceType;
   @override
   Widget build(BuildContext context) => ChangeNotifierProvider<SimceViewModel>(
-        create: (_) => SimceViewModel(),
+        create: (_) => SimceViewModel(simceType),
         child: Scaffold(
           body: Consumer<SimceViewModel>(
               builder: (__, SimceViewModel viewModel, _) {
@@ -29,34 +30,37 @@ class SimceScoreChartScreen extends StatelessWidget {
                     SliverList(
                       delegate: SliverChildListDelegate(
                         <Widget>[
-                          Container(
-                            width: 300,
-                            height: 300,
-                            child: charts.LineChart(
-                              viewModel.getLanguageSeries(),
-                            ),
+                          ReportChart(
+                            series: viewModel.getLanguageSeries(),
+                            title: 'Lenguaje',
+                            xLabel: 'Años',
+                            yLabel: 'Puntaje',
+                            chartType: ChartType.yearLine,
                           ),
-                          Container(
-                            width: 300,
-                            height: 300,
-                            child: charts.LineChart(
-                              viewModel.getHistorySeries(),
-                            ),
+                          ReportChart(
+                            series: viewModel.getMathSeries(),
+                            title: 'Matematica',
+                            xLabel: 'Años',
+                            yLabel: 'Puntaje',
+                            chartType: ChartType.yearLine,
                           ),
-                          Container(
-                            width: 300,
-                            height: 300,
-                            child: charts.LineChart(
-                              viewModel.getMathSeries(),
-                            ),
+                          ReportChart(
+                            series: viewModel.getHistorySeries(),
+                            title: 'Historia',
+                            xLabel: 'Años',
+                            yLabel: 'Puntaje',
+                            chartType: ChartType.yearLine,
                           ),
-                          Container(
-                            width: 300,
-                            height: 300,
-                            child: charts.LineChart(
-                              viewModel.getScienceSeries(),
-                            ),
+                          ReportChart(
+                            series: viewModel.getScienceSeries(),
+                            title: 'Ciencias Naturales',
+                            xLabel: 'Años',
+                            yLabel: 'Puntaje',
+                            chartType: ChartType.yearLine,
                           ),
+                          SizedBox(
+                            height: 40,
+                          )
                         ],
                       ),
                     )

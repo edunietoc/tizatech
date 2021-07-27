@@ -10,14 +10,27 @@ enum Status {
   error,
 }
 
+enum AttendanceType {
+  attendance,
+  unattendance,
+  delayment,
+}
+
 class AttendanceViewModel extends ChangeNotifier {
-  AttendanceViewModel() {
+  AttendanceViewModel(this.chartType) {
+    _dataFunction = {
+      AttendanceType.attendance: _chartsService.getAttendance(),
+      AttendanceType.unattendance: _chartsService.getUnattendance(),
+      AttendanceType.delayment: _chartsService.getDelayment(),
+    };
     getAttendance();
   }
 
   final ChartsService _chartsService = ChartsService();
 
   Status _currentStatus = Status.loading;
+  Map<AttendanceType, Future<AttendanceBase>> _dataFunction;
+  final AttendanceType chartType;
 
   Status get currentStatus => _currentStatus;
   set currentStatus(Status status) {
@@ -33,7 +46,8 @@ class AttendanceViewModel extends ChangeNotifier {
 
   Future<void> getAttendance() async {
     try {
-      _attendance = await _chartsService.getAttendance();
+      _attendance = await _dataFunction[chartType];
+
       currentStatus = Status.done;
     } on Exception catch (e) {
       _error = e.toString();
