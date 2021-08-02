@@ -20,6 +20,10 @@ enum PTUType {
 }
 
 class PTUViewModel extends ChangeNotifier {
+  PTUViewModel() {
+    _getPTU();
+  }
+
   final ChartsService _chartsService = ChartsService();
 
   Status _currentStatus = Status.loading;
@@ -37,7 +41,7 @@ class PTUViewModel extends ChangeNotifier {
 
   PTU get ptu => _ptu;
 
-  Future<void> getPTU() async {
+  Future<void> _getPTU() async {
     try {
       _ptu = await _chartsService.getPTU();
       currentStatus = Status.done;

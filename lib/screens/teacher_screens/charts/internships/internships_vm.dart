@@ -15,6 +15,10 @@ enum InternshipTypeData {
 }
 
 class IntershipsViewModel extends ChangeNotifier {
+  IntershipsViewModel() {
+    _getInternships();
+  }
+
   final ChartsService _chartsService = ChartsService();
 
   Status _currentStatus = Status.loading;
@@ -30,7 +34,7 @@ class IntershipsViewModel extends ChangeNotifier {
   Internship _internship;
   Internship get internship => _internship;
 
-  Future<void> getPersonalImp() async {
+  Future<void> _getInternships() async {
     try {
       _internship = await _chartsService.getInternships();
       currentStatus = Status.done;

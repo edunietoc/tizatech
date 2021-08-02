@@ -40,7 +40,7 @@ class AttendanceChartScreen extends StatelessWidget {
                       title: '${textType[attendanceType]}', subtitle: ''),
                   SliverList(
                     delegate: SliverChildListDelegate([
-                      ReportBarChart(
+                      ReportChart(
                         series: viewModel.getAnualSeries(),
                         title: 'Anuales',
                         subtitle: currentYear(),
@@ -48,7 +48,7 @@ class AttendanceChartScreen extends StatelessWidget {
                         yLabel: 'Meses',
                         isVertical: false,
                       ),
-                      ReportBarChart(
+                      ReportChart(
                         series: viewModel.getMonthSeries(),
                         title: 'Mensuales',
                         subtitle: currentMonth(),
@@ -57,7 +57,7 @@ class AttendanceChartScreen extends StatelessWidget {
                         yLabel: 'Cursos',
                         isVertical: false,
                       ),
-                      ReportBarChart(
+                      ReportChart(
                         series: viewModel.getDailySeries(),
                         title: 'Diarias',
                         subtitle: currentMonth(),
@@ -66,7 +66,7 @@ class AttendanceChartScreen extends StatelessWidget {
                         yLabel: 'Cursos',
                         isVertical: false,
                       ),
-                      ReportBarChart(
+                      ReportChart(
                         series: viewModel.getDailySeries(),
                         title: '$diaryText',
                         xLabel:
@@ -74,7 +74,7 @@ class AttendanceChartScreen extends StatelessWidget {
                         yLabel: 'Cursos',
                         isVertical: false,
                       ),
-                      ReportBarChart(
+                      ReportChart(
                         series: viewModel.getLevelSeries(),
                         title: 'Por Niveles',
                         xLabel: 'Número de ${textType[attendanceType]}',

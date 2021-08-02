@@ -11,6 +11,10 @@ enum Status {
 }
 
 class RepeatingViewModel extends ChangeNotifier {
+  RepeatingViewModel() {
+    _getRepeatingStudents();
+  }
+
   final ChartsService _chartsService = ChartsService();
 
   Status _currentStatus = Status.loading;
@@ -26,12 +30,13 @@ class RepeatingViewModel extends ChangeNotifier {
   RepeatingStudents _repeatingStudents;
   RepeatingStudents get repeatingStudents => _repeatingStudents;
 
-  Future<void> getRepeatingStudents() async {
+  Future<void> _getRepeatingStudents() async {
     try {
       _repeatingStudents = await _chartsService.getRepeatingStudents();
       currentStatus = Status.done;
     } on Exception catch (e) {
       _error = e.toString();
+      print(_error);
       currentStatus = Status.error;
     }
   }
@@ -53,9 +58,19 @@ class RepeatingViewModel extends ChangeNotifier {
           id: 'Anual Repeating Students',
           data: _repeatingStudents.levelList,
           seriesColor: charts.Color.fromHex(code: '#42B0A6'),
-          domainFn: (RepeatingByLevel datum, int index) =>
-              datum.levels[0].level,
-          measureFn: (RepeatingByLevel datum, _) => datum.levels[0].approved,
+          domainFn: (RepeatingByLevel datum, int index) => datum.level,
+          measureFn: (RepeatingByLevel datum, _) => datum.approved,
+        )
+      ];
+
+  List<charts.Series<RepeatingByRange, String>> getRangeSeries() =>
+      <charts.Series<RepeatingByRange, String>>[
+        charts.Series<RepeatingByRange, String>(
+          id: 'Anual Repeating Students',
+          data: _repeatingStudents.rangeList,
+          seriesColor: charts.Color.fromHex(code: '#42B0A6'),
+          domainFn: (RepeatingByRange datum, int index) => datum.range,
+          measureFn: (RepeatingByRange datum, _) => datum.students,
         )
       ];
 }

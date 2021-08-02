@@ -1,5 +1,6 @@
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:flutter/material.dart';
+import 'package:tizatech/shared/constants.dart';
 
 import '../../../../models/chart_models/annotations.dart';
 import '../../../../services/charts/charts.dart';
@@ -30,6 +31,21 @@ class AnnotationsViewModel extends ChangeNotifier {
   String get error => _error;
 
   Annotations _annotations;
+  Annotations get annotations => _annotations;
+
+  int _currentMonth = 1;
+  int get currentMonth => _currentMonth;
+  void setCurrentMonth(String month) {
+    _currentMonth = monthConstantsNumber[month];
+    notifyListeners();
+  }
+
+  int _currentLevel = 0;
+  int get currentLevel => _currentLevel;
+  set currentLevel(int value) {
+    _currentLevel = value;
+    notifyListeners();
+  }
 
   Future<void> _getAnnotations() async {
     try {
@@ -69,7 +85,7 @@ class AnnotationsViewModel extends ChangeNotifier {
       <charts.Series<CategoryLevelAnnotation, String>>[
         charts.Series<CategoryLevelAnnotation, String>(
           id: 'Anual Attendance',
-          data: _annotations.levelAnnotations.first.categories,
+          data: _annotations.levelAnnotations[currentLevel].categories,
           seriesColor: charts.Color.fromHex(code: '#42B0A6'),
           domainFn: (CategoryLevelAnnotation datum, int index) => datum.name,
           measureFn: (CategoryLevelAnnotation datum, int index) =>
@@ -81,7 +97,7 @@ class AnnotationsViewModel extends ChangeNotifier {
       <charts.Series<CourseValue, String>>[
         charts.Series<CourseValue, String>(
           id: 'Anual Attendance',
-          data: _annotations.monthlyAnnotations.first.values,
+          data: _annotations.monthlyAnnotations[_currentMonth - 1].values,
           seriesColor: charts.Color.fromHex(code: '#42B0A6'),
           domainFn: (CourseValue datum, int index) => datum.course,
           measureFn: (CourseValue datum, _) => int.parse(datum.total),

@@ -11,6 +11,10 @@ enum Status {
 }
 
 class PersonalImpViewModel extends ChangeNotifier {
+  PersonalImpViewModel() {
+    _getPersonalImp();
+  }
+
   final ChartsService _chartsService = ChartsService();
 
   Status _currentStatus = Status.loading;
@@ -26,7 +30,7 @@ class PersonalImpViewModel extends ChangeNotifier {
   PersonalImprovement _personalImprovement;
   PersonalImprovement get personalImprovement => _personalImprovement;
 
-  Future<void> getPersonalImp() async {
+  Future<void> _getPersonalImp() async {
     try {
       _personalImprovement = await _chartsService.getPersonalImprovement();
       currentStatus = Status.done;

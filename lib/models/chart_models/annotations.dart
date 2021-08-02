@@ -39,9 +39,17 @@ class AnualAnnotation {
   });
 
   factory AnualAnnotation.fromMap(Map<String, dynamic> map) => AnualAnnotation(
-        type: map['name'],
+        type: _mapNames[map['name']],
         total: map['total'],
       );
+
+  static const Map<String, String> _mapNames = <String, String>{
+    'Falta muy leve': 'Falta\n muy leve',
+    'Falta leve': 'Falta\n leve',
+    'Falta grave': 'Falta\n grave',
+    'Falta gravisima': 'Falta\n gravisima',
+    'Positiva': 'Positiva',
+  };
 
   String type;
   String total;
@@ -99,9 +107,16 @@ class CategoryLevelAnnotation {
 
   factory CategoryLevelAnnotation.fromValues(String name, String value) =>
       CategoryLevelAnnotation(
-        name: name,
+        name: _mapNames[name],
         value: value,
       );
+  static const Map<String, String> _mapNames = <String, String>{
+    'total_falta_muy_leve': 'Falta\n muy leve',
+    'total_falta_leve': 'Falta\n leve',
+    'total_falta_grave': 'Falta\n grave',
+    'total_falta_gravisima': 'Falta\n gravisima',
+    'total_positiva': 'Positiva',
+  };
 
   String name;
   String value;

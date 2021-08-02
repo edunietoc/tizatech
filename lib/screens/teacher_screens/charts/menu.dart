@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:tizatech/screens/teacher_screens/charts/attendance/attendance_vm.dart';
+import 'package:tizatech/screens/teacher_screens/charts/internships/internships.dart';
+import 'package:tizatech/screens/teacher_screens/charts/personal_improvement/personal_improvement.dart';
+import 'package:tizatech/screens/teacher_screens/charts/ptu/ptu.dart';
+import 'package:tizatech/screens/teacher_screens/charts/repeating/repeating.dart';
 import 'package:tizatech/screens/teacher_screens/charts/simce_essay/simce_essay_vm.dart';
 
 import '../../../_components/app_bar.dart';
@@ -86,6 +90,42 @@ class ChartListScreen extends StatelessWidget {
                     context,
                     MaterialPageRoute<Widget>(
                       builder: (_) => AnnotationsChartScreen(),
+                    ),
+                  ),
+                ),
+                OptionTile(
+                  text: 'Repitiencia',
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute<Widget>(
+                      builder: (_) => RepeatingChartScreen(),
+                    ),
+                  ),
+                ),
+                OptionTile(
+                  text: 'PTU',
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute<Widget>(
+                      builder: (_) => PTUChartScreen(),
+                    ),
+                  ),
+                ),
+                OptionTile(
+                  text: 'Practicas',
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute<Widget>(
+                      builder: (_) => InternshipChartScreen(),
+                    ),
+                  ),
+                ),
+                OptionTile(
+                  text: 'Desarrollo Personal',
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute<Widget>(
+                      builder: (_) => PersonalImpChartScreen(),
                     ),
                   ),
                 ),

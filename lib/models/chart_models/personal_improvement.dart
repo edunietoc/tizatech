@@ -3,18 +3,22 @@ import 'package:flutter/cupertino.dart';
 class PersonalImprovement {
   PersonalImprovement({
     this.pIList,
+    this.indicatorList,
   });
   factory PersonalImprovement.fromMap(Map<String, dynamic> map) {
-    List<dynamic> indicatorList =
-        List<dynamic>.from(map['lista_tipo_indicador']);
+    List<String> indicatorList = (map['lista_tipo_indicador'] as List<dynamic>)
+        .map((_) => _.toString())
+        .toList();
 
     return PersonalImprovement(
       pIList: List<PersonalImprovementIndicator>.from(map['lista_indicadores']
           ?.map((_) => PersonalImprovementIndicator.fromMap(_, indicatorList))),
+      indicatorList: indicatorList,
     );
   }
 
   List<PersonalImprovementIndicator> pIList;
+  List<String> indicatorList;
 }
 
 class PersonalImprovementIndicator {

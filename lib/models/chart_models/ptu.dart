@@ -49,7 +49,7 @@ class PTUData {
 
   factory PTUData.fromMap(Map<String, dynamic> map) => PTUData(
         scoreLabel: map['puntaje'],
-        students: map['alumnos'],
+        students: int.parse(map['alumnos'].toString()),
       );
 
   factory PTUData.fromJson(String source) =>

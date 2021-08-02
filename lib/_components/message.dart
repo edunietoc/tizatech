@@ -16,8 +16,8 @@ class MessageTile extends StatelessWidget {
   final Message message;
   final Function onTap;
 
-  final String _unreadPath = 'assets/images/messages/unread.png';
-  final String _readPath = 'assets/images/messages/read.png';
+  static const String _unreadPath = 'assets/images/messages/unread.png';
+  static const String _readPath = 'assets/images/messages/read.png';
 
   @override
   Widget build(BuildContext context) => InkWell(

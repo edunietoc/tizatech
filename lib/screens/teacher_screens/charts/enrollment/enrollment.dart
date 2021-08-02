@@ -1,11 +1,11 @@
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tizatech/_components/report_bar_chart.dart';
-import 'package:tizatech/shared/utils.dart';
 
 import '../../../../_components/app_bar.dart';
 import '../../../../_components/loader.dart';
+import '../../../../_components/report_bar_chart.dart';
+import '../../../../shared/utils.dart';
 import 'enrollment_vm.dart';
 
 class EnrollmentChartScreen extends StatelessWidget {
@@ -31,14 +31,14 @@ class EnrollmentChartScreen extends StatelessWidget {
                     TizaAppBar(title: 'Matricula', subtitle: ''),
                     SliverList(
                         delegate: SliverChildListDelegate(<Widget>[
-                      ReportBarChart(
+                      ReportChart(
                         series: viewModel.getAnualSeries(),
                         title: 'Anual',
                         subtitle: currentYear(),
                         xLabel: 'Años',
                         yLabel: 'Alumnos',
                       ),
-                      ReportBarChart(
+                      ReportChart(
                         series: viewModel.getCoursesSeries(),
                         title: 'Por Curso',
                         xLabel: 'Curso',
@@ -46,7 +46,7 @@ class EnrollmentChartScreen extends StatelessWidget {
                         isVertical: false,
                         height: 500,
                       ),
-                      ReportBarChart(
+                      ReportChart(
                         series: viewModel.getLevelSeries(),
                         title: 'Por Nivel',
                         xLabel: 'Nivel',
