@@ -1,0 +1,72 @@
+{
+    "Auth":{
+        "title": "Iniciar Sesión",
+        "rutField": "Rut",
+        "passwordField": "Contraseña",
+        "button": "Iniciar Sesión",
+        "errorTitle": "Usuario no registrado",
+        "errorDescription": "Verifica que tus claves sean correctas o contacta a la institución",
+        "errorButton": "Reintentar"
+    },
+
+    "menu":{
+
+        "exit":"Salir",
+        "teacherSubtitle": "Profesor",
+        "parentSubtitle": "Apoderado",
+        "studentSubtitle": "Alumno",
+        "profile": "Perfil",
+        "messages": "Mensajes",
+        "digitalBook": "Libro Digital",
+        "charts": "Informe de Gestión",
+        "teachers": "Profesores",
+        "grades": "Notas",
+        "attendments": "Asistencias",
+        "unattendments": "Inasistencias",
+        "delayments": "Retrasos",
+        "books": "Lecturas Anuales",
+        "students": "Estudiantes"
+    },
+
+    "profile":{
+        "title": "Perfil",
+        "generalSection": {
+            "title": "General",
+            "birthDate": "Fecha de Nacimiento",
+            "nationality": "Nacionalidad",
+            "rut": "Rut",
+            "sector": "Comuna"
+        },
+        "contactSection":{
+            "email": "Correo Electronico",
+            "mobilePhone": "Telefono (movi)",
+            "homePhone": "Telefono (casa)"
+        },
+        "studentsSection":{
+            "title": "Apoderado",
+            "subtitle": "Estudiantes a su cargo"
+        },
+        "button": "Informacion Academica"
+    },
+    "messages":{
+        "title": "Mensajes",
+        "selectAnswer": "Seleccione una Respuesta:",
+        "sendButton": "Enviar"
+    },
+
+
+
+
+
+
+
+
+
+    "charts":{
+        "Attendance":{
+            
+        }
+
+    }
+
+}

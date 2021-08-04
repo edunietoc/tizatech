@@ -25,51 +25,52 @@ class PTUChartScreen extends StatelessWidget {
               case Status.done:
                 return CustomScrollView(
                   slivers: <Widget>[
-                    TizaAppBar(title: 'Matricula', subtitle: ''),
+                    TizaAppBar(title: 'PTU', subtitle: ''),
                     SliverList(
                         delegate: SliverChildListDelegate(<Widget>[
                       ReportChart(
                         series: viewModel.getDataSeries(PTUType.language),
                         title: 'Lenguaje',
-                        xLabel: 'Años',
-                        yLabel: 'Alumnos',
+                        xLabel: 'Alumnos',
+                        yLabel: 'Puntaje',
                         isVertical: false,
                       ),
                       ReportChart(
                         series: viewModel.getDataSeries(PTUType.math),
                         title: 'Matematica',
-                        xLabel: 'Años',
-                        yLabel: 'Alumnos',
+                        xLabel: 'Alumnos',
+                        yLabel: 'Puntaje',
                         isVertical: false,
                       ),
                       ReportChart(
                         series: viewModel.getDataSeries(PTUType.science),
                         title: 'Ciencias Naturales',
-                        xLabel: 'Años',
-                        yLabel: 'Alumnos',
+                        xLabel: 'Alumnos',
+                        yLabel: 'Puntaje',
                         isVertical: false,
                       ),
                       ReportChart(
                         series: viewModel.getDataSeries(PTUType.men),
                         title: 'MEN',
-                        xLabel: 'Años',
-                        yLabel: 'Alumnos',
+                        xLabel: 'Alumnos',
+                        yLabel: 'Puntaje',
                         isVertical: false,
                       ),
                       ReportChart(
                         series: viewModel.getDataSeries(PTUType.mandatory),
                         title: 'Obligatorias',
-                        xLabel: 'Años',
-                        yLabel: 'Alumnos',
+                        xLabel: 'Alumnos',
+                        yLabel: 'Puntaje',
                         isVertical: false,
                       ),
                       ReportChart(
                         series: viewModel.getDataSeries(PTUType.ranking),
                         title: 'Ranking',
-                        xLabel: 'Años',
-                        yLabel: 'Alumnos',
+                        xLabel: 'Alumnos',
+                        yLabel: 'Puntaje',
                         isVertical: false,
                       ),
+                      SizedBox(height: 40),
                     ]))
                   ],
                 );

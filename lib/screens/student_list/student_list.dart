@@ -13,11 +13,11 @@ import '../profile/profile.dart';
 class StudentListScreen extends StatelessWidget {
   StudentListScreen({Key key}) : super(key: key);
 
-  @override
   final User user = locator<UserService>().user;
+  @override
   Widget build(BuildContext context) => Scaffold(
         body: CustomScrollView(
-          slivers: [
+          slivers: <Widget>[
             TizaAppBar(title: 'Estudiantes', subtitle: 'Apoderado'),
             SliverList(
               delegate: SliverChildListDelegate(

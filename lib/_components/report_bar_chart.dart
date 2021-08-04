@@ -56,6 +56,7 @@ class ReportChart extends StatelessWidget {
         return charts.BarChart(
           series,
           vertical: isVertical,
+          // ignore: always_specify_types
           behaviors: [
             charts.ChartTitle(
               yLabel,

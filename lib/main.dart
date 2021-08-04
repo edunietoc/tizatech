@@ -1,6 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:tizatech/screens/teacher_screens/search_teacher/search_teacher.dart';
 
 import '_components/loader.dart';
 import 'locator/locator.dart';
@@ -16,13 +16,23 @@ import 'screens/student_screen/delayments/delayments.dart';
 import 'screens/student_screen/grades/grades.dart';
 import 'screens/teacher_screens/charts/menu.dart';
 import 'screens/teacher_screens/courses/courses.dart';
+import 'screens/teacher_screens/search_teacher/search_teacher.dart';
 import 'services/navigation.dart';
 import 'shared/colors.dart';
 
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
   setupLocator();
-  runApp(MyApp());
+  runApp(EasyLocalization(
+    supportedLocales: <Locale>[
+      Locale('es', ''),
+      Locale('en', ''),
+    ],
+    path: 'assets/translations', // <-- change the path of the translation files
+    fallbackLocale: Locale('en', 'US'),
+    child: MyApp(),
+  ));
 }
 
 typedef WidgetFun = Widget Function(BuildContext context);
@@ -39,7 +49,7 @@ class _MyAppState extends State<MyApp> {
   bool _error = false;
 
   // Define an async function to initialize FlutterFire
-  void initializeFlutterFire() async {
+  Future<void> initializeFlutterFire() async {
     try {
       // Wait for Firebase to initialize and set `_initialized` state to true
       await Firebase.initializeApp();
@@ -73,6 +83,9 @@ class _MyAppState extends State<MyApp> {
 
     return MaterialApp(
       title: 'Tizatech',
+      localizationsDelegates: context.localizationDelegates,
+      supportedLocales: context.supportedLocales,
+      locale: context.locale,
       navigatorKey: locator<NavigationService>().navigatorKey,
       routes: <String, WidgetFun>{
         Routes.loader: (BuildContext context) => Loader(),

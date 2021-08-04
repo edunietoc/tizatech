@@ -124,6 +124,8 @@ class AttendmentsScreen extends StatelessWidget {
                   ],
                 ),
               );
+            default:
+              return Container();
           }
         }),
       );

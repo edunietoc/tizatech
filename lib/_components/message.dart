@@ -33,11 +33,6 @@ class MessageTile extends StatelessWidget {
                 width: 40,
                 height: 40,
               ),
-              /* Image.network(
-                '$imageBaseUrl${message.userSender.picturePath}',
-                width: 40,
-                height: 40,
-              ), */
               SizedBox(
                 width: 16,
               ),

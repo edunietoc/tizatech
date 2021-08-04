@@ -26,25 +26,26 @@ class InternshipChartScreen extends StatelessWidget {
               case Status.done:
                 return CustomScrollView(
                   slivers: <Widget>[
-                    TizaAppBar(title: 'Matricula', subtitle: ''),
+                    TizaAppBar(title: 'Prácticas Anuales', subtitle: ''),
                     SliverList(
                         delegate: SliverChildListDelegate(<Widget>[
                       ReportChart(
                         series: viewModel
                             .getDataSeries(InternshipTypeData.withInternship),
-                        title: 'Anual',
-                        xLabel: 'Años',
-                        yLabel: 'Alumnos',
+                        title: 'Hechas',
+                        xLabel: 'Cantidad',
+                        yLabel: 'Niveles',
                         isVertical: false,
                       ),
                       ReportChart(
                         series: viewModel
                             .getDataSeries(InternshipTypeData.noInternship),
-                        title: 'Anual',
-                        xLabel: 'Años',
-                        yLabel: 'Alumnos',
+                        title: 'Sin hacer',
+                        xLabel: 'Cantidad',
+                        yLabel: 'Niveles',
                         isVertical: false,
                       ),
+                      SizedBox(height: 40),
                     ]))
                   ],
                 );

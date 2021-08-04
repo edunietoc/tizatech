@@ -38,11 +38,6 @@ class HomeViewModel {
         imagePath: 'assets/images/home/books.png',
         route: Routes.books,
       ),
-      MenuCard(
-        title: 'Notificaciones',
-        imagePath: 'assets/images/home/notifications.png',
-        route: Routes.notifications,
-      ),
     ];
 
     reducedStudentMenu = <MenuCard>[
@@ -84,11 +79,6 @@ class HomeViewModel {
         imagePath: 'assets/images/home/message_dot.png',
         route: Routes.messages,
       ),
-      MenuCard(
-        title: 'Notificaciones',
-        imagePath: 'assets/images/home/notifications.png',
-        route: Routes.notifications,
-      ),
     ];
 
     teacherMenu = <MenuCard>[
@@ -121,29 +111,6 @@ class HomeViewModel {
         title: 'Profesores',
         imagePath: 'assets/images/home/teachers.png',
         route: Routes.searchTeacher,
-      ),
-    ];
-
-    coursesTeacherMenu = <MenuCard>[
-      MenuCard(
-        title: 'Perfil',
-        image: locator<UserService>().getUserAvatar(),
-        route: Routes.profile,
-      ),
-      MenuCard(
-        title: 'Mensajes',
-        imagePath: 'assets/images/home/message_dot.png',
-        route: Routes.messages,
-      ),
-      MenuCard(
-        title: 'Lecturas Anuales',
-        imagePath: 'assets/images/home/books.png',
-        route: Routes.books,
-      ),
-      MenuCard(
-        title: 'Cursos',
-        imagePath: 'assets/images/home/courses.png',
-        route: Routes.courses,
       ),
     ];
   }

@@ -68,7 +68,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         onChanged: (String value) =>
                             authViewModel.password = value,
                       ),
-                      Align(
+                      //TODO: recover password not implemented
+                      /* Align(
                         alignment: Alignment.centerRight,
                         child: TextButton(
                           onPressed: () {},
@@ -83,7 +84,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     color: informationColor),
                           ),
                         ),
-                      ),
+                      ), */
                       Container(
                         width: MediaQuery.of(context).size.width,
                         padding: EdgeInsets.only(top: 40),

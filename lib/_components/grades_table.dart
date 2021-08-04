@@ -67,6 +67,7 @@ class _GradesTableState extends State<GradesTable> {
               child: Column(
                 children: <Widget>[
                   DataContainer(
+                    //TODO: localization
                     data: subjectList != null ? 'Asignaturas' : 'Alumnos',
                     color: cardColorPrimary,
                     isMainColumn: true,

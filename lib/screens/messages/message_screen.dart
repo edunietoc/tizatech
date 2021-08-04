@@ -30,7 +30,7 @@ class MessagesScreen extends StatelessWidget {
               return Scaffold(
                 body: CustomScrollView(
                   slivers: <Widget>[
-                    TizaAppBar(title: 'Mensajes', subtitle: ''),
+                    TizaAppBar(title: 'Mensajes'),
                     SliverToBoxAdapter(
                       child: SearchBar(
                         hintText: 'Buscar',

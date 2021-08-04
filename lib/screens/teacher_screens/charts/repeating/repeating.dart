@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tizatech/screens/teacher_screens/charts/repeating/repeating_vm.dart';
+import 'package:tizatech/shared/utils.dart';
 
 import '../../../../_components/app_bar.dart';
 import '../../../../_components/loader.dart';
 import '../../../../_components/report_bar_chart.dart';
-import '../../../../shared/utils.dart';
+import 'repeating_vm.dart';
 
 class RepeatingChartScreen extends StatelessWidget {
   const RepeatingChartScreen({Key key}) : super(key: key);
@@ -27,29 +27,31 @@ class RepeatingChartScreen extends StatelessWidget {
               case Status.done:
                 return CustomScrollView(
                   slivers: <Widget>[
-                    TizaAppBar(title: 'Repitiencia', subtitle: ''),
+                    TizaAppBar(title: 'Repitencia Último Año', subtitle: ''),
                     SliverList(
                         delegate: SliverChildListDelegate(<Widget>[
                       ReportChart(
                         series: viewModel.getAnualSeries(),
                         title: 'Anual',
+                        subtitle: currentYear(),
                         xLabel: 'Años',
-                        yLabel: 'Alumnos',
+                        yLabel: 'Porcentaje',
                       ),
                       ReportChart(
                         series: viewModel.getLevelSeries(),
-                        title: 'Anual',
-                        xLabel: 'Años',
-                        yLabel: 'Alumnos',
+                        title: 'Por Nivel',
+                        xLabel: 'Porcentaje',
+                        yLabel: 'Nivel',
                         isVertical: false,
                       ),
                       ReportChart(
                         series: viewModel.getRangeSeries(),
-                        title: 'Anual',
-                        xLabel: 'Años',
-                        yLabel: 'Alumnos',
+                        title: 'Por Rango',
+                        xLabel: 'Alumnos',
+                        yLabel: 'Rango',
                         isVertical: false,
                       ),
+                      SizedBox(height: 40),
                     ]))
                   ],
                 );

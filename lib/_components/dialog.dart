@@ -44,7 +44,7 @@ void showMessageDialog({
                 onPressed: onPressed,
                 style: ElevatedButton.styleFrom(primary: blackShadesColor[10]),
                 child: Text(
-                  'button Text',
+                  buttonText,
                   style: body1(context),
                 ),
               ),

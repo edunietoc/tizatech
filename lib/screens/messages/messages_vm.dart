@@ -82,6 +82,7 @@ class MessagesViewModel extends ChangeNotifier {
           (Message message) => message.message == _currentMessage.message);
       notifyListeners();
     } on Exception catch (e) {
+      //TODO: implement error screen
       currentStatus = Status.error;
     }
   }

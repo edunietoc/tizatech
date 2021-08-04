@@ -163,33 +163,3 @@ class _SendedMessage extends StatelessWidget {
         ],
       );
 }
-
-/* class _AnswerOption extends StatelessWidget {
-  const _AnswerOption({@required this.text, Key key}) : super(key: key);
-  final String text;
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 16,
-        vertical: 8,
-      ),
-      decoration: BoxDecoration(
-        border: Border.all(
-          color: primaryColor[80],
-        ),
-        borderRadius: BorderRadius.all(
-          Radius.circular(16),
-        ),
-      ),
-      child: Text(
-        text,
-        style: body2(context).copyWith(
-          color: primaryColor[80],
-        ),
-        textAlign: TextAlign.center,
-      ),
-    );
-  }
-}
- */
