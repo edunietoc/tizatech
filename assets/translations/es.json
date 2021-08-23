@@ -36,15 +36,15 @@
             "sector": "Comuna"
         },
         "contactSection":{
-            "email": "Correo Electronico",
-            "mobilePhone": "Telefono (movi)",
-            "homePhone": "Telefono (casa)"
+            "email": "Correo Electrónico",
+            "mobilePhone": "Teléfono (móvil)",
+            "homePhone": "Teléfono (casa)"
         },
         "studentsSection":{
             "title": "Apoderado",
             "subtitle": "Estudiantes a su cargo"
         },
-        "button": "Informacion Academica"
+        "button": "Información Académica"
     },
     "messages":{
         "title": "Mensajes",
@@ -59,20 +59,20 @@
     "studentScreens":{
         "attendments": {
             "title": "Asistencias",
-            "avatarDescription": "Visualiza de forma mesual y anual todas las asistencias e inasistencias.",
+            "avatarDescription": "Visualiza de forma mensual y anual todas las asistencias e inasistencias.",
             "monthlyTitle": "Mensuales",
             "weeksLabel": "Semanas",
-            "daysLabel": "Dias Habiles",
+            "daysLabel": "Días Hábiles",
             "unattendments": "Inasistencias",
             "yearlyTitle": "Anuales",
             "monthsLabel": "Meses"
         },
         "delayments": {
             "title": "Retrasos",
-            "avatarDescription":"Visualiza de forma mesual y anual todas las asistencias e inasistencias.",
+            "avatarDescription":"Visualiza de forma mensual y anual todas las asistencias e inasistencias.",
             "monthlyTitle": "Mensuales",
             "weeksLabel": "Semanas",
-            "daysLabel": "Dias Habiles",
+            "daysLabel": "Días Hábiles",
             "unattendments": "Inasistencias",
             "yearlyTitle": "Anuales",
             "monthsLabel": "Meses"
@@ -130,7 +130,7 @@
                 "levelYLabel": "Niveles"
             },
             "enrollment": {
-                "title": "Matricula",
+                "title": "Matrícula",
                 "annualTitle": "Anual",
                 "annualXLabel": "Años",
                 "annualYLabel": "Alumnos",
@@ -140,7 +140,7 @@
                 "levelTitle": "Por Nivel",
                 "levelXLabel": "Nivel",
                 "levelYLabel": "Número de Alumnos",
-                "genderTitle": "Por Genero",
+                "genderTitle": "Por Género",
                 "maleLabel": "Masculino",
                 "femaleLabel": "Femenino"
             },
@@ -197,11 +197,11 @@
                 "delayments": "Retrasos",
                 "simceEssay": "Ensayo Simce",
                 "simceScore": "Puntaje Simce",
-                "enrollment": "Matricula",
+                "enrollment": "Matrícula",
                 "annotations": "Cumplimiento",
-                "repeating": "Repitiencia",
+                "repeating": "Repitencia",
                 "ptu": "PTU",
-                "internship": "Practicas",
+                "internship": "Prácticas",
                 "improvement": "Desarrollo Personal"
             }
         },
@@ -223,7 +223,7 @@
         },
         "searchTeacher": {
             "title": "Busqueda",
-            "description": "Para buscar un profresor(a) utilice cualquiera de los tres campos.",
+            "description": "Para buscar un profesor(a), utilice cualquiera de los tres campos.",
             "name": "Nombre",
             "lastName": "Apellido",
             "rut": "Rut",
@@ -246,7 +246,7 @@
             "save": "Guardar",
             "codeTitle": "Verificación de Código",
             "typeCode": "Ingresa el Código",
-            "codeDescription": "Ingresa el código de seguridad de seis dígito desde tu aplicación de autenticación.",
+            "codeDescription": "Ingresa el código de seguridad de seis dígitos desde tu aplicación de autenticación.",
             "accept": "Aceptar"
         }
         
