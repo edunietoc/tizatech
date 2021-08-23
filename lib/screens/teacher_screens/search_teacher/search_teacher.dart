@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -27,7 +28,9 @@ class SearchTeacherScreen extends StatelessWidget {
                 case Status.done:
                   return CustomScrollView(
                     slivers: <Widget>[
-                      TizaAppBar(title: 'Busqueda', subtitle: ''),
+                      TizaAppBar(
+                        title: 'teacherScreens.searchTeacher.title'.tr(),
+                      ),
                       SliverList(
                         delegate: SliverChildListDelegate(
                           <Widget>[
@@ -35,27 +38,33 @@ class SearchTeacherScreen extends StatelessWidget {
                               padding: const EdgeInsets.only(
                                   top: 32, bottom: 16, left: 24, right: 24),
                               child: Text(
-                                  'Para buscar un profresor(a) utilice cualquiera de los tres campos.'),
+                                  'teacherScreens.searchTeacher.description'
+                                      .tr()),
                             ),
                             TextInput(
-                              hintText: 'Nombre',
-                              labelText: 'Nombre',
+                              hintText:
+                                  'teacherScreens.searchTeacher.name'.tr(),
+                              labelText:
+                                  'teacherScreens.searchTeacher.name'.tr(),
                               padding: const EdgeInsets.only(
                                   left: 24, right: 24, bottom: 24),
                               onChanged: (String value) =>
                                   viewModel.firstName = value,
                             ),
                             TextInput(
-                              hintText: 'Apellido',
-                              labelText: 'Apellido',
+                              hintText:
+                                  'teacherScreens.searchTeacher.lastName'.tr(),
+                              labelText:
+                                  'teacherScreens.searchTeacher.lastName'.tr(),
                               padding: const EdgeInsets.only(
                                   left: 24, right: 24, bottom: 24),
                               onChanged: (String value) =>
                                   viewModel.lastName = value,
                             ),
                             TextInput(
-                              hintText: 'Rut',
-                              labelText: 'Rut',
+                              hintText: 'teacherScreens.searchTeacher.rut'.tr(),
+                              labelText:
+                                  'teacherScreens.searchTeacher.rut'.tr(),
                               padding: const EdgeInsets.only(
                                   left: 24, right: 24, bottom: 24),
                               onChanged: (String value) =>
@@ -65,7 +74,7 @@ class SearchTeacherScreen extends StatelessWidget {
                               padding: const EdgeInsets.symmetric(
                                   vertical: 48, horizontal: 24),
                               onPressed: () => viewModel.search(),
-                              text: 'Buscar',
+                              text: 'teacherScreens.searchTeacher.button'.tr(),
                             )
                           ],
                         ),

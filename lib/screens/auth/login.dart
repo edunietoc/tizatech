@@ -5,6 +5,7 @@ import '../../_components/text_input.dart';
 import '../../services/auth.dart';
 import '../../shared/colors.dart';
 import 'auth_vm.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key key}) : super(key: key);
@@ -50,20 +51,20 @@ class _LoginScreenState extends State<LoginScreen> {
                       Container(
                         width: MediaQuery.of(context).size.width,
                         child: Text(
-                          'Iniciar Sesion',
+                          'auth.title'.tr(),
                           textAlign: TextAlign.left,
                           style: Theme.of(context).textTheme.headline2,
                         ),
                       ),
                       TextInput(
-                        hintText: 'Correo',
-                        labelText: 'Correo',
+                        hintText: 'auth.rutField'.tr(),
+                        labelText: 'auth.rutField'.tr(),
                         onChanged: (String value) =>
                             authViewModel.email = value,
                       ),
                       TextInput(
-                        hintText: '',
-                        labelText: 'Contraseña',
+                        hintText: 'auth.passwordField'.tr(),
+                        labelText: 'auth.passwordField'.tr(),
                         obscureText: true,
                         onChanged: (String value) =>
                             authViewModel.password = value,
@@ -90,7 +91,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         padding: EdgeInsets.only(top: 40),
                         child: ElevatedButton(
                           onPressed: () => authViewModel.login(),
-                          child: Text('Iniciar Sesion'),
+                          child: Text('auth.button'.tr()),
                         ),
                       ),
                       Spacer()

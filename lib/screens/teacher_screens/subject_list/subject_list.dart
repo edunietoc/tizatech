@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 import '../../../_components/app_bar.dart';
@@ -21,7 +22,7 @@ class SubjectListScreen extends StatelessWidget {
         body: CustomScrollView(
           slivers: <Widget>[
             TizaAppBar(
-              title: 'Asignaturas',
+              title: 'teacherScreens.subjectList.title'.tr(),
               subtitle: currentCourse.courseName,
             ),
             SliverList(
@@ -37,7 +38,7 @@ class SubjectListScreen extends StatelessWidget {
                       vertical: 16,
                     ),
                     child: Text(
-                      'Usted tiene asignadas las siguientes materias:',
+                      'teacherScreens.subjectList.description'.tr(),
                       style: body1(context).copyWith(
                         color: blackShadesColor[70],
                       ),

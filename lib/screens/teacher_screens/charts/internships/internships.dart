@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -26,23 +27,27 @@ class InternshipChartScreen extends StatelessWidget {
               case Status.done:
                 return CustomScrollView(
                   slivers: <Widget>[
-                    TizaAppBar(title: 'Prácticas Anuales', subtitle: ''),
+                    TizaAppBar(
+                      title: 'teacherScreens.charts.internship.title'.tr(),
+                    ),
                     SliverList(
                         delegate: SliverChildListDelegate(<Widget>[
                       ReportChart(
                         series: viewModel
                             .getDataSeries(InternshipTypeData.withInternship),
-                        title: 'Hechas',
-                        xLabel: 'Cantidad',
-                        yLabel: 'Niveles',
+                        title:
+                            'teacherScreens.charts.internship.doneTitle'.tr(),
+                        xLabel: 'teacherScreens.charts.internship.xLabel'.tr(),
+                        yLabel: 'teacherScreens.charts.internship.yLabel'.tr(),
                         isVertical: false,
                       ),
                       ReportChart(
                         series: viewModel
                             .getDataSeries(InternshipTypeData.noInternship),
-                        title: 'Sin hacer',
-                        xLabel: 'Cantidad',
-                        yLabel: 'Niveles',
+                        title:
+                            'teacherScreens.charts.internship.undoneTitle'.tr(),
+                        xLabel: 'teacherScreens.charts.internship.xLabel'.tr(),
+                        yLabel: 'teacherScreens.charts.internship.yLabel'.tr(),
                         isVertical: false,
                       ),
                       SizedBox(height: 40),

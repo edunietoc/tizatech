@@ -50,11 +50,9 @@ class CoursesViewModel extends ChangeNotifier {
 
   Future<void> getCourses() async {
     try {
-      print('Running');
       _courseList = await _teacherServices.getCourses('${_teacher.id}');
       currentStatus = Status.done;
     } on Exception catch (e) {
-      print(e.toString());
       _error = e.toString();
       currentStatus = Status.error;
     }

@@ -1,13 +1,14 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tizatech/_components/loader.dart';
-import 'package:tizatech/shared/constants.dart';
 
 import '../../../_components/app_bar.dart';
+import '../../../_components/loader.dart';
 import '../../../_components/table.dart';
 import '../../../models/courses.dart';
 import '../../../models/user.dart';
 import '../../../shared/colors.dart';
+import '../../../shared/constants.dart';
 import 'take_attendment_vm.dart';
 
 class TeacherTakeAttendmentScreen extends StatelessWidget {
@@ -40,7 +41,7 @@ class TeacherTakeAttendmentScreen extends StatelessWidget {
                   return CustomScrollView(
                     slivers: <Widget>[
                       TizaAppBar(
-                        title: 'Asistencias',
+                        title: 'teacherScreens.takeAttendment.title'.tr(),
                         subtitle: course.courseName,
                       ),
                       SliverList(
@@ -56,7 +57,8 @@ class TeacherTakeAttendmentScreen extends StatelessWidget {
                                   text: TextSpan(
                                 children: <TextSpan>[
                                   TextSpan(
-                                    text: 'Turno: ',
+                                    text: 'teacherScreens.takeAttendment.turn'
+                                        .tr(),
                                     style: body1(context).copyWith(
                                       color: blackShadesColor[70],
                                     ),
@@ -91,16 +93,22 @@ class TeacherTakeAttendmentScreen extends StatelessWidget {
                                     ),
                                   )
                                   .toList(),
-                              firstColumnLabel: 'Alumnos',
-                              secondCoulmnLabel: 'Asistencia',
-                              thirdColumnLabel: 'Retraso',
+                              firstColumnLabel:
+                                  'teacherScreens.takeAttendment.students'.tr(),
+                              secondCoulmnLabel:
+                                  'teacherScreens.takeAttendment.attendment'
+                                      .tr(),
+                              thirdColumnLabel:
+                                  'teacherScreens.takeAttendment.delayment'
+                                      .tr(),
                             ),
                             Container(
                               margin: EdgeInsets.only(bottom: 24),
                               padding: EdgeInsets.symmetric(horizontal: 24),
                               child: ElevatedButton(
                                 onPressed: () => viewModel.uploadAttendments(),
-                                child: Text('Guardar'),
+                                child: Text(
+                                    'teacherScreens.takeAttendment.save'.tr()),
                               ),
                             )
                           ],

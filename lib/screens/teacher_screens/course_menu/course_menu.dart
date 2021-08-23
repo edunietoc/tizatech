@@ -16,7 +16,7 @@ class TeacherCourseMenuScreen extends StatelessWidget {
     TeacherCourseMenuViewModel viewModel = TeacherCourseMenuViewModel(course);
     return Scaffold(
       body: CustomScrollView(
-        slivers: [
+        slivers: <Widget>[
           TizaAppBar(
             title: '${course.name} ${course.letter}',
             subtitle: course.schedule,

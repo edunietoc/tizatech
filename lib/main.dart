@@ -30,7 +30,7 @@ Future<void> main() async {
       Locale('en', ''),
     ],
     path: 'assets/translations', // <-- change the path of the translation files
-    fallbackLocale: Locale('en', 'US'),
+    fallbackLocale: Locale('es', ''),
     child: MyApp(),
   ));
 }

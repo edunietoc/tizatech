@@ -1,17 +1,18 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:tizatech/screens/teacher_screens/charts/attendance/attendance_vm.dart';
-import 'package:tizatech/screens/teacher_screens/charts/internships/internships.dart';
-import 'package:tizatech/screens/teacher_screens/charts/personal_improvement/personal_improvement.dart';
-import 'package:tizatech/screens/teacher_screens/charts/ptu/ptu.dart';
-import 'package:tizatech/screens/teacher_screens/charts/repeating/repeating.dart';
-import 'package:tizatech/screens/teacher_screens/charts/simce_essay/simce_essay_vm.dart';
 
 import '../../../_components/app_bar.dart';
 import '../../../_components/option_tile.dart';
 import 'annotations/annotations.dart';
 import 'attendance/attendance.dart';
+import 'attendance/attendance_vm.dart';
 import 'enrollment/enrollment.dart';
+import 'internships/internships.dart';
+import 'personal_improvement/personal_improvement.dart';
+import 'ptu/ptu.dart';
+import 'repeating/repeating.dart';
 import 'simce_essay/simce_essay.dart';
+import 'simce_essay/simce_essay_vm.dart';
 
 class ChartListScreen extends StatelessWidget {
   const ChartListScreen({Key key}) : super(key: key);
@@ -21,14 +22,14 @@ class ChartListScreen extends StatelessWidget {
         body: CustomScrollView(
           slivers: <Widget>[
             TizaAppBar(
-              title: 'Informe de Gestión',
+              title: 'teacherScreens.charts.menu.title'.tr(),
             ),
             SliverList(
                 delegate: SliverChildListDelegate(
               <Widget>[
                 SizedBox(height: 32),
                 OptionTile(
-                  text: 'Asistencias',
+                  text: 'teacherScreens.charts.menu.attendance'.tr(),
                   onTap: () => Navigator.push(
                     context,
                     MaterialPageRoute<Widget>(
@@ -38,7 +39,7 @@ class ChartListScreen extends StatelessWidget {
                   ),
                 ),
                 OptionTile(
-                  text: 'Inasistencias',
+                  text: 'teacherScreens.charts.menu.unattendments'.tr(),
                   onTap: () => Navigator.push(
                     context,
                     MaterialPageRoute<Widget>(
@@ -48,7 +49,7 @@ class ChartListScreen extends StatelessWidget {
                   ),
                 ),
                 OptionTile(
-                  text: 'Retrasos',
+                  text: 'teacherScreens.charts.menu.delayments'.tr(),
                   onTap: () => Navigator.push(
                     context,
                     MaterialPageRoute<Widget>(
@@ -58,7 +59,7 @@ class ChartListScreen extends StatelessWidget {
                   ),
                 ),
                 OptionTile(
-                  text: 'Ensayo Simce',
+                  text: 'teacherScreens.charts.menu.simceEssay'.tr(),
                   onTap: () => Navigator.push(
                     context,
                     MaterialPageRoute<Widget>(
@@ -67,7 +68,7 @@ class ChartListScreen extends StatelessWidget {
                   ),
                 ),
                 OptionTile(
-                  text: 'Puntaje Simce',
+                  text: 'teacherScreens.charts.menu.simceScore'.tr(),
                   onTap: () => Navigator.push(
                     context,
                     MaterialPageRoute<Widget>(
@@ -76,7 +77,7 @@ class ChartListScreen extends StatelessWidget {
                   ),
                 ),
                 OptionTile(
-                  text: 'Matricula',
+                  text: 'teacherScreens.charts.menu.enrollment'.tr(),
                   onTap: () => Navigator.push(
                     context,
                     MaterialPageRoute<Widget>(
@@ -85,7 +86,7 @@ class ChartListScreen extends StatelessWidget {
                   ),
                 ),
                 OptionTile(
-                  text: 'Cumplimiento',
+                  text: 'teacherScreens.charts.menu.annotations'.tr(),
                   onTap: () => Navigator.push(
                     context,
                     MaterialPageRoute<Widget>(
@@ -94,7 +95,7 @@ class ChartListScreen extends StatelessWidget {
                   ),
                 ),
                 OptionTile(
-                  text: 'Repitiencia',
+                  text: 'teacherScreens.charts.menu.repeating'.tr(),
                   onTap: () => Navigator.push(
                     context,
                     MaterialPageRoute<Widget>(
@@ -103,7 +104,7 @@ class ChartListScreen extends StatelessWidget {
                   ),
                 ),
                 OptionTile(
-                  text: 'PTU',
+                  text: 'teacherScreens.charts.menu.ptu'.tr(),
                   onTap: () => Navigator.push(
                     context,
                     MaterialPageRoute<Widget>(
@@ -112,7 +113,7 @@ class ChartListScreen extends StatelessWidget {
                   ),
                 ),
                 OptionTile(
-                  text: 'Practicas',
+                  text: 'teacherScreens.charts.menu.internship'.tr(),
                   onTap: () => Navigator.push(
                     context,
                     MaterialPageRoute<Widget>(
@@ -121,7 +122,7 @@ class ChartListScreen extends StatelessWidget {
                   ),
                 ),
                 OptionTile(
-                  text: 'Desarrollo Personal',
+                  text: 'teacherScreens.charts.menu.improvement'.tr(),
                   onTap: () => Navigator.push(
                     context,
                     MaterialPageRoute<Widget>(

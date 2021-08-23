@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 import '../../../_components/app_bar.dart';
 import '../../../_components/avatar_info.dart';
@@ -30,8 +31,7 @@ class AttendmentsScreen extends StatelessWidget {
                 errorDescription: viewModel.errorDescription,
                 errorImage: viewModel.errorImage,
                 errorTitle: viewModel.errorTitle,
-                screenSubtitle: 'Alumno',
-                screenTitle: 'Asistencias',
+                screenTitle: 'studentScreens.attendments.title'.tr(),
                 user: viewModel.user,
               );
 
@@ -42,7 +42,7 @@ class AttendmentsScreen extends StatelessWidget {
               return Scaffold(
                 body: CustomScrollView(
                   slivers: <Widget>[
-                    TizaAppBar(title: 'Asistencias', subtitle: 'Alumno'),
+                    TizaAppBar(title: 'studentScreens.attendments.title'.tr()),
                     SliverList(
                       delegate: SliverChildListDelegate(
                         <Widget>[
@@ -54,7 +54,8 @@ class AttendmentsScreen extends StatelessWidget {
                                     .getUserAvatar(userParam: userParam),
                                 showId: true,
                                 description:
-                                    'Visualiza de forma mesual y anual todas las asistencias e inasistencias.',
+                                    'studentScreens.attendments.avatarDescription'
+                                        .tr(),
                               ),
                             ],
                           ),
@@ -62,27 +63,33 @@ class AttendmentsScreen extends StatelessWidget {
                             padding:
                                 EdgeInsets.only(top: 40, left: 24, bottom: 8),
                             child: Text(
-                              'Mensuales',
+                              'studentScreens.attendments.monthlyTitle'.tr(),
                               style: h3(context)
                                   .copyWith(color: secondaryColor[80]),
                             ),
                           ),
                           if (viewModel.monthSeriesList != null)
                             TizaBarChart(
+                              //TODO: Place current Month here
                               title: 'Abril',
-                              xAxisLabel: 'Semanas',
-                              yAxisLabel: 'Dias Habiles',
+                              xAxisLabel:
+                                  'studentScreens.attendments.weeksLabel'.tr(),
+                              yAxisLabel:
+                                  'studentScreens.attendments.daysLabel'.tr(),
                               seriesList: viewModel.monthSeriesList,
                               dataIndicators: <DataIndicator>[
                                 DataIndicator(
                                   color: primaryColor,
-                                  dataName: 'Asistencias',
+                                  dataName:
+                                      'studentScreens.attendments.title'.tr(),
                                   dataValue: viewModel.totalMonthAttendments
                                       .toString(),
                                 ),
                                 DataIndicator(
                                   color: delaymentsChartColor,
-                                  dataName: 'Inasistencias',
+                                  dataName:
+                                      'studentScreens.attendments.unattendments'
+                                          .tr(),
                                   dataValue: viewModel.totalMonthUnattendments
                                       .toString(),
                                 ),
@@ -92,7 +99,7 @@ class AttendmentsScreen extends StatelessWidget {
                             padding:
                                 EdgeInsets.only(top: 40, left: 24, bottom: 8),
                             child: Text(
-                              'Anuales',
+                              'studentScreens.attendments.yearlyTitle'.tr(),
                               style: h3(context)
                                   .copyWith(color: secondaryColor[80]),
                             ),
@@ -101,18 +108,23 @@ class AttendmentsScreen extends StatelessWidget {
                             TizaBarChart(
                               seriesList: viewModel.yearSeriesList,
                               title: DateTime.now().year.toString(),
-                              xAxisLabel: 'Meses',
-                              yAxisLabel: 'Dias Habiles',
+                              xAxisLabel:
+                                  'studentScreens.attendments.monthsLabel'.tr(),
+                              yAxisLabel:
+                                  'studentScreens.attendments.daysLabel'.tr(),
                               dataIndicators: <DataIndicator>[
                                 DataIndicator(
                                   color: primaryColor,
-                                  dataName: 'Asistencias',
+                                  dataName:
+                                      'studentScreens.attendments.title'.tr(),
                                   dataValue:
                                       viewModel.totalYearAttendments.toString(),
                                 ),
                                 DataIndicator(
                                   color: delaymentsChartColor,
-                                  dataName: 'Inasistencias',
+                                  dataName:
+                                      'studentScreens.attendments.unattendments'
+                                          .tr(),
                                   dataValue: viewModel.totalYearUnattendments
                                       .toString(),
                                 ),

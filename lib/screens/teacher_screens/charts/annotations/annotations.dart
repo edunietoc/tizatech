@@ -1,11 +1,12 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tizatech/shared/utils.dart';
 
 import '../../../../_components/app_bar.dart';
 import '../../../../_components/loader.dart';
 import '../../../../_components/report_bar_chart.dart';
 import '../../../../shared/constants.dart';
+import '../../../../shared/utils.dart';
 import 'annotations_vm.dart';
 
 class AnnotationsChartScreen extends StatelessWidget {
@@ -27,43 +28,65 @@ class AnnotationsChartScreen extends StatelessWidget {
 
               case Status.done:
                 return CustomScrollView(slivers: <Widget>[
-                  TizaAppBar(title: 'Cumplimiento', subtitle: ''),
+                  TizaAppBar(
+                    title: 'teacherScreens.charts.annotations.title'.tr(),
+                  ),
                   SliverList(
                     delegate: SliverChildListDelegate(<Widget>[
                       ReportChart(
                         series: viewModel.getAnualSeries(),
-                        title: 'Anotaciones Anuales',
+                        title: 'teacherScreens.charts.annotations.yearlyTitle'
+                            .tr(),
                         subtitle: currentYear(),
-                        xLabel: 'Número',
-                        yLabel: 'Faltas',
+                        xLabel: 'teacherScreens.charts.annotations.yearlyXLabel'
+                            .tr(),
+                        yLabel: 'teacherScreens.charts.annotations.yearlyYLabel'
+                            .tr(),
                       ),
                       ReportChart(
                         series: viewModel.getMonthSeries(),
-                        title: 'Cursos con Faltas Graves',
-                        xLabel: 'Número de Anotaciones',
-                        yLabel: 'Curso',
+                        title: 'teacherScreens.charts.annotations.monthlyTitle'
+                            .tr(),
+                        xLabel:
+                            'teacherScreens.charts.annotations.monthlyXLabel'
+                                .tr(),
+                        yLabel:
+                            'teacherScreens.charts.annotations.monthlyYLabel'
+                                .tr(),
                         subtitle: monthConstants[viewModel.currentMonth],
                         isVertical: false,
                         filterOptions: FilterOptions(
                           options: monthConstants.values.toList(),
                           onChanged: (String value) =>
                               viewModel.setCurrentMonth(value),
-                          modalTitle: 'Filtrar Mes',
-                          iconText: 'Mes',
+                          modalTitle:
+                              'teacherScreens.charts.annotations.monthlyFilter.modalTitle'
+                                  .tr(),
+                          iconText:
+                              'teacherScreens.charts.annotations.monthlyFilter.filterText'
+                                  .tr(),
                         ),
                       ),
                       ReportChart(
                         series: viewModel.getCourseSeries(),
-                        title: 'Anotaciones por Curso',
-                        xLabel: 'Número de Faltas Graves',
-                        yLabel: 'Cursos',
+                        title: 'teacherScreens.charts.annotations.coursesTitle'
+                            .tr(),
+                        xLabel:
+                            'teacherScreens.charts.annotations.coursesXLabel'
+                                .tr(),
+                        yLabel:
+                            'teacherScreens.charts.annotations.coursesYLabel'
+                                .tr(),
                         isVertical: false,
                       ),
                       ReportChart(
                         series: viewModel.getLevelSeries(),
-                        title: 'Anotaciones por Nivel',
-                        xLabel: 'Número',
-                        yLabel: 'Faltas',
+                        title:
+                            'teacherScreens.charts.annotations.levelTitle'.tr(),
+                        xLabel: 'teacherScreens.charts.annotations.levelXLabel'
+                            .tr(),
+                        yLabel: 'teacherScreens.charts.annotations.levelYLabel'
+                            .tr(),
                         subtitle: viewModel.annotations
                             .levelAnnotations[viewModel.currentLevel].name,
                         filterOptions: FilterOptions(
@@ -73,8 +96,12 @@ class AnnotationsChartScreen extends StatelessWidget {
                           onChanged: (String value) => viewModel.currentLevel =
                               viewModel.annotations.levelAnnotations
                                   .indexWhere((_) => _.name == value),
-                          modalTitle: 'Filtrar Nivel',
-                          iconText: 'Nivel',
+                          modalTitle:
+                              'teacherScreens.charts.annotations.levelFilter.modalTitle'
+                                  .tr(),
+                          iconText:
+                              'teacherScreens.charts.annotations.levelFilter.filterText'
+                                  .tr(),
                         ),
                       ),
                       SizedBox(height: 40),

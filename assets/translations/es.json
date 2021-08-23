@@ -1,0 +1,268 @@
+{
+    "auth":{
+        "title": "Iniciar Sesión",
+        "rutField": "Rut",
+        "passwordField": "Contraseña",
+        "button": "Iniciar Sesión",
+        "errorTitle": "Usuario no registrado",
+        "errorDescription": "Verifica que tus claves sean correctas o contacta a la institución",
+        "errorButton": "Reintentar"
+    },
+    "menu":{
+        "exit":"Salir",
+        "teacherSubtitle": "Profesor",
+        "parentSubtitle": "Apoderado",
+        "studentSubtitle": "Alumno",
+        "profile": "Perfil",
+        "messages": "Mensajes",
+        "digitalBook": "Libro Digital",
+        "charts": "Informe de Gestión",
+        "teachers": "Profesores",
+        "grades": "Notas",
+        "attendments": "Asistencias",
+        "unattendments": "Inasistencias",
+        "delayments": "Retrasos",
+        "books": "Lecturas Anuales",
+        "students": "Estudiantes"
+    },
+
+    "profile":{
+        "title": "Perfil",
+        "generalSection": {
+            "title": "General",
+            "birthDate": "Fecha de Nacimiento",
+            "nationality": "Nacionalidad",
+            "rut": "Rut",
+            "sector": "Comuna"
+        },
+        "contactSection":{
+            "email": "Correo Electronico",
+            "mobilePhone": "Telefono (movi)",
+            "homePhone": "Telefono (casa)"
+        },
+        "studentsSection":{
+            "title": "Apoderado",
+            "subtitle": "Estudiantes a su cargo"
+        },
+        "button": "Informacion Academica"
+    },
+    "messages":{
+        "title": "Mensajes",
+        "selectAnswer": "Seleccione una Respuesta:",
+        "sendButton": "Enviar"
+    },
+    "studentList":{
+        "title": "Estudiantes",
+        "avatarDescription": "Visualiza todos los estudiantes registrados a tu nombre.",
+        "listTitle": "Lista de Estudiantes"
+    },
+    "studentScreens":{
+        "attendments": {
+            "title": "Asistencias",
+            "avatarDescription": "Visualiza de forma mesual y anual todas las asistencias e inasistencias.",
+            "monthlyTitle": "Mensuales",
+            "weeksLabel": "Semanas",
+            "daysLabel": "Dias Habiles",
+            "unattendments": "Inasistencias",
+            "yearlyTitle": "Anuales",
+            "monthsLabel": "Meses"
+        },
+        "delayments": {
+            "title": "Retrasos",
+            "avatarDescription":"Visualiza de forma mesual y anual todas las asistencias e inasistencias.",
+            "monthlyTitle": "Mensuales",
+            "weeksLabel": "Semanas",
+            "daysLabel": "Dias Habiles",
+            "unattendments": "Inasistencias",
+            "yearlyTitle": "Anuales",
+            "monthsLabel": "Meses"
+        },
+        "grades": {
+            "title": "Notas",
+            "avatarDescription": "Desliza a la izquierda para visualizar\nlas notas de cada asignatura.",
+            "averageTitle": "Promedio General: "
+        }
+        
+    },
+    "teacherScreens":{
+
+        "charts":{
+            "annotations": {
+                "title": "Cumplimiento",
+                "yearlyTitle": "Anotaciones Anuales",
+                "yearlyXLabel": "Número",
+                "yearlyYLabel": "Faltas",
+                "monthlyTitle": "Cursos con Faltas Graves",
+                "monthlyXLabel": "Número de Anotaciones",
+                "monthlyYLabel": "Curso",
+                "monthlyFilter":{
+                    "filterText": "Mes",
+                    "modalTitle": "Filtrar"
+                },
+                "coursesTitle": "Anotaciones por Curso",
+                "coursesXLabel": "Número de Faltas Graves",
+                "coursesYLabel": "Cursos",
+                "levelTitle": "Anotaciones por Nivel",
+                "levelXLabel": "Número",
+                "levelYLabel": "Faltas",
+                "levelFilter": {
+                    "filterText": "Nivel",
+                    "modalTitle": "Filtrar Nivel"
+                }
+            },
+            "attendance": {
+                "attendance": "Asistencias",
+                "unnatendance": "Inasistencias",
+                "delayments": "Retrasos",
+                "dailyM": "Diarios",
+                "dailyF":"Diarias",
+                "annualTitle": "Anuales",
+                "annualXLabel": "Porcentaje de {}",
+                "annualYLabel": "Meses",
+                "monthlyTitle": "Mensuales",
+                "monthlyXLabel": "Porcentaje de {} Mensual",
+                "monthlyYLabel": "Cursos",
+                "dailyTitle": "Diarias",
+                "dailyXLabel": "Porcentaje de {} {}",
+                "dailyYLabel": "Cursos",
+                "levelTitle": "Por Niveles",
+                "levelXLabel": "Número de {}",
+                "levelYLabel": "Niveles"
+            },
+            "enrollment": {
+                "title": "Matricula",
+                "annualTitle": "Anual",
+                "annualXLabel": "Años",
+                "annualYLabel": "Alumnos",
+                "courseTitle": "Por Curso",
+                "courseXLabel": "Curso",
+                "courseYLabel": "Número de Alumnos",
+                "levelTitle": "Por Nivel",
+                "levelXLabel": "Nivel",
+                "levelYLabel": "Número de Alumnos",
+                "genderTitle": "Por Genero",
+                "maleLabel": "Masculino",
+                "femaleLabel": "Femenino"
+            },
+            "internship":{
+                "title": "Prácticas Anuales",
+                "doneTitle": "Hechas",
+                "xLabel": "Cantidad",
+                "yLabel": "Niveles",
+                "undoneTitle": "Sin hacer"
+            },
+            "improvement": {
+                "title": "Desarrollo Personal",
+                "annualTitle": "Anual",
+                "xLabel": "Puntuación",
+                "yLabel": "Curso"
+            },
+            "ptu":{
+                "title": "PTU",
+                "xLabel": "Alumnos",
+                "yLabel": "Puntaje",
+                "language": "Lenguaje",
+                "math": "Matematica",
+                "science": "Ciencias Naturales",
+                "men": "MEN",
+                "mandatory": "Obligatorias",
+                "ranking": "Ranking"
+            },
+            "repeating": {
+                "title": "Repitiencia Último Año",
+                "annualTitle": "Anual",
+                "annualXLabel": "Años",
+                "annualYLabel": "Porcentaje",
+                "levelTitle": "Por Nivel",
+                "levelXLabel": "Porcentaje",
+                "levelYLabel": "Nivel",
+                "rangeTitle": "Por Rango",
+                "rangeXLabel": "Alumnos",
+                "rangeYLabel": "Rango"
+            },
+            "simce": {
+                "essay": "Ensayo Simce",
+                "score": "Puntaje Simce",
+                "xLabel": "Años",
+                "yLabel": "Puntaje",
+                "language": "Lenguaje",
+                "math": "Matematica",
+                "history": "Historia",
+                "science": "Ciencias Naturales"
+            },
+            "menu": {
+                "title": "Informe de Gestión",
+                "attendments": "Asistencias",
+                "unattendments": "Inasistencias",
+                "delayments": "Retrasos",
+                "simceEssay": "Ensayo Simce",
+                "simceScore": "Puntaje Simce",
+                "enrollment": "Matricula",
+                "annotations": "Cumplimiento",
+                "repeating": "Repitiencia",
+                "ptu": "PTU",
+                "internship": "Practicas",
+                "improvement": "Desarrollo Personal"
+            }
+        },
+        "courseMenu": {
+            "students": "Alumnos",
+            "subjects": "Asignaturas",
+            "grades": "Notas",
+            "attendment": "Asistencia"
+        },
+        "courses": {
+            "title": "Cursos",
+            "subtitle": "profesor",
+            "button": "Aplicar"
+        },
+        "grades": {
+            "title": "Notas",
+            "students": "Alumnos",
+            "grade": "Nota"
+        },
+        "searchTeacher": {
+            "title": "Busqueda",
+            "description": "Para buscar un profresor(a) utilice cualquiera de los tres campos.",
+            "name": "Nombre",
+            "lastName": "Apellido",
+            "rut": "Rut",
+            "button": "Buscar",
+            "teacher": "Profesor(a)",
+            "hoursTitle": "Carga Horaria",
+            "roomHours": "Horas aula: ",
+            "schoolHours": "Horas colegio: "
+        },
+        "subjectList": {
+            "title": "Asignaturas",
+            "description": "Usted tiene asignadas las siguientes materias:"
+        },
+        "takeAttendment": {
+            "title": "Asistencias",
+            "turn": "Turno: ",
+            "students": "Alumnos",
+            "attendement": "Asistencia",
+            "delayment": "Retraso",
+            "save": "Guardar",
+            "codeTitle": "Verificación de Código",
+            "typeCode": "Ingresa el Código",
+            "codeDescription": "Ingresa el código de seguridad de seis dígito desde tu aplicación de autenticación.",
+            "accept": "Aceptar"
+        }
+        
+    },
+    "months":{
+        "january": "Enero",
+        "february": "Febrero",
+        "march": "Marzo",
+        "april": "Abril",
+        "may": "Mayo",
+        "june": "Junio",
+        "july": "Julio",
+        "august": "Agosto",
+        "september": "Septiembre",
+        "october": "Octubre",
+        "november": "Noviembre",
+        "december": "Diciembre"
+    }
+}

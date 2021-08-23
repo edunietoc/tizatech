@@ -1,8 +1,8 @@
+import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:flutter/material.dart';
 
 import '../../../../models/chart_models/personal_improvement.dart';
 import '../../../../services/charts/charts.dart';
-import 'package:charts_flutter/flutter.dart' as charts;
 
 enum Status {
   loading,

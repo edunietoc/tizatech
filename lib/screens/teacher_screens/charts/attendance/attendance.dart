@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -11,10 +12,13 @@ class AttendanceChartScreen extends StatelessWidget {
   AttendanceChartScreen(this.attendanceType, {Key key}) : super(key: key);
   final AttendanceType attendanceType;
 
-  final Map<AttendanceType, String> textType = {
-    AttendanceType.attendance: 'Asistencias',
-    AttendanceType.unattendance: 'Inasistencias',
-    AttendanceType.delayment: 'Retrasos',
+  final Map<AttendanceType, String> textType = <AttendanceType, String>{
+    AttendanceType.attendance:
+        'teacherScreens.charts.attendance.attendance'.tr(),
+    AttendanceType.unattendance:
+        'teacherScreens.charts.attendance.unnatendace'.tr(),
+    AttendanceType.delayment:
+        'teacherScreens.charts.attendance.delayments'.tr(),
   };
 
   @override
@@ -25,8 +29,8 @@ class AttendanceChartScreen extends StatelessWidget {
           body: Consumer<AttendanceViewModel>(
               builder: (_, AttendanceViewModel viewModel, __) {
             String diaryText = attendanceType == AttendanceType.delayment
-                ? 'Diarios'
-                : 'Diarias';
+                ? 'teacherScreens.charts.attendance.dailyM'
+                : 'teacherScreens.charts.attendance.dailyF';
             switch (viewModel.currentStatus) {
               case Status.loading:
                 return Loader();
@@ -37,48 +41,53 @@ class AttendanceChartScreen extends StatelessWidget {
               case Status.done:
                 return CustomScrollView(shrinkWrap: true, slivers: <Widget>[
                   TizaAppBar(
-                      title: '${textType[attendanceType]}', subtitle: ''),
+                    title: '${textType[attendanceType]}',
+                  ),
                   SliverList(
-                    delegate: SliverChildListDelegate([
+                    delegate: SliverChildListDelegate(<Widget>[
                       ReportChart(
                         series: viewModel.getAnualSeries(),
-                        title: 'Anuales',
+                        title:
+                            'teacherScreens.charts.attendance.annualTitle'.tr(),
                         subtitle: currentYear(),
-                        xLabel: 'Porcentaje de ${textType[attendanceType]}',
-                        yLabel: 'Meses',
+                        xLabel: 'teacherScreens.charts.attendance.annualXLabel'
+                            .tr(args: <String>[textType[attendanceType]]),
+                        yLabel: 'teacherScreens.charts.attendance.annualYLabel'
+                            .tr(),
                         isVertical: false,
                       ),
                       ReportChart(
                         series: viewModel.getMonthSeries(),
-                        title: 'Mensuales',
+                        title: 'teacherScreens.charts.attendance.monthlyTitle'
+                            .tr(),
                         subtitle: currentMonth(),
-                        xLabel:
-                            'Porcentaje de ${textType[attendanceType]} Mensual',
-                        yLabel: 'Cursos',
-                        isVertical: false,
-                      ),
-                      ReportChart(
-                        series: viewModel.getDailySeries(),
-                        title: 'Diarias',
-                        subtitle: currentMonth(),
-                        xLabel:
-                            'Porcentaje de ${textType[attendanceType]} $diaryText',
-                        yLabel: 'Cursos',
+                        xLabel: 'teacherScreens.charts.attendance.monthlyXLabel'
+                            .tr(args: <String>[textType[attendanceType]]),
+                        yLabel: 'teacherScreens.charts.attendance.monthlyYLabel'
+                            .tr(),
                         isVertical: false,
                       ),
                       ReportChart(
                         series: viewModel.getDailySeries(),
                         title: '$diaryText',
-                        xLabel:
-                            'Porcentaje de ${textType[attendanceType]} $diaryText',
-                        yLabel: 'Cursos',
+                        subtitle: currentMonth(),
+                        xLabel: 'teacherScreens.charts.attendance.dailyXLabel'
+                            .tr(args: <String>[
+                          textType[attendanceType],
+                          diaryText
+                        ]),
+                        yLabel:
+                            'teacherScreens.charts.attendance.dailyYLabel'.tr(),
                         isVertical: false,
                       ),
                       ReportChart(
                         series: viewModel.getLevelSeries(),
-                        title: 'Por Niveles',
-                        xLabel: 'Número de ${textType[attendanceType]}',
-                        yLabel: 'Niveles',
+                        title:
+                            'teacherScreens.charts.attendance.levelTitle'.tr(),
+                        xLabel: 'teacherScreens.charts.attendance.levelXLabel'
+                            .tr(args: <String>[textType[attendanceType]]),
+                        yLabel:
+                            'teacherScreens.charts.attendance.levelYLabel'.tr(),
                         isVertical: false,
                       ),
                       SizedBox(

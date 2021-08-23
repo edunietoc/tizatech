@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 import '../../../_components/app_bar.dart';
@@ -19,7 +20,9 @@ class TeacherScheduleScreen extends StatelessWidget {
   Widget build(BuildContext context) => Scaffold(
         body: CustomScrollView(
           slivers: <Widget>[
-            TizaAppBar(title: 'Profesor(a)', subtitle: ''),
+            TizaAppBar(
+              title: 'teacherScreens.searchTeacher.teacher'.tr(),
+            ),
             SliverList(
                 delegate: SliverChildListDelegate(<Widget>[
               AvatarInfo(
@@ -53,7 +56,7 @@ class _TeacherHours extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Text(
-              'Carga Horaria',
+              'teacherScreens.searchTeacher.hoursTitle'.tr(),
               style: h4(context).copyWith(
                 color: secondaryColor[80],
               ),
@@ -62,7 +65,7 @@ class _TeacherHours extends StatelessWidget {
             RichText(
               text: TextSpan(children: <TextSpan>[
                 TextSpan(
-                  text: 'Horas aula: ',
+                  text: 'teacherScreens.searchTeacher.roomHours'.tr(),
                   style: body1(context).copyWith(color: blackShadesColor[70]),
                 ),
                 TextSpan(text: '${teacher.roomHours}', style: body1(context))
@@ -72,7 +75,7 @@ class _TeacherHours extends StatelessWidget {
             RichText(
               text: TextSpan(children: <TextSpan>[
                 TextSpan(
-                  text: 'Horas colegio: ',
+                  text: 'teacherScreens.searchTeacher.schoolHours'.tr(),
                   style: body1(context).copyWith(color: blackShadesColor[70]),
                 ),
                 TextSpan(text: '${teacher.schoolHours}', style: body1(context))

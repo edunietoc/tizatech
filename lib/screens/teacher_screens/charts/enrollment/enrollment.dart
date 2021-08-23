@@ -1,4 +1,5 @@
 import 'package:charts_flutter/flutter.dart' as charts;
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -28,31 +29,43 @@ class EnrollmentChartScreen extends StatelessWidget {
               case Status.done:
                 return CustomScrollView(
                   slivers: <Widget>[
-                    TizaAppBar(title: 'Matricula', subtitle: ''),
+                    TizaAppBar(
+                      title: 'teacherScreens.charts.enrollment.title'.tr(),
+                    ),
                     SliverList(
                         delegate: SliverChildListDelegate(<Widget>[
                       ReportChart(
                         series: viewModel.getAnualSeries(),
-                        title: 'Anual',
+                        title:
+                            'teacherScreens.charts.enrollment.annualTitle'.tr(),
                         subtitle: currentYear(),
-                        xLabel: 'Años',
-                        yLabel: 'Alumnos',
+                        xLabel: 'teacherScreens.charts.enrollment.annualXLabel'
+                            .tr(),
+                        yLabel: 'teacherScreens.charts.enrollment.annualYLabel'
+                            .tr(),
                       ),
                       ReportChart(
                         series: viewModel.getCoursesSeries(),
-                        title: 'Por Curso',
-                        xLabel: 'Curso',
-                        yLabel: 'Numero de Alumnos',
+                        title:
+                            'teacherScreens.charts.enrollment.courseTitle'.tr(),
+                        xLabel: 'teacherScreens.charts.enrollment.courseXLabel'
+                            .tr(),
+                        yLabel: 'teacherScreens.charts.enrollment.courseYLabel'
+                            .tr(),
                         isVertical: false,
                         height: 500,
                       ),
                       ReportChart(
                         series: viewModel.getLevelSeries(),
-                        title: 'Por Nivel',
-                        xLabel: 'Nivel',
-                        yLabel: 'Numero de Alumnos',
+                        title:
+                            'teacherScreens.charts.enrollment.levelTitle'.tr(),
+                        xLabel:
+                            'teacherScreens.charts.enrollment.levelXLabel'.tr(),
+                        yLabel:
+                            'teacherScreens.charts.enrollment.levelYLabel'.tr(),
                         isVertical: false,
                       ),
+                      //TODO: fix this chart
                       Container(
                           width: 300,
                           height: 300,

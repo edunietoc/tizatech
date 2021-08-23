@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 import '../../../../_components/app_bar.dart';
 import '../../../../_components/loader.dart';
@@ -10,6 +11,11 @@ class SimceScoreChartScreen extends StatelessWidget {
   const SimceScoreChartScreen(this.simceType, {Key key}) : super(key: key);
 
   final SimceType simceType;
+
+  static final Map<SimceType, String> simceMap = <SimceType, String>{
+    SimceType.essay: 'teacherScreens.charts.simce.essay'.tr(),
+    SimceType.score: 'teacherScreens.charts.simce.score'.tr()
+  };
   @override
   Widget build(BuildContext context) => ChangeNotifierProvider<SimceViewModel>(
         create: (_) => SimceViewModel(simceType),
@@ -26,36 +32,38 @@ class SimceScoreChartScreen extends StatelessWidget {
               case Status.done:
                 return CustomScrollView(
                   slivers: <Widget>[
-                    TizaAppBar(title: 'Ensayo Simce', subtitle: ''),
+                    TizaAppBar(
+                      title: simceMap[simceType],
+                    ),
                     SliverList(
                       delegate: SliverChildListDelegate(
                         <Widget>[
                           ReportChart(
                             series: viewModel.getLanguageSeries(),
-                            title: 'Lenguaje',
-                            xLabel: 'Años',
-                            yLabel: 'Puntaje',
+                            title: 'teacherScreens.charts.simce.language'.tr(),
+                            xLabel: 'teacherScreens.charts.simce.xLabel'.tr(),
+                            yLabel: 'teacherScreens.charts.simce.yLabel'.tr(),
                             chartType: ChartType.yearLine,
                           ),
                           ReportChart(
                             series: viewModel.getMathSeries(),
-                            title: 'Matematica',
-                            xLabel: 'Años',
-                            yLabel: 'Puntaje',
+                            title: 'teacherScreens.charts.simce.math'.tr(),
+                            xLabel: 'teacherScreens.charts.simce.xLabel'.tr(),
+                            yLabel: 'teacherScreens.charts.simce.yLabel'.tr(),
                             chartType: ChartType.yearLine,
                           ),
                           ReportChart(
                             series: viewModel.getHistorySeries(),
-                            title: 'Historia',
-                            xLabel: 'Años',
-                            yLabel: 'Puntaje',
+                            title: 'teacherScreens.charts.simce.history'.tr(),
+                            xLabel: 'teacherScreens.charts.simce.xLabel'.tr(),
+                            yLabel: 'teacherScreens.charts.simce.yLabel'.tr(),
                             chartType: ChartType.yearLine,
                           ),
                           ReportChart(
                             series: viewModel.getScienceSeries(),
-                            title: 'Ciencias Naturales',
-                            xLabel: 'Años',
-                            yLabel: 'Puntaje',
+                            title: 'teacherScreens.charts.simce.science'.tr(),
+                            xLabel: 'teacherScreens.charts.simce.xLabel'.tr(),
+                            yLabel: 'teacherScreens.charts.simce.yLabel'.tr(),
                             chartType: ChartType.yearLine,
                           ),
                           SizedBox(

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 import '../../../_components/app_bar.dart';
@@ -17,7 +18,8 @@ class SubjectSelectionScreen extends StatelessWidget {
   Widget build(BuildContext context) => Scaffold(
           body: CustomScrollView(
         slivers: <Widget>[
-          TizaAppBar(title: 'Notas', subtitle: course.name),
+          TizaAppBar(
+              title: 'teacherScreens.grades.title'.tr(), subtitle: course.name),
           SliverPadding(padding: const EdgeInsets.only(top: 32)),
           SliverList(
             delegate: SliverChildListDelegate(course.subjectList

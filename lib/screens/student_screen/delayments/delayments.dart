@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 import '../../../_components/app_bar.dart';
 import '../../../_components/avatar_info.dart';
@@ -29,8 +30,7 @@ class DelaymentScreen extends StatelessWidget {
                 errorDescription: viewModel.errorDescription,
                 errorImage: viewModel.errorImage,
                 errorTitle: viewModel.errorTitle,
-                screenSubtitle: 'Alumno',
-                screenTitle: 'Atrasos',
+                screenTitle: 'studentScreens.delayments.title'.tr(),
                 user: viewModel.user,
               );
 
@@ -41,7 +41,7 @@ class DelaymentScreen extends StatelessWidget {
               return Scaffold(
                 body: CustomScrollView(
                   slivers: <Widget>[
-                    TizaAppBar(title: 'Asistencias', subtitle: 'Alumno'),
+                    TizaAppBar(title: 'studentScreens.delayments.title'.tr()),
                     SliverList(
                       delegate: SliverChildListDelegate(
                         <Widget>[
@@ -53,7 +53,8 @@ class DelaymentScreen extends StatelessWidget {
                                     .getUserAvatar(userParam: userParam),
                                 showId: true,
                                 description:
-                                    'Visualiza de forma mesual y anual todas las asistencias e inasistencias.',
+                                    'studentScreens.delayments.avatarDescription'
+                                        .tr(),
                               ),
                             ],
                           ),
@@ -61,21 +62,25 @@ class DelaymentScreen extends StatelessWidget {
                             padding:
                                 EdgeInsets.only(top: 40, left: 24, bottom: 8),
                             child: Text(
-                              'Mensuales',
+                              'studentScreens.delayments.monthlyTitle'.tr(),
                               style: h3(context)
                                   .copyWith(color: secondaryColor[80]),
                             ),
                           ),
                           if (viewModel.monthSeriesList != null)
                             TizaBarChart(
+                              //TODO: place current month
                               title: 'Abril',
-                              xAxisLabel: 'Semanas',
-                              yAxisLabel: 'Dias Habiles',
+                              xAxisLabel:
+                                  'studentScreens.delayments.weeksLabel'.tr(),
+                              yAxisLabel:
+                                  'studentScreens.delayments.daysLabel'.tr(),
                               seriesList: viewModel.monthSeriesList,
                               dataIndicators: <DataIndicator>[
                                 DataIndicator(
                                   color: delaymentsChartColor,
-                                  dataName: 'Retrasos',
+                                  dataName:
+                                      'studentScreens.delayments.title'.tr(),
                                   dataValue:
                                       viewModel.totalMonthDelayments.toString(),
                                 ),
@@ -85,7 +90,7 @@ class DelaymentScreen extends StatelessWidget {
                             padding:
                                 EdgeInsets.only(top: 40, left: 24, bottom: 8),
                             child: Text(
-                              'Anuales',
+                              'studentScreens.delayments.title'.tr(),
                               style: h3(context)
                                   .copyWith(color: secondaryColor[80]),
                             ),
@@ -94,12 +99,15 @@ class DelaymentScreen extends StatelessWidget {
                             TizaBarChart(
                               seriesList: viewModel.yearSeriesList,
                               title: DateTime.now().year.toString(),
-                              xAxisLabel: 'Meses',
-                              yAxisLabel: 'Dias Habiles',
+                              xAxisLabel:
+                                  'studentScreens.delayments.monthsLabel'.tr(),
+                              yAxisLabel:
+                                  'studentScreens.delayments.daysLabel'.tr(),
                               dataIndicators: <DataIndicator>[
                                 DataIndicator(
                                   color: delaymentsChartColor,
-                                  dataName: 'Retrasos',
+                                  dataName:
+                                      'studentScreens.delayments.title'.tr(),
                                   dataValue:
                                       viewModel.totalYearDelayments.toString(),
                                 )
@@ -111,6 +119,9 @@ class DelaymentScreen extends StatelessWidget {
                   ],
                 ),
               );
+
+            default:
+              return Container();
           }
         }),
       );

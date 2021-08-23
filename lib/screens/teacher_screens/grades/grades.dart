@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 import '../../../_components/app_bar.dart';
 import '../../../_components/loader.dart';
@@ -46,15 +47,16 @@ class TeacherGradesScreen extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.only(top: 32, left: 24),
                           child: Text(
-                            'Notas',
+                            'teacherScreens.grades.title'.tr(),
                             style: h3(context).copyWith(
                               color: secondaryColor[80],
                             ),
                           ),
                         ),
                         TizaTable(
-                          firstColumnLabel: 'Alumnos',
-                          secondCoulmnLabel: 'Nota',
+                          firstColumnLabel:
+                              'teacherScreens.grades.students'.tr(),
+                          secondCoulmnLabel: 'teacherScreens.grades.grade'.tr(),
                           dataRows: viewModel.grades
                               .map((GradesByStudent grades) => TizaDataRow(
                                     label: grades.student.halfName,

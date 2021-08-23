@@ -3,6 +3,7 @@ import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:provider/provider.dart';
 import 'package:tizatech/_components/button.dart';
 import 'package:tizatech/shared/constants.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 import '../../../_components/app_bar.dart';
 import '../../../_components/loader.dart';
@@ -34,7 +35,9 @@ class TeacherVerifyCodeScreen extends StatelessWidget {
                 case Status.done:
                   return CustomScrollView(
                     slivers: <Widget>[
-                      TizaAppBar(title: 'Verificacion de Codigo', subtitle: ''),
+                      TizaAppBar(
+                        title: 'teacherScreens.takeAttendment.codeTitle'.tr(),
+                      ),
                       SliverList(
                         delegate: SliverChildListDelegate(
                           <Widget>[
@@ -44,7 +47,7 @@ class TeacherVerifyCodeScreen extends StatelessWidget {
                                 bottom: 24,
                               ),
                               child: Text(
-                                'Ingresa el Código',
+                                'teacherScreens.takeAttendment.typeCode'.tr(),
                                 textAlign: TextAlign.center,
                                 style: h3(context).copyWith(
                                   color: secondaryColor[80],
@@ -55,7 +58,8 @@ class TeacherVerifyCodeScreen extends StatelessWidget {
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 24),
                               child: Text(
-                                'Ingresa el código de seguridad de seis dígito desde tu aplicación de autenticación.',
+                                'teacherScreens.takeAttendment.codeDescription'
+                                    .tr(),
                                 textAlign: TextAlign.center,
                                 style: body1(context).copyWith(
                                   color: blackShadesColor[70],
@@ -91,7 +95,7 @@ class TeacherVerifyCodeScreen extends StatelessWidget {
                             ),
                             Button(
                               onPressed: () => viewModel.verifyCode(),
-                              text: 'Aceptar',
+                              text: 'teacherScreens.takeAttendment.accept'.tr(),
                             ),
                           ],
                         ),

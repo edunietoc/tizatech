@@ -50,7 +50,7 @@ class PIValues {
   factory PIValues.fromMap(Map<String, dynamic> map, String indicator) =>
       PIValues(
         name: indicator,
-        value: map[indicator],
+        value: double.tryParse(map[indicator].toString()),
       );
 
   String name;

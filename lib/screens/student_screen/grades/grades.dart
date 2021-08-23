@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 import '../../../_components/app_bar.dart';
 import '../../../_components/avatar_info.dart';
@@ -16,7 +17,6 @@ import 'grades_vm.dart';
 class GradesScreen extends StatelessWidget {
   const GradesScreen({this.userParam, Key key}) : super(key: key);
 
-  @override
   final User userParam;
   @override
   Widget build(BuildContext context) => ChangeNotifierProvider<GradesViewModel>(
@@ -30,8 +30,7 @@ class GradesScreen extends StatelessWidget {
                 errorDescription: viewModel.errorDescription,
                 errorImage: viewModel.errorImage,
                 errorTitle: viewModel.errorTitle,
-                screenSubtitle: 'Alumno',
-                screenTitle: 'Notas',
+                screenTitle: 'studentScreens.grades.title'.tr(),
                 user: viewModel.user,
               );
 
@@ -42,7 +41,7 @@ class GradesScreen extends StatelessWidget {
               return Scaffold(
                 body: CustomScrollView(
                   slivers: <Widget>[
-                    TizaAppBar(title: 'Notas', subtitle: 'Alumno'),
+                    TizaAppBar(title: 'studentScreens.grades.title'.tr()),
                     SliverList(
                       delegate: SliverChildListDelegate(
                         <Widget>[
@@ -51,14 +50,15 @@ class GradesScreen extends StatelessWidget {
                             profileImage: locator<UserService>()
                                 .getUserAvatar(userParam: userParam),
                             description:
-                                'Desliza a la izquierda para visualizar\nlas notas de cada asignatura.',
+                                'studentScreens.grades.avatarDescription'.tr(),
                           ),
                           if (viewModel.gradeAverage != null)
                             Padding(
                               padding: const EdgeInsets.all(24),
                               child: RichText(
                                 text: TextSpan(
-                                  text: 'Promedio General: ',
+                                  text:
+                                      'studentScreens.grades.averageTitle'.tr(),
                                   style: h4(context).copyWith(
                                     color: secondaryColor[80],
                                   ),
@@ -80,6 +80,8 @@ class GradesScreen extends StatelessWidget {
                   ],
                 ),
               );
+            default:
+              return Container();
           }
         }),
       );

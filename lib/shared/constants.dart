@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 double deviceWidth(BuildContext context) => MediaQuery.of(context).size.width;
 double deviceHeight(BuildContext context) => MediaQuery.of(context).size.height;
@@ -14,32 +15,45 @@ TextStyle caption(BuildContext context) => Theme.of(context).textTheme.caption;
 
 const double cardElevation = 6;
 
+String january = 'months.january'.tr();
+String february = 'months.february'.tr();
+String march = 'months.march'.tr();
+String april = 'months.april'.tr();
+String may = 'months.may'.tr();
+String june = 'months.june'.tr();
+String july = 'months.july'.tr();
+String august = 'months.august'.tr();
+String september = 'months.september'.tr();
+String october = 'months.october'.tr();
+String november = 'months.november'.tr();
+String december = 'months.december'.tr();
+
 Map<int, String> monthConstants = <int, String>{
-  1: 'Enero',
-  2: 'Febrero',
-  3: 'Marzo',
-  4: 'Abril',
-  5: 'Mayo',
-  6: 'Junio',
-  7: 'Julio',
-  8: 'Agosto',
-  9: 'Septiembre',
-  10: 'Octubre',
-  11: 'Noviembre',
-  12: 'Diciembre',
+  1: january,
+  2: february,
+  3: march,
+  4: april,
+  5: may,
+  6: june,
+  7: july,
+  8: august,
+  9: september,
+  10: october,
+  11: november,
+  12: december,
 };
 
 Map<String, int> monthConstantsNumber = <String, int>{
-  'Enero': 1,
-  'Febrero': 2,
-  'Marzo': 3,
-  'Abril': 4,
-  'Mayo': 5,
-  'Junio': 6,
-  'Julio': 7,
-  'Agosto': 8,
-  'Septiembre': 9,
-  'Octubre': 10,
-  'Noviembre': 11,
-  'Diciembre': 12,
+  january: 1,
+  february: 2,
+  march: 3,
+  april: 4,
+  may: 5,
+  june: 6,
+  july: 7,
+  august: 8,
+  september: 9,
+  october: 10,
+  november: 11,
+  december: 12,
 };

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 import '../../_components/dialog.dart';
 import '../../_components/loader.dart';
 import '../../locator/locator.dart';
@@ -31,10 +31,9 @@ class AuthViewModel extends ChangeNotifier {
       loginError = e.toString();
       showMessageDialog(
           context: context,
-          buttonText: 'Entendido',
-          description:
-              'Verifica que tus claves sean correctas o contacta a la Institución.',
-          title: 'Usuario No Registrado',
+          buttonText: 'auth.errorButton'.tr(),
+          description: 'auth.errorDescription'.tr(),
+          title: 'auth.errorTitle'.tr(),
           onPressed: () => Navigator.pop(context));
     }
   }

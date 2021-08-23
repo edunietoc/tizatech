@@ -13,9 +13,9 @@ class ErrorScreen extends StatelessWidget {
     @required this.errorDescription,
     @required this.errorImage,
     @required this.errorTitle,
-    @required this.screenSubtitle,
     @required this.screenTitle,
     @required this.user,
+    this.screenSubtitle,
     Key key,
   }) : super(key: key);
 

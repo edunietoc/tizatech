@@ -1,10 +1,11 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tizatech/shared/utils.dart';
 
 import '../../../../_components/app_bar.dart';
 import '../../../../_components/loader.dart';
 import '../../../../_components/report_bar_chart.dart';
+import '../../../../shared/utils.dart';
 import 'repeating_vm.dart';
 
 class RepeatingChartScreen extends StatelessWidget {
@@ -27,28 +28,39 @@ class RepeatingChartScreen extends StatelessWidget {
               case Status.done:
                 return CustomScrollView(
                   slivers: <Widget>[
-                    TizaAppBar(title: 'Repitencia Último Año', subtitle: ''),
+                    TizaAppBar(
+                      title: 'teacherScreens.charts.repeating.title'.tr(),
+                    ),
                     SliverList(
                         delegate: SliverChildListDelegate(<Widget>[
                       ReportChart(
                         series: viewModel.getAnualSeries(),
-                        title: 'Anual',
+                        title:
+                            'teacherScreens.charts.repeating.annualTitle'.tr(),
                         subtitle: currentYear(),
-                        xLabel: 'Años',
-                        yLabel: 'Porcentaje',
+                        xLabel:
+                            'teacherScreens.charts.repeating.annualXLabel'.tr(),
+                        yLabel:
+                            'teacherScreens.charts.repeating.annualYLabel'.tr(),
                       ),
                       ReportChart(
                         series: viewModel.getLevelSeries(),
-                        title: 'Por Nivel',
-                        xLabel: 'Porcentaje',
-                        yLabel: 'Nivel',
+                        title:
+                            'teacherScreens.charts.repeating.levelTitle'.tr(),
+                        xLabel:
+                            'teacherScreens.charts.repeating.levelXLabel'.tr(),
+                        yLabel:
+                            'teacherScreens.charts.repeating.levelYLabel'.tr(),
                         isVertical: false,
                       ),
                       ReportChart(
                         series: viewModel.getRangeSeries(),
-                        title: 'Por Rango',
-                        xLabel: 'Alumnos',
-                        yLabel: 'Rango',
+                        title:
+                            'teacherScreens.charts.repeating.rangeTitle'.tr(),
+                        xLabel:
+                            'teacherScreens.charts.repeating.rangeXLabel'.tr(),
+                        yLabel:
+                            'teacherScreens.charts.repeating.rangeYLabel'.tr(),
                         isVertical: false,
                       ),
                       SizedBox(height: 40),

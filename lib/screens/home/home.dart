@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 import '../../_components/app_bar.dart';
 import '../../locator/locator.dart';
 import '../../locator/user_service.dart';
@@ -78,7 +78,7 @@ class HomeAppBar extends StatelessWidget {
               height: 24,
             ),
             label: Text(
-              'Salir',
+              'menu.exit'.tr(),
               style: Theme.of(context).textTheme.bodyText1.copyWith(
                     color: secondaryColor[80],
                   ),

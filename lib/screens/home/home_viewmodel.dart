@@ -8,33 +8,35 @@ import '../student_screen/books/books_screen.dart';
 import '../student_screen/delayments/delayments.dart';
 import '../student_screen/grades/grades.dart';
 
+import 'package:easy_localization/easy_localization.dart';
+
 class HomeViewModel {
   HomeViewModel({User userParameter}) {
     user = userParameter ?? locator<UserService>().user;
     userParam = userParameter;
     studentMenu = <MenuCard>[
       MenuCard(
-        title: 'Perfil',
+        title: 'menu.profile'.tr(),
         image: locator<UserService>().getUserAvatar(),
         route: Routes.profile,
       ),
       MenuCard(
-        title: 'Notas',
+        title: 'menu.grades'.tr(),
         imagePath: 'assets/images/home/grades.png',
         route: Routes.grades,
       ),
       MenuCard(
-        title: 'Asistencias',
+        title: 'menu.attendments'.tr(),
         imagePath: 'assets/images/home/attendments.png',
         route: Routes.assistance,
       ),
       MenuCard(
-        title: 'Atrasos',
+        title: 'menu.delayments'.tr(),
         imagePath: 'assets/images/home/delayments.png',
         route: Routes.delayments,
       ),
       MenuCard(
-        title: 'Lecturas Anuales',
+        title: 'menu.books'.tr(),
         imagePath: 'assets/images/home/books.png',
         route: Routes.books,
       ),
@@ -42,22 +44,22 @@ class HomeViewModel {
 
     reducedStudentMenu = <MenuCard>[
       MenuCard(
-        title: 'Notas',
+        title: 'menu.grades'.tr(),
         imagePath: 'assets/images/home/grades.png',
         widgetRoute: GradesScreen(userParam: user),
       ),
       MenuCard(
-        title: 'Asistencias',
+        title: 'menu.attendments'.tr(),
         imagePath: 'assets/images/home/attendments.png',
         widgetRoute: AttendmentsScreen(userParam: user),
       ),
       MenuCard(
-        title: 'Atrasos',
+        title: 'menu.delayments'.tr(),
         imagePath: 'assets/images/home/delayments.png',
         widgetRoute: DelaymentScreen(userParam: user),
       ),
       MenuCard(
-        title: 'Lecturas Anuales',
+        title: 'menu.books'.tr(),
         imagePath: 'assets/images/home/books.png',
         widgetRoute: BooksScreen(userParam: user),
       ),
@@ -65,17 +67,17 @@ class HomeViewModel {
 
     parentMenu = <MenuCard>[
       MenuCard(
-        title: 'Perfil',
+        title: 'menu.profile'.tr(),
         image: locator<UserService>().getUserAvatar(),
         route: Routes.profile,
       ),
       MenuCard(
-        title: 'Estudiantes',
+        title: 'menu.students'.tr(),
         imagePath: 'assets/images/home/students.png',
         route: Routes.studentList,
       ),
       MenuCard(
-        title: 'Mensajes',
+        title: 'menu.messages'.tr(),
         imagePath: 'assets/images/home/message_dot.png',
         route: Routes.messages,
       ),
@@ -83,12 +85,12 @@ class HomeViewModel {
 
     teacherMenu = <MenuCard>[
       MenuCard(
-        title: 'Perfil',
+        title: 'menu.profile'.tr(),
         image: locator<UserService>().getUserAvatar(),
         route: Routes.profile,
       ),
       MenuCard(
-        title: 'Mensajes',
+        title: 'menu.messages'.tr(),
         imagePath: 'assets/images/home/messages.png',
         route: Routes.messages,
       ),
@@ -98,17 +100,17 @@ class HomeViewModel {
         route: Routes.books,
       ), */
       MenuCard(
-        title: 'Libro Digital',
+        title: 'menu.digitalBook'.tr(),
         imagePath: 'assets/images/home/courses.png',
         route: Routes.courses,
       ),
       MenuCard(
-        title: 'Informe de Gestion',
+        title: 'menu.charts'.tr(),
         imagePath: 'assets/images/home/charts.png',
         route: Routes.charts,
       ),
       MenuCard(
-        title: 'Profesores',
+        title: 'menu.teachers'.tr(),
         imagePath: 'assets/images/home/teachers.png',
         route: Routes.searchTeacher,
       ),

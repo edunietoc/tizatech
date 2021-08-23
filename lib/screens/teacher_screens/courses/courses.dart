@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tizatech/locator/locator.dart';
 import 'package:tizatech/locator/user_service.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 import '../../../_components/app_bar.dart';
 import '../../../_components/avatar_info.dart';
@@ -31,14 +32,15 @@ class CoursesScreen extends StatelessWidget {
                   padding: EdgeInsets.symmetric(vertical: 28, horizontal: 24),
                   child: ElevatedButton(
                     onPressed: () => viewModel.selectCourse(),
-                    child: Text('Aplicar'),
+                    child: Text('teacherScreens.courses.button'.tr()),
                   ),
                 ),
                 body: CustomScrollView(
                   slivers: <Widget>[
                     TizaAppBar(
-                      title: 'Cursos',
-                      subtitle: 'profesor',
+                      title: 'teacherScreens.courses.title'.tr(),
+                      //TODO: this sub?
+                      subtitle: 'teacherScreens.courses.subtitle'.tr(),
                     ),
                     SliverList(
                       delegate: SliverChildListDelegate(

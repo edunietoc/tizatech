@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 import '../../../../_components/app_bar.dart';
 import '../../../../_components/loader.dart';
@@ -26,15 +27,19 @@ class PersonalImpChartScreen extends StatelessWidget {
               case Status.done:
                 return CustomScrollView(
                   slivers: <Widget>[
-                    TizaAppBar(title: 'Matricula', subtitle: ''),
+                    TizaAppBar(
+                      title: 'teacherScreens.charts.improvement.title'.tr(),
+                    ),
                     SliverList(
                         delegate: SliverChildListDelegate(<Widget>[
                       ReportChart(
                         series: viewModel.getDataSeries(),
-                        title: 'Anual',
-                        xLabel: 'Años',
-                        yLabel: 'Alumnos',
+                        title: 'teacherScreens.charts.improvement.annualTitle'
+                            .tr(),
+                        xLabel: 'teacherScreens.charts.improvement.xLabel'.tr(),
+                        yLabel: 'teacherScreens.charts.improvement.yLabel'.tr(),
                         isVertical: false,
+                        height: 500,
                       ),
                     ]))
                   ],
