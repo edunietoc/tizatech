@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -32,6 +35,15 @@ class MessagesViewModel extends ChangeNotifier {
   List<Message> get messageList => _messageList;
 
   List<Message> _filteredMessages;
+
+  String _selectedFilePath;
+
+  String get selectedFilePath => _selectedFilePath;
+
+  set selectedFilePath(String path) {
+    _selectedFilePath = path;
+    notifyListeners();
+  }
 
   List<Message> get filteredMessage => _filteredMessages;
 
@@ -73,10 +85,38 @@ class MessagesViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  Future<void> selectFile() async {
+    try {
+      print('selecting file');
+      FilePickerResult result = await FilePicker.platform.pickFiles(
+          /* type: FileType.custom,
+        allowedExtensions: ['jpg', 'pdf', 'doc', 'jpeg', 'png'], */
+          );
+
+      if (result != null) {
+        selectedFilePath = result.files.single.path;
+      } else {
+        // User canceled the picker
+      }
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
+  void removeSelectedFile() {
+    selectedFilePath = null;
+  }
+
   Future<void> submitAnswer() async {
     try {
       currentStatus = Status.loading;
-      await _messageService.answerMessage(_currentMessage, _user, answer.first);
+
+      await _messageService.answerMessage(
+        _currentMessage,
+        _user,
+        answer.first,
+        filePath: _selectedFilePath,
+      );
       await getMessageList();
       _currentMessage = messageList.firstWhere(
           (Message message) => message.message == _currentMessage.message);

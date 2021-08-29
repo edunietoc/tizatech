@@ -39,6 +39,18 @@ class Message {
   String answer;
   DateTime dateTime;
 
+  String get answerWithoutFile => answer.split('file:').first;
+
+  String get filePath =>
+      answer.contains('file:') ? answer.split('file:').last.trim() : null;
+
+  String get fileName => filePath?.split('/')?.last;
+
+  bool get fileIsImage =>
+      (fileName?.endsWith('.png') ?? false) ||
+      (fileName?.endsWith('.jpg') ?? false) ||
+      (fileName?.endsWith('.jpeg') ?? false);
+
   Map<String, dynamic> toMap() => <String, dynamic>{
         'title': title,
         'message': message,

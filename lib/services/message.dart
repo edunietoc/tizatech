@@ -1,4 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:http/http.dart';
+import 'package:http_parser/http_parser.dart';
 
 import '../models/messages.dart';
 import '../models/user.dart';
@@ -66,23 +68,46 @@ class MessageService {
     }
   }
 
-  Future<void> answerMessage(Message message, User user, String answer) async {
+  Future<void> answerMessage(Message message, User user, String answer,
+      {String filePath}) async {
     const String endpoint = 'respuestasmensaje/';
     try {
+      String answerMessage =
+          filePath != null ? '$answer \nfile: $filePath' : answer;
       await _firestore.doc(message.path).update(<String, dynamic>{
         'has_been_answered_by': FieldValue.arrayUnion(<Map<String, dynamic>>[
           <String, dynamic>{
             'id': user.id,
-            'respuesta': answer,
+            'respuesta': answerMessage,
           },
         ])
       });
-      await _api.post(endpoint, <String, dynamic>{
+
+      Map<String, dynamic> body = <String, String>{
         'apoderado': user.id.toString(),
         'respuesta': answer,
         'mensaje': message.path.substring(6),
         'establecimiento': user.schoolId.toString()
-      });
+      };
+
+      if (filePath != null) {
+        String extension = filePath?.split('/')?.last?.split('.')?.last;
+        print('extension $extension');
+
+        print(extension);
+        await _api.multipartPost(
+          endpoint,
+          <MultipartFile>[
+            await MultipartFile.fromPath(
+              'adjuntos',
+              filePath,
+            ),
+          ],
+          body,
+        );
+      } else {
+        await _api.post(endpoint, body);
+      }
     } on Exception catch (_) {
       rethrow;
     }

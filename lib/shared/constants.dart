@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:http_parser/http_parser.dart';
 
 double deviceWidth(BuildContext context) => MediaQuery.of(context).size.width;
 double deviceHeight(BuildContext context) => MediaQuery.of(context).size.height;
@@ -57,3 +58,9 @@ Map<String, int> monthConstantsNumber = <String, int>{
   november: 11,
   december: 12,
 };
+
+class FileContentType {
+  MediaType mediaType(String extension) {
+    Map<String, MediaType> map = {};
+  }
+}

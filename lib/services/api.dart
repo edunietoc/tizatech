@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 import '../locator/locator.dart';
@@ -114,6 +115,30 @@ class API {
       http.StreamedResponse response = await request.send();
       String data = utf8.decode(await response.stream.single);
       return json.decode(data);
+    } on Exception catch (_) {
+      rethrow;
+    }
+  }
+
+  Future<dynamic> multipartPost(String endpoint,
+      Iterable<http.MultipartFile> files, Map<String, String> body) async {
+    try {
+      Uri uri = Uri.parse(baseUrl + endpoint);
+      http.MultipartRequest request = http.MultipartRequest('POST', uri)
+        ..headers.addAll(_getHeaders())
+        ..files.addAll(files)
+        ..fields.addAll(body);
+
+      debugPrint('''
+      file_size: ${files.first.length}
+      headers: ${request.headers}
+      request_content_size: ${request.contentLength}
+      file_quantity: ${request.files.length}
+      url: ${request.url}
+         ''');
+      http.StreamedResponse response = await request.send();
+
+      print(await response.stream.bytesToString());
     } on Exception catch (_) {
       rethrow;
     }

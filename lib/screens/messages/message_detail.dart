@@ -1,5 +1,10 @@
+import 'dart:io';
+
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:open_file/open_file.dart';
 import 'package:provider/provider.dart';
+import 'package:tizatech/services/url_launcher.dart';
 
 import '../../_components/app_bar.dart';
 import '../../_components/filter_item.dart';
@@ -83,6 +88,41 @@ class MessagesDetailScreen extends StatelessWidget {
                   if (!viewModel.currentMessage.hasBeenAnswered &&
                       !viewModel.userSentThis)
                     Positioned(
+                      bottom: 100,
+                      left: 24,
+                      child: TextButton.icon(
+                        icon: viewModel.selectedFilePath == null
+                            ? Image.asset('assets/icons/clip.png')
+                            : Image.asset('assets/icons/delete.png'),
+                        onPressed: () => viewModel.selectedFilePath == null
+                            ? viewModel.selectFile()
+                            : viewModel.removeSelectedFile(),
+                        label: viewModel.selectedFilePath == null
+                            ? Text(
+                                'Agregar Archivo',
+                                style: caption(context),
+                              )
+                            : Text(
+                                viewModel.selectedFilePath.split('/').last ??
+                                    'Eliminar',
+                                style: caption(context),
+                              ),
+                        style: TextButton.styleFrom(
+                          backgroundColor: viewModel.selectedFilePath == null
+                              ? blackShadesColor[05]
+                              : blackShadesColor[10],
+                          shape: RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(6)),
+                              side: BorderSide(
+                                color: blackShadesColor[20],
+                              )),
+                        ),
+                      ),
+                    ),
+                  if (!viewModel.currentMessage.hasBeenAnswered &&
+                      !viewModel.userSentThis)
+                    Positioned(
                       bottom: 40,
                       right: 24,
                       left: 24,
@@ -141,25 +181,50 @@ class _SendedMessage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.end,
         children: <Widget>[
           Container(
-            margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
-            padding: const EdgeInsets.symmetric(
-              vertical: 8,
-              horizontal: 16,
-            ),
-            decoration: BoxDecoration(
-                color: primaryColor[80],
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(16),
-                  topRight: Radius.circular(16),
-                  bottomLeft: Radius.circular(16),
-                )),
-            child: Text(
-              userSentThis ? message.message : message.answer,
-              style: body1(context).copyWith(
-                color: blackShadesColor[05],
+              margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+              padding: const EdgeInsets.symmetric(
+                vertical: 8,
+                horizontal: 16,
               ),
-            ),
-          ),
+              decoration: BoxDecoration(
+                  color: primaryColor[80],
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(16),
+                    topRight: Radius.circular(16),
+                    bottomLeft: Radius.circular(16),
+                  )),
+              child: Column(
+                children: <Widget>[
+                  if (message.answer.contains('file:')) ...<Widget>[
+                    RichText(
+                      text: TextSpan(
+                          style: body1(context).copyWith(
+                            color: blackShadesColor[05],
+                          ),
+                          children: <TextSpan>[
+                            TextSpan(text: message.answerWithoutFile),
+                            if (!message.fileIsImage)
+                              TextSpan(
+                                text: '\n ${message.fileName}',
+                                recognizer: TapGestureRecognizer()
+                                  ..onTap =
+                                      () => OpenFile.open(message.filePath),
+                              )
+                          ]),
+                    ),
+                    if (message.fileIsImage)
+                      InkWell(
+                          onTap: () => OpenFile.open(message.filePath),
+                          child: Image.file(File(message.filePath)))
+                  ] else
+                    Text(
+                      userSentThis ? message.message : message.answer ?? '',
+                      style: body1(context).copyWith(
+                        color: blackShadesColor[05],
+                      ),
+                    ),
+                ],
+              )),
         ],
       );
 }
