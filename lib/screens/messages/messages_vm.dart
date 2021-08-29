@@ -68,6 +68,15 @@ class MessagesViewModel extends ChangeNotifier {
 
   List<dynamic> answer = <dynamic>[];
 
+  Function get buttonFunction {
+    if (currentMessage.replyHasAttachment && selectedFilePath == null) {
+      return null;
+    }
+    if (answer.isNotEmpty) {
+      return submitAnswer;
+    }
+  }
+
   set currentStatus(Status status) {
     _currentStatus = status;
     notifyListeners();

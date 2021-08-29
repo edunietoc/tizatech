@@ -11,6 +11,7 @@ class Message {
     this.date,
     this.responseOptions,
     this.dateTime,
+    this.replyHasAttachment,
   });
   factory Message.fromMap(Map<String, dynamic> map) => Message(
         title: map['titulo'],
@@ -22,6 +23,7 @@ class Message {
             .map((dynamic e) => e.toString())
             .toList(),
         dateTime: DateTime.parse(map['date']),
+        replyHasAttachment: map['replyhasAttachment'] ?? false,
       );
 
   factory Message.fromJson(String source) =>
@@ -33,6 +35,7 @@ class Message {
   final String date;
   final User userSender;
   final List<String> responseOptions;
+  final bool replyHasAttachment;
   bool hasBeenRead = false;
   bool hasBeenAnswered = false;
   String path;

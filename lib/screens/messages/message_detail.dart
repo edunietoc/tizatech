@@ -127,7 +127,7 @@ class MessagesDetailScreen extends StatelessWidget {
                       right: 24,
                       left: 24,
                       child: ElevatedButton(
-                        onPressed: () => viewModel.submitAnswer(),
+                        onPressed: viewModel.buttonFunction,
                         child: Text('Enviar'),
                       ),
                     )
