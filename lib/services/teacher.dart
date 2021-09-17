@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:tizatech/models/attendment_modules.dart';
 
 import '../models/courses.dart';
 import '../models/grades_subject.dart';
@@ -95,9 +96,7 @@ class TeacherServices {
           json.encode(attendmentList
               .map((TakeAttendment model) => model.toMap())
               .toList()));
-      print(response);
-    } on Exception catch (e) {
-      print(e.toString());
+    } on Exception catch (_) {
       rethrow;
     }
   }
@@ -117,6 +116,18 @@ class TeacherServices {
 
       return List<Teacher>.generate((response as List<dynamic>).length,
           (int index) => Teacher.fromMap(response[index]));
+    } on Exception catch (_) {
+      rethrow;
+    }
+  }
+
+  Future<List<AttendmentModule>> getAttendmentsTodayModules(
+      String subjectId) async {
+    String endpoint = 'modulos/today/asignatura/$subjectId';
+    try {
+      dynamic response = await _api.getRequest(endpoint);
+      return List<AttendmentModule>.generate((response as List<dynamic>).length,
+          (int index) => AttendmentModule.fromMap(response[index]));
     } on Exception catch (_) {
       rethrow;
     }

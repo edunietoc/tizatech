@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:tizatech/_components/dropdown.dart';
 
 import '../../../_components/app_bar.dart';
 import '../../../_components/loader.dart';
@@ -44,6 +45,17 @@ class TeacherGradesScreen extends StatelessWidget {
                     SliverList(
                         delegate: SliverChildListDelegate(
                       <Widget>[
+                        SizedBox(
+                          height: 32,
+                        ),
+                        Dropdown(
+                            options: viewModel.optionList,
+                            label: 'Periodos',
+                            onChanged: (Option option) {
+                              print(option.value);
+                              viewModel.selectedPeriodId =
+                                  int.tryParse(option.value.toString());
+                            }),
                         Padding(
                           padding: const EdgeInsets.only(top: 32, left: 24),
                           child: Text(
@@ -57,7 +69,7 @@ class TeacherGradesScreen extends StatelessWidget {
                           firstColumnLabel:
                               'teacherScreens.grades.students'.tr(),
                           secondCoulmnLabel: 'teacherScreens.grades.grade'.tr(),
-                          dataRows: viewModel.grades
+                          dataRows: viewModel.gradesByPeriod
                               .map((GradesByStudent grades) => TizaDataRow(
                                     label: grades.student.halfName,
                                     value: grades.grade.toStringAsFixed(1),

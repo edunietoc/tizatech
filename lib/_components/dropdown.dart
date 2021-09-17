@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../shared/colors.dart';
 
 typedef OptionCallback = void Function(Option);
@@ -65,4 +66,14 @@ class Option {
 
   final String text;
   final dynamic value;
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+
+    return other is Option && other.text == text && other.value == value;
+  }
+
+  @override
+  int get hashCode => text.hashCode ^ value.hashCode;
 }

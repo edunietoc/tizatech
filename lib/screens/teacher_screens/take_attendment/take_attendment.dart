@@ -1,6 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tizatech/_components/dropdown.dart';
+import 'package:tizatech/models/attendment_modules.dart';
 
 import '../../../_components/app_bar.dart';
 import '../../../_components/loader.dart';
@@ -11,8 +13,8 @@ import '../../../shared/colors.dart';
 import '../../../shared/constants.dart';
 import 'take_attendment_vm.dart';
 
-class TeacherTakeAttendmentScreen extends StatelessWidget {
-  const TeacherTakeAttendmentScreen({
+class TeacherTakeAttendmentScreen extends StatefulWidget {
+  TeacherTakeAttendmentScreen({
     @required this.course,
     @required this.code,
     Key key,
@@ -20,13 +22,25 @@ class TeacherTakeAttendmentScreen extends StatelessWidget {
 
   final Courses course;
   final String code;
+  TeacherSubject _subject;
 
+  TeacherSubject get subject => _subject;
+  set subject(TeacherSubject sub) => _subject = sub;
+
+  @override
+  _TeacherTakeAttendmentScreenState createState() =>
+      _TeacherTakeAttendmentScreenState();
+}
+
+class _TeacherTakeAttendmentScreenState
+    extends State<TeacherTakeAttendmentScreen> {
   @override
   Widget build(BuildContext context) => Scaffold(
         body: ChangeNotifierProvider<TakeAttendmentViewModel>(
             create: (_) => TakeAttendmentViewModel(
-                  code: code,
-                  course: course,
+                  code: widget.code,
+                  course: widget.course,
+                  subject: widget.subject,
                 ),
             child: Consumer<TakeAttendmentViewModel>(
                 builder: (_, TakeAttendmentViewModel viewModel, __) {
@@ -42,12 +56,12 @@ class TeacherTakeAttendmentScreen extends StatelessWidget {
                     slivers: <Widget>[
                       TizaAppBar(
                         title: 'teacherScreens.takeAttendment.title'.tr(),
-                        subtitle: course.courseName,
+                        subtitle: widget.course.courseName,
                       ),
                       SliverList(
                         delegate: SliverChildListDelegate(
                           <Widget>[
-                            Padding(
+                            /*  Padding(
                               padding: const EdgeInsets.only(
                                 top: 32,
                                 left: 24,
@@ -64,14 +78,24 @@ class TeacherTakeAttendmentScreen extends StatelessWidget {
                                     ),
                                   ),
                                   TextSpan(
-                                    text: course.schedule,
+                                    text: widget.course.schedule,
                                     style: body1(context),
                                   )
                                 ],
                               )),
-                            ),
+                            ), */
+                            SizedBox(height: 32),
+                            Dropdown(
+                                options: viewModel.modules
+                                    .map((AttendmentModule module) => Option(
+                                        text: module.name, value: module.id))
+                                    .toList(),
+                                label: 'Modulos',
+                                onChanged: (Option option) {
+                                  print(option);
+                                }),
                             TizaTable(
-                              dataRows: course.studentList
+                              dataRows: widget.course.studentList
                                   .map(
                                     (Student student) => TizaDataRow(
                                       label: student.halfName,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tizatech/screens/teacher_screens/grades/subject_selection.dart';
 
 import '../../../locator/locator.dart';
 import '../../../locator/user_service.dart';
@@ -49,9 +50,12 @@ class TeacherVerifyCodeViewModel extends ChangeNotifier {
         await Navigator.pushReplacement(
             context,
             MaterialPageRoute<Widget>(
-              builder: (_) => TeacherTakeAttendmentScreen(
+              builder: (_) => SubjectSelectionScreen(
                 course: course,
-                code: code,
+                screen: TeacherTakeAttendmentScreen(
+                  course: course,
+                  code: code,
+                ),
               ),
             ));
       }

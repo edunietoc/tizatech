@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tizatech/models/attendment_modules.dart';
 
 import '../../../locator/locator.dart';
 import '../../../locator/user_service.dart';
@@ -17,15 +18,21 @@ class TakeAttendmentViewModel extends ChangeNotifier {
   TakeAttendmentViewModel({
     this.code,
     this.course,
-  });
+    this.subject,
+  }) {
+    _getModules();
+  }
 
   final String code;
   final Courses course;
+  final TeacherSubject subject;
 
   final TeacherServices _teacherServices = TeacherServices();
   final Teacher _user = locator<UserService>().user;
   List<Student> _offStudents = <Student>[];
   List<Student> _lateStudents = <Student>[];
+
+  List<AttendmentModule> modules;
 
   List<Student> get offStudents => _offStudents;
   List<Student> get lateStudents => _lateStudents;
@@ -108,6 +115,18 @@ class TakeAttendmentViewModel extends ChangeNotifier {
           )));
 
       await _teacherServices.uploadAttendments(attendmentList);
+      currentStatus = Status.done;
+    } on Exception catch (e) {
+      _error = e.toString();
+      currentStatus = Status.error;
+    }
+  }
+
+  Future<void> _getModules() async {
+    try {
+      currentStatus = Status.loading;
+      modules = await _teacherServices
+          .getAttendmentsTodayModules(subject.id.toString());
       currentStatus = Status.done;
     } on Exception catch (e) {
       _error = e.toString();
