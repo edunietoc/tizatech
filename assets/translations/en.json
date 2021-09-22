@@ -21,7 +21,7 @@
         "grades": "Notas",
         "attendments": "Asistencias",
         "unattendments": "Inasistencias",
-        "delayments": "Retrasos",
+        "delayments": "Atrasos",
         "books": "Lecturas Anuales",
         "students": "Estudiantes"
     },
@@ -68,7 +68,7 @@
             "monthsLabel": "Meses"
         },
         "delayments": {
-            "title": "Retrasos",
+            "title": "Atrasos",
             "avatarDescription":"Visualiza de forma mensual y anual todas las asistencias e inasistencias.",
             "monthlyTitle": "Mensuales",
             "weeksLabel": "Semanas",
@@ -113,7 +113,7 @@
             "attendance": {
                 "attendance": "Asistencias",
                 "unnatendance": "Inasistencias",
-                "delayments": "Retrasos",
+                "delayments": "Atrasos",
                 "dailyM": "Diarios",
                 "dailyF":"Diarias",
                 "annualTitle": "Anuales",
@@ -194,7 +194,7 @@
                 "title": "Informe de Gestión",
                 "attendments": "Asistencias",
                 "unattendments": "Inasistencias",
-                "delayments": "Retrasos",
+                "delayments": "Atrasos",
                 "simceEssay": "Ensayo Simce",
                 "simceScore": "Puntaje Simce",
                 "enrollment": "Matrícula",
@@ -242,7 +242,7 @@
             "turn": "Turno: ",
             "students": "Alumnos",
             "attendement": "Asistencia",
-            "delayment": "Retraso",
+            "delayment": "Atraso",
             "save": "Guardar",
             "codeTitle": "Verificación de Código",
             "typeCode": "Ingresa el Código",

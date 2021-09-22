@@ -38,7 +38,8 @@ class TeacherGradesViewModel extends ChangeNotifier {
             grades.firstWhere((grade) => grade.periodId == periodId);
 
         return Option(text: grade.period, value: grade.periodId);
-      }).toList();
+      }).toList()
+        ..add(Option(text: 'Todos', value: -1));
 
   List<int> get periodList => grades.map((_) => _.periodId).toSet().toList();
 
@@ -61,7 +62,8 @@ class TeacherGradesViewModel extends ChangeNotifier {
 
   Future<void> _getGrades() async {
     try {
-      _grades = await _teacherServices.getGrades(_currentSubject.id);
+      _grades = await _teacherServices.getGrades(_currentSubject.id)
+        ..sort((a, b) => a.student.firstName.compareTo(b.student.firstName));
 
       currentStatus = Status.done;
     } on Exception catch (e) {

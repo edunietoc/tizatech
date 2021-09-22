@@ -29,7 +29,7 @@ class ChartListScreen extends StatelessWidget {
               <Widget>[
                 SizedBox(height: 32),
                 OptionTile(
-                  text: 'teacherScreens.charts.menu.attendance'.tr(),
+                  text: 'teacherScreens.charts.menu.attendments'.tr(),
                   onTap: () => Navigator.push(
                     context,
                     MaterialPageRoute<Widget>(

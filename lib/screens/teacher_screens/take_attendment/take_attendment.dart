@@ -109,7 +109,7 @@ class _TeacherTakeAttendmentScreenState
                                       thirdValue: Checkbox(
                                         activeColor: primaryColor[80],
                                         value:
-                                            !viewModel.isMarkedAsLate(student),
+                                            viewModel.isMarkedAsLate(student),
                                         onChanged: (_) => viewModel.addItem(
                                             student,
                                             modifyLateStudents: true),
@@ -120,7 +120,7 @@ class _TeacherTakeAttendmentScreenState
                               firstColumnLabel:
                                   'teacherScreens.takeAttendment.students'.tr(),
                               secondCoulmnLabel:
-                                  'teacherScreens.takeAttendment.attendment'
+                                  'teacherScreens.takeAttendment.attendement'
                                       .tr(),
                               thirdColumnLabel:
                                   'teacherScreens.takeAttendment.delayment'

@@ -69,12 +69,19 @@ class TeacherGradesScreen extends StatelessWidget {
                           firstColumnLabel:
                               'teacherScreens.grades.students'.tr(),
                           secondCoulmnLabel: 'teacherScreens.grades.grade'.tr(),
-                          dataRows: viewModel.gradesByPeriod
-                              .map((GradesByStudent grades) => TizaDataRow(
-                                    label: grades.student.halfName,
-                                    value: grades.grade.toStringAsFixed(1),
-                                  ))
-                              .toList(),
+                          dataRows: viewModel.selectedPeriodId > 0
+                              ? viewModel.gradesByPeriod
+                                  .map((GradesByStudent grades) => TizaDataRow(
+                                        label: grades.student.halfName,
+                                        value: grades.grade.toStringAsFixed(1),
+                                      ))
+                                  .toList()
+                              : viewModel.grades
+                                  .map((GradesByStudent grades) => TizaDataRow(
+                                        label: grades.student.halfName,
+                                        value: grades.grade.toStringAsFixed(1),
+                                      ))
+                                  .toList(),
                         ),
                       ],
                     ))
