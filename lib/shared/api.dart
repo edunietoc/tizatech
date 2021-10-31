@@ -1,4 +1,4 @@
-const String baseUrl = 'http://tizatech-piloto.herokuapp.com/api/';
+const String baseUrl = 'http://tizatechapp-demo.herokuapp.com/api/';
 const String imageBaseUrl = 'http://tizatechapp-demo.herokuapp.com';
 
-const String baseUrlHttp = 'tizatech-piloto.herokuapp.com';
+const String baseUrlHttp = 'tizatechapp-demo.herokuapp.com';

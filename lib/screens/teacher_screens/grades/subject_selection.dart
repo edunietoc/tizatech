@@ -23,7 +23,10 @@ class SubjectSelectionScreen extends StatelessWidget {
           body: CustomScrollView(
         slivers: <Widget>[
           TizaAppBar(
-              title: 'teacherScreens.grades.title'.tr(), subtitle: course.name),
+              title: screen != null
+                  ? 'teacherScreens.takeAttendment.title'.tr()
+                  : 'teacherScreens.grades.title'.tr(),
+              subtitle: course.name),
           SliverPadding(padding: const EdgeInsets.only(top: 32)),
           SliverList(
             delegate: SliverChildListDelegate(course.subjectList
