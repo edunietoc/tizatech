@@ -60,7 +60,7 @@ class TeacherGradesScreen extends StatelessWidget {
                           padding: const EdgeInsets.only(top: 32, left: 24),
                           child: Text(
                             'teacherScreens.grades.title'.tr(),
-                            style: h3(context).copyWith(
+                            style: h3().copyWith(
                               color: secondaryColor[80],
                             ),
                           ),

@@ -96,7 +96,7 @@ class ReportChart extends StatelessWidget {
                   child: Text(
                     title,
                     textAlign: TextAlign.start,
-                    style: h3(context).copyWith(
+                    style: h3().copyWith(
                       color: secondaryColor[80],
                     ),
                   ),
@@ -115,8 +115,7 @@ class ReportChart extends StatelessWidget {
                         children: <Widget>[
                           Text(
                             filterOptions.iconText,
-                            style: caption(context)
-                                .copyWith(color: primaryColor[80]),
+                            style: caption().copyWith(color: primaryColor[80]),
                           ),
                           SizedBox(width: 6),
                           Image.asset('assets/icons/filter.png')
@@ -128,7 +127,7 @@ class ReportChart extends StatelessWidget {
           if (subtitle != null)
             Text(
               subtitle,
-              style: body1(context).copyWith(
+              style: body1().copyWith(
                 color: blackShadesColor[70],
                 fontWeight: FontWeight.w500,
               ),
@@ -144,7 +143,7 @@ class ReportChart extends StatelessWidget {
           ),
           Text(
             xLabel,
-            style: caption(context).copyWith(
+            style: caption().copyWith(
                 color: blackShadesColor[70], fontWeight: FontWeight.w500),
           )
         ],
@@ -206,7 +205,7 @@ void bottomSheet(
                     flex: 3,
                     child: Text(
                       title,
-                      style: body1(context).copyWith(
+                      style: body1().copyWith(
                         fontWeight: FontWeight.w500,
                         fontSize: 20,
                       ),
@@ -226,7 +225,7 @@ void bottomSheet(
                 children: options
                     .map((_) => InkWell(
                           child: ListTile(
-                            title: Text(_, style: body1(context)),
+                            title: Text(_, style: body1()),
                             trailing: Radio<String>(
                               groupValue: _selectedValue,
                               value: _,

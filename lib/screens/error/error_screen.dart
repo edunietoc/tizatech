@@ -44,7 +44,7 @@ class ErrorScreen extends StatelessWidget {
                 SizedBox(height: 24),
                 Text(
                   errorTitle,
-                  style: h3(context).copyWith(color: blackShadesColor[80]),
+                  style: h3().copyWith(color: blackShadesColor[80]),
                   textAlign: TextAlign.center,
                 ),
                 Padding(
@@ -52,7 +52,7 @@ class ErrorScreen extends StatelessWidget {
                       const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
                   child: Text(
                     errorDescription,
-                    style: body1(context).copyWith(
+                    style: body1().copyWith(
                       color: blackShadesColor[70],
                       letterSpacing: 0.7,
                     ),

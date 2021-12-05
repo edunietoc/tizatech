@@ -36,7 +36,7 @@ class StudentListScreen extends StatelessWidget {
                     ),
                     child: Text(
                       'Lista de Estudiantes',
-                      style: h3(context).copyWith(
+                      style: h3().copyWith(
                         color: primaryColor[80],
                       ),
                     ),

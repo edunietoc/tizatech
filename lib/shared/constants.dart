@@ -1,18 +1,22 @@
-import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/material.dart';
 import 'package:http_parser/http_parser.dart';
+
+import 'colors.dart';
 
 double deviceWidth(BuildContext context) => MediaQuery.of(context).size.width;
 double deviceHeight(BuildContext context) => MediaQuery.of(context).size.height;
 
-TextStyle h1(BuildContext context) => Theme.of(context).textTheme.headline1;
-TextStyle h2(BuildContext context) => Theme.of(context).textTheme.headline2;
-TextStyle h3(BuildContext context) => Theme.of(context).textTheme.headline3;
+TextStyle h1() => const TextStyle(
+    fontSize: 44, fontWeight: FontWeight.w500, color: blackShadesColor);
+TextStyle h2() => const TextStyle(
+    fontSize: 36, fontWeight: FontWeight.w500, color: blackShadesColor);
+TextStyle h3() => const TextStyle(fontSize: 32, color: blackShadesColor);
 
-TextStyle h4(BuildContext context) => Theme.of(context).textTheme.headline4;
-TextStyle body1(BuildContext context) => Theme.of(context).textTheme.bodyText1;
-TextStyle body2(BuildContext context) => Theme.of(context).textTheme.bodyText2;
-TextStyle caption(BuildContext context) => Theme.of(context).textTheme.caption;
+TextStyle h4() => const TextStyle(fontSize: 24, color: blackShadesColor);
+TextStyle body1() => const TextStyle(fontSize: 18, color: blackShadesColor);
+TextStyle body2() => const TextStyle(fontSize: 16, color: blackShadesColor);
+TextStyle caption() => const TextStyle(fontSize: 14, color: blackShadesColor);
 
 const double cardElevation = 6;
 

@@ -64,8 +64,7 @@ class AttendmentsScreen extends StatelessWidget {
                                 EdgeInsets.only(top: 40, left: 24, bottom: 8),
                             child: Text(
                               'studentScreens.attendments.monthlyTitle'.tr(),
-                              style: h3(context)
-                                  .copyWith(color: secondaryColor[80]),
+                              style: h3().copyWith(color: secondaryColor[80]),
                             ),
                           ),
                           if (viewModel.monthSeriesList != null)
@@ -100,8 +99,7 @@ class AttendmentsScreen extends StatelessWidget {
                                 EdgeInsets.only(top: 40, left: 24, bottom: 8),
                             child: Text(
                               'studentScreens.attendments.yearlyTitle'.tr(),
-                              style: h3(context)
-                                  .copyWith(color: secondaryColor[80]),
+                              style: h3().copyWith(color: secondaryColor[80]),
                             ),
                           ),
                           if (viewModel.yearSeriesList != null)

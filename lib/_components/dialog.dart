@@ -26,7 +26,7 @@ void showMessageDialog({
                 child: Image.asset(isError ? errorIconPath : sadIconPath)),
             Text(
               title,
-              style: h4(context).copyWith(color: blackShadesColor[80]),
+              style: h4().copyWith(color: blackShadesColor[80]),
             ),
             Padding(
               padding: const EdgeInsets.only(
@@ -34,7 +34,7 @@ void showMessageDialog({
               child: Text(
                 description,
                 textAlign: TextAlign.center,
-                style: body2(context).copyWith(color: blackShadesColor[70]),
+                style: body2().copyWith(color: blackShadesColor[70]),
               ),
             ),
             Container(
@@ -45,7 +45,7 @@ void showMessageDialog({
                 style: ElevatedButton.styleFrom(primary: blackShadesColor[10]),
                 child: Text(
                   buttonText,
-                  style: body1(context),
+                  style: body1(),
                 ),
               ),
             ),

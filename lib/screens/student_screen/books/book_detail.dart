@@ -29,7 +29,7 @@ class BookDetailScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(book.title,
-                            style: h3(context).copyWith(
+                            style: h3().copyWith(
                               color: blackShadesColor[80],
                             )),
                         SizedBox(height: 16),
@@ -39,14 +39,14 @@ class BookDetailScreen extends StatelessWidget {
                         SizedBox(height: 24),
                         Text(
                           'Descripcion del libro:',
-                          style: body1(context).copyWith(
+                          style: body1().copyWith(
                             fontWeight: FontWeight.w500,
                           ),
                         ),
                         SizedBox(height: 4),
                         Text(
                           book.description,
-                          style: body2(context).copyWith(
+                          style: body2().copyWith(
                             color: blackShadesColor[70],
                             letterSpacing: 0.27,
                           ),

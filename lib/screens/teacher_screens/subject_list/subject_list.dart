@@ -39,7 +39,7 @@ class SubjectListScreen extends StatelessWidget {
                     ),
                     child: Text(
                       'teacherScreens.subjectList.description'.tr(),
-                      style: body1(context).copyWith(
+                      style: body1().copyWith(
                         color: blackShadesColor[70],
                       ),
                     ),
@@ -58,7 +58,7 @@ class SubjectListScreen extends StatelessWidget {
                           ),
                           child: Text(
                             currentCourse.subjectList[index].name.trimLeft(),
-                            style: body1(context),
+                            style: body1(),
                           ),
                         ),
                       ),

@@ -61,7 +61,7 @@ class MessagesDetailScreen extends StatelessWidget {
                                   padding: EdgeInsets.symmetric(horizontal: 16),
                                   child: Text(
                                     'Seleccione una Respuesta:',
-                                    style: body2(context),
+                                    style: body2(),
                                   )),
                             if (!viewModel.currentMessage.hasBeenAnswered &&
                                 !viewModel.userSentThis)
@@ -100,12 +100,12 @@ class MessagesDetailScreen extends StatelessWidget {
                         label: viewModel.selectedFilePath == null
                             ? Text(
                                 'Agregar Archivo',
-                                style: caption(context),
+                                style: caption(),
                               )
                             : Text(
                                 viewModel.selectedFilePath.split('/').last ??
                                     'Eliminar',
-                                style: caption(context),
+                                style: caption(),
                               ),
                         style: TextButton.styleFrom(
                           backgroundColor: viewModel.selectedFilePath == null
@@ -163,7 +163,7 @@ class _ReceivedMessage extends StatelessWidget {
             )),
         child: Text(
           message.message,
-          style: body2(context),
+          style: body2(),
         ),
       );
 }
@@ -198,7 +198,7 @@ class _SendedMessage extends StatelessWidget {
                   if (message.answer.contains('file:')) ...<Widget>[
                     RichText(
                       text: TextSpan(
-                          style: body1(context).copyWith(
+                          style: body1().copyWith(
                             color: blackShadesColor[05],
                           ),
                           children: <TextSpan>[
@@ -219,7 +219,7 @@ class _SendedMessage extends StatelessWidget {
                   ] else
                     Text(
                       userSentThis ? message.message : message.answer ?? '',
-                      style: body1(context).copyWith(
+                      style: body1().copyWith(
                         color: blackShadesColor[05],
                       ),
                     ),

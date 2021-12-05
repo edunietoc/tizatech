@@ -87,8 +87,7 @@ class ProfileScreen extends StatelessWidget {
                           width: deviceWidth(context),
                           child: Text(
                             'Apoderado',
-                            style:
-                                h4(context).copyWith(color: secondaryColor[80]),
+                            style: h4().copyWith(color: secondaryColor[80]),
                             textAlign: TextAlign.left,
                           ),
                         ),
@@ -96,8 +95,8 @@ class ProfileScreen extends StatelessWidget {
                           padding: EdgeInsets.only(top: 8, bottom: 4),
                           child: Text(
                             'Estudiantes a su cargo',
-                            style: caption(context)
-                                .copyWith(color: blackShadesColor[70]),
+                            style:
+                                caption().copyWith(color: blackShadesColor[70]),
                           ),
                         ),
                         Column(
@@ -108,7 +107,7 @@ class ProfileScreen extends StatelessWidget {
                               padding: EdgeInsets.only(bottom: 8),
                               child: Text(
                                 user.studentList[index].fullName,
-                                style: body2(context),
+                                style: body2(),
                               ),
                             ),
                           ),

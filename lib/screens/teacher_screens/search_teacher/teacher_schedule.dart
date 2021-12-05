@@ -57,7 +57,7 @@ class _TeacherHours extends StatelessWidget {
           children: <Widget>[
             Text(
               'teacherScreens.searchTeacher.hoursTitle'.tr(),
-              style: h4(context).copyWith(
+              style: h4().copyWith(
                 color: secondaryColor[80],
               ),
             ),
@@ -66,9 +66,9 @@ class _TeacherHours extends StatelessWidget {
               text: TextSpan(children: <TextSpan>[
                 TextSpan(
                   text: 'teacherScreens.searchTeacher.roomHours'.tr(),
-                  style: body1(context).copyWith(color: blackShadesColor[70]),
+                  style: body1().copyWith(color: blackShadesColor[70]),
                 ),
-                TextSpan(text: '${teacher.roomHours}', style: body1(context))
+                TextSpan(text: '${teacher.roomHours}', style: body1())
               ]),
             ),
             SizedBox(height: 16),
@@ -76,9 +76,9 @@ class _TeacherHours extends StatelessWidget {
               text: TextSpan(children: <TextSpan>[
                 TextSpan(
                   text: 'teacherScreens.searchTeacher.schoolHours'.tr(),
-                  style: body1(context).copyWith(color: blackShadesColor[70]),
+                  style: body1().copyWith(color: blackShadesColor[70]),
                 ),
-                TextSpan(text: '${teacher.schoolHours}', style: body1(context))
+                TextSpan(text: '${teacher.schoolHours}', style: body1())
               ]),
             ),
           ],

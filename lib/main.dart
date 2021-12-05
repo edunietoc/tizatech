@@ -113,21 +113,6 @@ class _MyAppState extends State<MyApp> {
               textStyle: TextStyle(fontWeight: FontWeight.w500, fontSize: 17),
             ),
           ),
-          textTheme: TextTheme(
-            headline1: TextStyle(
-                fontSize: 44,
-                fontWeight: FontWeight.w500,
-                color: blackShadesColor),
-            headline2: TextStyle(
-                fontSize: 36,
-                fontWeight: FontWeight.w500,
-                color: blackShadesColor),
-            headline3: TextStyle(fontSize: 32, color: blackShadesColor),
-            headline4: TextStyle(fontSize: 24, color: blackShadesColor),
-            bodyText1: TextStyle(fontSize: 18, color: blackShadesColor),
-            bodyText2: TextStyle(fontSize: 16, color: blackShadesColor),
-            caption: TextStyle(fontSize: 14, color: blackShadesColor),
-          ),
           colorScheme: colorScheme,
           inputDecorationTheme: InputDecorationTheme(
             filled: true,

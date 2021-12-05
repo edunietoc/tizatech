@@ -33,17 +33,16 @@ class TileCard extends StatelessWidget {
           ),
         ),
         child: ListTile(
-          title: Text(title, style: body1(context)),
+          title: Text(title, style: body1()),
           subtitle: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Text>[
               Text(description,
-                  style: body2(context).copyWith(
+                  style: body2().copyWith(
                       color: isBlue ? primaryColor[80] : secondaryColor[80])),
               if (author != null)
                 Text(author,
-                    style:
-                        caption(context).copyWith(color: blackShadesColor[70]))
+                    style: caption().copyWith(color: blackShadesColor[70]))
             ],
           ),
           leading: Image.asset(iconPath),

@@ -32,7 +32,7 @@ class _FilterItemState extends State<FilterItem> {
         side: BorderSide(color: primaryColor[80]),
         label: Text(
           widget.text,
-          style: body2(context).copyWith(
+          style: body2().copyWith(
             color: widget.isSelected ? blackShadesColor[05] : primaryColor[80],
           ),
           textAlign: TextAlign.center,

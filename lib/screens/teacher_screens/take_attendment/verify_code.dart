@@ -49,7 +49,7 @@ class TeacherVerifyCodeScreen extends StatelessWidget {
                               child: Text(
                                 'teacherScreens.takeAttendment.typeCode'.tr(),
                                 textAlign: TextAlign.center,
-                                style: h3(context).copyWith(
+                                style: h3().copyWith(
                                   color: secondaryColor[80],
                                 ),
                               ),
@@ -61,7 +61,7 @@ class TeacherVerifyCodeScreen extends StatelessWidget {
                                 'teacherScreens.takeAttendment.codeDescription'
                                     .tr(),
                                 textAlign: TextAlign.center,
-                                style: body1(context).copyWith(
+                                style: body1().copyWith(
                                   color: blackShadesColor[70],
                                 ),
                               ),

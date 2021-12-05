@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:292999620995:android:9e6d84be48d67e7147eeb6",
         "android_client_info": {
-          "package_name": "com.tiza.app"
+          "package_name": "com.tiza.tech"
         }
       },
       "oauth_client": [
@@ -34,7 +34,7 @@
               "client_id": "292999620995-pfmoem9jribckmcudpcdcno59o76c26t.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.tiza.app"
+                "bundle_id": "com.tiza.tech"
               }
             }
           ]

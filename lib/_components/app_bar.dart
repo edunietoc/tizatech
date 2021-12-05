@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tizatech/shared/constants.dart';
 
 import '../shared/colors.dart';
 
@@ -44,10 +45,7 @@ class TizaAppBar extends StatelessWidget {
                   ),
                   label: Text(
                     'Regresar',
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyText1
-                        .copyWith(color: secondaryColor[80]),
+                    style: body1().copyWith(color: secondaryColor[80]),
                   ),
                 ),
               ),
@@ -62,9 +60,9 @@ class TizaAppBar extends StatelessWidget {
               ),
               label: Text(
                 'Salir',
-                style: Theme.of(context).textTheme.bodyText1.copyWith(
-                      color: secondaryColor[80],
-                    ),
+                style: body1().copyWith(
+                  color: secondaryColor[80],
+                ),
               ),
             )
         ],
@@ -80,20 +78,18 @@ class TizaAppBar extends StatelessWidget {
                 Text(
                   title,
                   textAlign: TextAlign.left,
-                  style: isHome
-                      ? Theme.of(context).textTheme.headline3
-                      : Theme.of(context).textTheme.headline2,
+                  style: isHome ? h3() : h4(),
                 ),
                 Text(
                   subtitle,
                   textAlign: TextAlign.left,
                   style: isHome
-                      ? Theme.of(context).textTheme.bodyText1.copyWith(
-                            color: primaryColor[80],
-                          )
-                      : Theme.of(context).textTheme.headline4.copyWith(
-                            color: primaryColor[80],
-                          ),
+                      ? body1().copyWith(
+                          color: primaryColor[80],
+                        )
+                      : h4().copyWith(
+                          color: primaryColor[80],
+                        ),
                 ),
               ],
             ),

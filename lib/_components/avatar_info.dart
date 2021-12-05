@@ -42,7 +42,7 @@ class AvatarInfo extends StatelessWidget {
                       (!showId)
                           ? '${user.firstName} ${user.middleName} \n${user.lastName} ${user.lastName2}'
                           : '${user.firstName} ${user.lastName} ',
-                      style: body1(context),
+                      style: body1(),
                       maxLines: 2,
                     ),
                     if (showId && user.rut.isNotEmpty) Text(user.rut)
@@ -57,7 +57,7 @@ class AvatarInfo extends StatelessWidget {
                 child: Text(
                   description,
                   textAlign: TextAlign.left,
-                  style: body1(context).copyWith(
+                  style: body1().copyWith(
                     color: blackShadesColor[70],
                     fontWeight: FontWeight.normal,
                   ),

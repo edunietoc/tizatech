@@ -48,7 +48,7 @@ class BooksScreen extends StatelessWidget {
                                 children: <Widget>[
                                   Text(
                                     'Busca por asignatura y visualiza todas las lecturas de consulta proporcionadaspor tus profesores.',
-                                    style: body1(context)
+                                    style: body1()
                                         .copyWith(color: blackShadesColor[70]),
                                   ),
                                   TextInput(
@@ -65,7 +65,7 @@ class BooksScreen extends StatelessWidget {
                             ),
                             child: Text(
                               'Literatura',
-                              style: h3(context).copyWith(
+                              style: h3().copyWith(
                                 color: secondaryColor[80],
                               ),
                             ),

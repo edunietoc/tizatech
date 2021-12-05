@@ -37,7 +37,7 @@ class TizaBarChart extends StatelessWidget {
               margin: EdgeInsets.only(top: 24, bottom: 8),
               child: Text(
                 title,
-                style: body1(context).copyWith(color: secondaryColor[80]),
+                style: body1().copyWith(color: secondaryColor[80]),
               ),
             ),
             Container(
@@ -96,13 +96,13 @@ class DataIndicator extends StatelessWidget {
                 Text(
                   dataName,
                   textAlign: TextAlign.left,
-                  style: body2(context).copyWith(color: blackShadesColor[70]),
+                  style: body2().copyWith(color: blackShadesColor[70]),
                 ),
                 SizedBox(height: 4),
                 Text(
                   dataValue,
                   textAlign: TextAlign.left,
-                  style: h4(context),
+                  style: h4(),
                 )
               ],
             )

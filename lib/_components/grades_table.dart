@@ -221,7 +221,7 @@ class DataContainer extends StatelessWidget {
         color: color ?? Colors.transparent,
         child: Text(
           '$data',
-          style: body2(context).copyWith(
+          style: body2().copyWith(
               fontWeight: isHeader ? FontWeight.w500 : FontWeight.w400),
         ),
       );

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tizatech/shared/constants.dart';
 
 import '../../_components/text_input.dart';
 import '../../services/auth.dart';
@@ -53,7 +54,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         child: Text(
                           'auth.title'.tr(),
                           textAlign: TextAlign.left,
-                          style: Theme.of(context).textTheme.headline2,
+                          style: h2(),
                         ),
                       ),
                       TextInput(

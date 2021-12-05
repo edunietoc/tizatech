@@ -19,7 +19,7 @@ class MenuText extends StatelessWidget {
             padding: EdgeInsets.only(left: 24, bottom: 8, top: 32),
             child: Text(
               title,
-              style: h4(context).copyWith(color: secondaryColor[80]),
+              style: h4().copyWith(color: secondaryColor[80]),
               textAlign: TextAlign.left,
             ),
           ),
@@ -55,13 +55,13 @@ class TextSection extends StatelessWidget {
           children: <Widget>[
             Text(
               title,
-              style: caption(context).copyWith(color: blackShadesColor[70]),
+              style: caption().copyWith(color: blackShadesColor[70]),
             ),
             SizedBox(height: 4),
             Flexible(
               child: Text(
                 value,
-                style: body2(context),
+                style: body2(),
                 softWrap: true,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,

@@ -73,13 +73,13 @@ class _TeacherTakeAttendmentScreenState
                                   TextSpan(
                                     text: 'teacherScreens.takeAttendment.turn'
                                         .tr(),
-                                    style: body1(context).copyWith(
+                                    style: body1().copyWith(
                                       color: blackShadesColor[70],
                                     ),
                                   ),
                                   TextSpan(
                                     text: widget.course.schedule,
-                                    style: body1(context),
+                                    style: body1(),
                                   )
                                 ],
                               )),

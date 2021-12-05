@@ -59,14 +59,14 @@ class GradesScreen extends StatelessWidget {
                                 text: TextSpan(
                                   text:
                                       'studentScreens.grades.averageTitle'.tr(),
-                                  style: h4(context).copyWith(
+                                  style: h4().copyWith(
                                     color: secondaryColor[80],
                                   ),
                                   children: <TextSpan>[
                                     TextSpan(
                                         text: viewModel.gradeAverage
                                             .toStringAsFixed(1),
-                                        style: h4(context)
+                                        style: h4()
                                             .copyWith(color: blackShadesColor)),
                                   ],
                                 ),

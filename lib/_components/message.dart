@@ -42,19 +42,19 @@ class MessageTile extends StatelessWidget {
                   children: <Widget>[
                     Text(
                       message.userSender.halfName,
-                      style: body2(context).copyWith(
+                      style: body2().copyWith(
                           fontWeight:
                               hasBeenRead ? FontWeight.w400 : FontWeight.w500),
                     ),
                     Text(
                       message.title,
-                      style: body2(context).copyWith(
+                      style: body2().copyWith(
                           fontWeight:
                               hasBeenRead ? FontWeight.w400 : FontWeight.w500),
                     ),
                     Text(
                       message.message,
-                      style: caption(context),
+                      style: caption(),
                       overflow: TextOverflow.ellipsis,
                     )
                   ],
@@ -62,7 +62,7 @@ class MessageTile extends StatelessWidget {
               ),
               Text(
                 parseDate(message.date, message.time),
-                style: caption(context).copyWith(
+                style: caption().copyWith(
                     fontWeight:
                         hasBeenRead ? FontWeight.w400 : FontWeight.w500),
               ),

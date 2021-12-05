@@ -27,14 +27,14 @@ class NotificationsScreen extends StatelessWidget {
                         children: <Widget>[
                           Text(
                             'En esta sección puedes activar o descativar las notificaciones.',
-                            style: body2(context),
+                            style: body2(),
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
                                 'Activar',
-                                style: body1(context),
+                                style: body1(),
                               ),
                               Switch(
                                   value: viewModel.notificationsEnabled,
@@ -45,8 +45,8 @@ class NotificationsScreen extends StatelessWidget {
                           ),
                           Text(
                             'Aviso de mensajes, notas, actualizaciónes de asistencias, atrasos y lecturas anuales.',
-                            style: body2(context)
-                                .copyWith(color: blackShadesColor[30]),
+                            style:
+                                body2().copyWith(color: blackShadesColor[30]),
                           )
                         ],
                       ),

@@ -56,9 +56,9 @@ class MenuCard extends StatelessWidget {
                 Text(
                   title,
                   textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.bodyText1.copyWith(
-                        color: primaryColor[80],
-                      ),
+                  style: body1().copyWith(
+                    color: primaryColor[80],
+                  ),
                 ),
               ],
             ),
