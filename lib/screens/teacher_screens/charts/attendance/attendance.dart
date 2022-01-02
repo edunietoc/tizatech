@@ -16,7 +16,7 @@ class AttendanceChartScreen extends StatelessWidget {
     AttendanceType.attendance:
         'teacherScreens.charts.attendance.attendance'.tr(),
     AttendanceType.unattendance:
-        'teacherScreens.charts.attendance.unnatendace'.tr(),
+        'teacherScreens.charts.attendance.unnatendance'.tr(),
     AttendanceType.delayment:
         'teacherScreens.charts.attendance.delayments'.tr(),
   };
@@ -29,8 +29,8 @@ class AttendanceChartScreen extends StatelessWidget {
           body: Consumer<AttendanceViewModel>(
               builder: (_, AttendanceViewModel viewModel, __) {
             String diaryText = attendanceType == AttendanceType.delayment
-                ? 'teacherScreens.charts.attendance.dailyM'
-                : 'teacherScreens.charts.attendance.dailyF';
+                ? 'teacherScreens.charts.attendance.dailyM'.tr()
+                : 'teacherScreens.charts.attendance.dailyF'.tr();
             switch (viewModel.currentStatus) {
               case Status.loading:
                 return Loader();
