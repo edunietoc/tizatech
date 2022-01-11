@@ -54,6 +54,7 @@ class CoursesViewModel extends ChangeNotifier {
       currentStatus = Status.done;
     } on Exception catch (e) {
       _error = e.toString();
+      print(_error);
       currentStatus = Status.error;
     }
   }

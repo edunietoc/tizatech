@@ -18,6 +18,7 @@ class TeacherServices {
     String endpoint = 'cursos/profesor/$id';
     try {
       dynamic response = await _api.getRequest(endpoint);
+      print(response);
       List<dynamic> responseList = response;
 
       List<Courses> courseList = responseList
@@ -38,8 +39,10 @@ class TeacherServices {
       return (response as List<dynamic>)
           .map((dynamic grade) => GradesByStudent.fromMap(grade))
           .toList()
-            ..forEach((GradesByStudent element) => element.key = GlobalKey());
+        ..forEach((GradesByStudent element) => element.key = GlobalKey());
     } on Exception catch (_) {
+      String error = _.toString();
+      print(error);
       rethrow;
     }
   }
